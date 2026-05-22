@@ -342,28 +342,54 @@
 }
 
 /* ============================================================
-   Mega-menu — hover-triggered panel
+   Mega-menu — UNIFIED panel pattern
+
+   ONE panel shared by all category triggers (cloudflare.com style).
+
+   Anatomy:
+     .mega-zone           : wrapper that holds the triggers + the panel.
+                            position:relative — the panel's positioning context.
+                            Hover/focus inside this zone reveals the panel.
+     .mega-trigger        : individual category link in the nav (display:inline).
+                            Hovering one reveals the shared panel.
+     .mega-panel          : the single shared panel below the zone.
+                            position:absolute, left:50%, translate(-50%).
+
+   The reveal is bound to the .mega-zone (not the trigger), so hovering between
+   triggers keeps the panel open instead of closing/reopening as the mouse
+   crosses the gap between them.
+
+   Pure CSS. No JS state management needed.
    ============================================================ */
-.mega-trigger {
+.mega-zone {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 .mega-panel {
   opacity: 0;
-  transform: translateY(-8px);
+  transform: translate(-50%, -8px);
   pointer-events: none;
   visibility: hidden;
   transition: opacity 200ms var(--ease-out-soft),
               transform 200ms var(--ease-out-soft),
               visibility 0s linear 200ms;
 }
-.mega-trigger:hover .mega-panel,
-.mega-trigger:focus-within .mega-panel,
+.mega-zone:hover .mega-panel,
+.mega-zone:focus-within .mega-panel,
 .mega-panel:hover {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
   pointer-events: auto;
   visibility: visible;
   transition-delay: 0s;
+}
+
+/* Width is locked to the wider container so the panel never juts outside
+   the page edges, while still being roomy enough for 4 equal columns. */
+.mega-panel > div {
+  width: min(1100px, calc(100vw - 48px));
 }
 
 /* Reduced-motion: respect user preference */

@@ -7,6 +7,21 @@ const isActive = (href: string) =>
   href === '/' ? pathname === '/' : pathname.startsWith(href);
 ---
 
+<!--
+  Header with a UNIFIED mega-panel.
+
+  All four nav triggers (Cybersecurity / Cloudflare / Network / IT & Cloud)
+  share ONE panel. Hovering any trigger reveals the shared panel underneath
+  the whole nav. This is the cloudflare.com pattern.
+
+  Implementation: a single .mega-zone wraps the four triggers PLUS the panel.
+  CSS (in global.css) reveals the panel when any direct child trigger
+  (.mega-trigger) is hovered, or when the panel itself is hovered. No JS.
+
+  The triggers themselves are still clickable links to their category's
+  landing page — hover opens the panel, click navigates.
+-->
+
 <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#0a0f1a]/85 border-b border-[var(--color-border-subtle)]">
   <div class="container-wide flex items-center justify-between h-16">
     <!-- Brand -->
@@ -17,12 +32,16 @@ const isActive = (href: string) =>
 
     <!-- Desktop nav -->
     <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
-      {menuCategories.map((cat) => (
-        <div class="mega-trigger">
+
+      <!-- ===================================================================
+           MEGA ZONE — all category triggers + the single shared panel
+           =================================================================== -->
+      <div class="mega-zone">
+        {menuCategories.map((cat) => (
           <a
             href={cat.href}
             class:list={[
-              'flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition',
+              'mega-trigger flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition',
               isActive(cat.href) ? 'text-white' : 'text-[var(--color-text-muted)] hover:text-white',
             ]}
             aria-haspopup="true"
@@ -32,59 +51,74 @@ const isActive = (href: string) =>
               <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </a>
+        ))}
 
-          <!-- Mega panel -->
+        <!-- The single shared panel. Positioned relative to .mega-zone,
+             centered horizontally beneath it. -->
+        <div class="mega-panel absolute left-1/2 top-full pt-3 z-50" role="region" aria-label="Services menu">
           <div
-            class="mega-panel absolute left-1/2 top-full -translate-x-1/2 pt-3 z-50"
-            style="min-width: max(720px, 60vw);"
+            class="rounded-xl shadow-2xl overflow-hidden"
+            style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); box-shadow: 0 24px 64px -16px rgba(0,0,0,0.6);"
           >
-            <div
-              class="rounded-xl p-7 shadow-2xl"
-              style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); box-shadow: 0 24px 64px -16px rgba(0,0,0,0.6);"
-            >
-              <div class:list={['grid gap-8', cat.columns.length === 2 ? 'grid-cols-2' : 'grid-cols-3']}>
-                {cat.columns.map((col) => (
-                  <div>
-                    <div class="eyebrow mb-4">{col.title}</div>
-                    <ul class="space-y-1">
-                      {col.tiles.map((tile) => (
-                        <li>
-                          <a
-                            href={tile.href}
-                            class="group block -mx-3 px-3 py-2.5 rounded-md transition"
-                            style="--hover-bg: var(--color-bg-elevated);"
-                            onmouseenter="this.style.background='var(--color-bg-elevated)'"
-                            onmouseleave="this.style.background='transparent'"
+            <!-- Columns: one per category -->
+            <div class="grid grid-cols-4 gap-x-2 p-6">
+              {menuCategories.map((cat) => (
+                <div class="min-w-0">
+                  <a
+                    href={cat.href}
+                    class="block mb-3 font-display text-sm font-semibold hover:text-[var(--color-amber-300)] transition"
+                    style="color: var(--color-text-primary)"
+                  >
+                    {cat.label}
+                  </a>
+                  <ul class="space-y-0.5">
+                    {cat.tiles.map((tile) => (
+                      <li>
+                        <a
+                          href={tile.href}
+                          class="group block -mx-2 px-2 py-1.5 rounded-md transition"
+                          onmouseenter="this.style.background='var(--color-bg-elevated)'"
+                          onmouseleave="this.style.background='transparent'"
+                        >
+                          <div
+                            class="font-medium text-[13px] leading-tight group-hover:text-[var(--color-amber-300)] transition"
+                            style="color: var(--color-text-primary);"
                           >
-                            <div class="font-medium text-sm group-hover:text-[var(--color-amber-300)] transition" style="color: var(--color-text-primary);">
-                              {tile.title}
-                            </div>
-                            <div class="text-xs mt-0.5 leading-snug" style="color: var(--color-text-muted)">
-                              {tile.description}
-                            </div>
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+                            {tile.title}
+                          </div>
+                          <div class="text-[11px] mt-0.5 leading-snug" style="color: var(--color-text-muted)">
+                            {tile.description}
+                          </div>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
 
-              <div class="hairline mt-7 mb-5"></div>
+            <!-- Footer strip inside the panel -->
+            <div
+              class="px-6 py-4 flex items-center justify-between border-t"
+              style="background: var(--color-bg-page); border-color: var(--color-border-subtle)"
+            >
+              <span class="text-[11px] font-mono uppercase tracking-[0.18em]" style="color: var(--color-text-subtle)">
+                Cloudflare Partner · Cache Valley
+              </span>
               <a
-                href={cat.href}
-                class="inline-flex items-center gap-1.5 text-sm font-medium transition"
+                href="/services"
+                class="inline-flex items-center gap-1.5 text-xs font-medium transition"
                 style="color: var(--color-amber-300)"
               >
-                Explore all {cat.label.toLowerCase()} services <span aria-hidden="true">→</span>
+                See all services <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
         </div>
-      ))}
+      </div>
 
+      <!-- Divider + simple links -->
       <div class="mx-2 h-5 w-px" style="background: var(--color-border-subtle)"></div>
-
       {simpleNavLinks.map((link) => (
         <a
           href={link.href}
@@ -126,7 +160,7 @@ const isActive = (href: string) =>
     </div>
   </div>
 
-  <!-- Mobile nav drawer -->
+  <!-- Mobile nav drawer (mega-menu collapses to accordions per category) -->
   <div
     id="mobile-nav"
     class="lg:hidden hidden border-t"
@@ -145,7 +179,7 @@ const isActive = (href: string) =>
             </svg>
           </summary>
           <div class="pl-3 pb-3 space-y-1">
-            {cat.columns.flatMap((col) => col.tiles).map((tile) => (
+            {cat.tiles.map((tile) => (
               <a
                 href={tile.href}
                 class="block py-2 text-sm"
