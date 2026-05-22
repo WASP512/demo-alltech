@@ -1,0 +1,56 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { site } from '~/lib/site';
+---
+
+<BaseLayout
+  title="About AllTech"
+  description="AllTech is a Hyde Park, UT-based IT and cybersecurity firm serving Cache Valley, the Wasatch Front, and southern Idaho since 2009."
+>
+  <section class="bg-ink-900 text-white">
+    <div class="container-wide py-20">
+      <div class="eyebrow mb-4">About</div>
+      <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-tight max-w-3xl">
+        Built for the businesses that build Cache Valley.
+      </h1>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="container-prose space-y-6 text-lg text-ink-700 leading-relaxed">
+      <p>
+        AllTech was founded in 2009 to meet the technical needs of Utah businesses.
+        We've spent thousands of hours perfecting the relationship between
+        technology and business processes — and with the way security and
+        infrastructure are changing, that work has never mattered more.
+      </p>
+      <p>
+        Today we run real infrastructure for manufacturing operations, schools,
+        title companies, and multi-site SMBs. We bring enterprise tooling —
+        Cloudflare Zero Trust, Darktrace, Datto RMM, Ubiquiti UniFi — down to
+        where mid-market businesses can actually use it.
+      </p>
+      <p>
+        We're not the cheapest. We're the team you call when you need it to
+        actually work.
+      </p>
+
+      <div class="hairline my-10"></div>
+
+      <div class="grid sm:grid-cols-3 gap-6 not-prose">
+        <div>
+          <div class="font-display text-3xl font-semibold text-ink-900">2009</div>
+          <div class="text-sm text-ink-500 mt-1">Founded in Cache Valley</div>
+        </div>
+        <div>
+          <div class="font-display text-3xl font-semibold text-ink-900">Cloudflare</div>
+          <div class="text-sm text-ink-500 mt-1">Official Partner</div>
+        </div>
+        <div>
+          <div class="font-display text-3xl font-semibold text-ink-900">In-house</div>
+          <div class="text-sm text-ink-500 mt-1">No outsourced help desk</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

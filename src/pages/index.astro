@@ -1,0 +1,192 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { services, site } from '~/lib/site';
+
+// Render featured service prominently, the rest in grid
+const featured = services.find((s) => s.featured);
+const rest = services.filter((s) => !s.featured);
+---
+
+<BaseLayout
+  title="Managed IT, Cybersecurity & Cloudflare Zero Trust"
+  description="AllTech is a Cache Valley managed IT and cybersecurity provider. Cloudflare Partner, UniFi specialist, 24/7 monitoring. Serving Logan, Tremonton, Brigham City, Preston, and northern Utah."
+>
+  <!-- ============ HERO ============ -->
+  <section class="relative overflow-hidden bg-ink-900 text-white">
+    <div class="absolute inset-0 bg-grid opacity-50"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-ink-900 via-ink-900 to-ink-800"></div>
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent-400/10 blur-3xl"></div>
+
+    <div class="relative container-wide py-24 lg:py-32">
+      <div class="max-w-3xl">
+        <div class="eyebrow mb-5">Managed IT · Cybersecurity · Northern Utah</div>
+
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-semibold leading-[0.95] tracking-tight">
+          IT that actually <span class="text-accent-300">works</span>,
+          security that actually <span class="text-accent-300">holds</span>.
+        </h1>
+
+        <p class="mt-7 text-xl text-ink-200 max-w-2xl leading-relaxed">
+          AllTech designs, deploys, and runs the infrastructure that keeps Cache Valley
+          businesses online and secure — from UniFi networks to full Cloudflare Zero Trust rollouts.
+        </p>
+
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a href="/contact" class="btn btn-accent">
+            Talk to an engineer
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="/services" class="btn btn-ghost bg-transparent border-ink-500 text-white hover:bg-white/5">
+            See what we do
+          </a>
+        </div>
+
+        <div class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-ink-300">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-accent-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <span>5.0 on Google · local since 2009</span>
+          </div>
+          <div>Cloudflare Partner</div>
+          <div>Ubiquiti UniFi specialist</div>
+          <div>24/7 monitoring & response</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEM / VALUE ============ -->
+  <section class="py-20 lg:py-28">
+    <div class="container-wide grid lg:grid-cols-12 gap-12 lg:gap-16">
+      <div class="lg:col-span-5">
+        <div class="eyebrow mb-4">Why AllTech</div>
+        <h2 class="text-4xl lg:text-5xl font-semibold leading-tight">
+          Most MSPs sell you tickets. We sell you uptime.
+        </h2>
+      </div>
+      <div class="lg:col-span-7 space-y-6 text-lg text-ink-600 leading-relaxed">
+        <p>
+          You don't need another vendor that shows up after the firewall is down.
+          You need engineers who designed the firewall in the first place — who know
+          your network because they built it, and who can tell you, at 2 a.m. on a
+          Tuesday, exactly why a tunnel is flapping.
+        </p>
+        <p>
+          We run real infrastructure for real businesses: manufacturing lines,
+          title companies, schools, multi-site operations. We bring enterprise-grade
+          tools — Cloudflare Zero Trust, Darktrace, Datto, UniFi — down to where
+          mid-market businesses can actually use them.
+        </p>
+        <div class="hairline"></div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-2">
+          <div>
+            <div class="font-display text-3xl font-semibold text-ink-900">17+</div>
+            <div class="text-sm text-ink-500 mt-1">Years serving Cache Valley</div>
+          </div>
+          <div>
+            <div class="font-display text-3xl font-semibold text-ink-900">14</div>
+            <div class="text-sm text-ink-500 mt-1">Client organizations</div>
+          </div>
+          <div>
+            <div class="font-display text-3xl font-semibold text-ink-900">24/7</div>
+            <div class="text-sm text-ink-500 mt-1">Monitoring & response</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="py-20 lg:py-24 bg-ink-50 border-y border-ink-100">
+    <div class="container-wide">
+      <div class="max-w-2xl mb-14">
+        <div class="eyebrow mb-4">What we do</div>
+        <h2 class="text-4xl lg:text-5xl font-semibold leading-tight">
+          Six disciplines, one team.
+        </h2>
+        <p class="mt-5 text-lg text-ink-600 leading-relaxed">
+          Everything below is delivered in-house by engineers who specialize in it —
+          not subcontracted to a faceless NOC.
+        </p>
+      </div>
+
+      <!-- Featured service (Cloudflare) -->
+      {featured && (
+        <a
+          href={`/services/${featured.slug}`}
+          class="group block mb-6 rounded-xl bg-ink-900 text-white p-8 lg:p-10 relative overflow-hidden transition hover:bg-ink-800"
+        >
+          <div class="absolute top-0 right-0 w-72 h-72 bg-accent-400/15 rounded-full blur-3xl"></div>
+          <div class="relative grid lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-8">
+              <div class="eyebrow mb-3 text-accent-300">Featured · Partner Solution</div>
+              <h3 class="font-display text-3xl lg:text-4xl font-semibold mb-3">
+                {featured.name}
+              </h3>
+              <p class="text-ink-200 text-lg leading-relaxed max-w-2xl">{featured.short}</p>
+            </div>
+            <div class="lg:col-span-4 lg:text-right">
+              <span class="inline-flex items-center gap-2 text-accent-300 font-medium text-sm group-hover:gap-3 transition-all">
+                Explore Zero Trust
+                <span aria-hidden="true">→</span>
+              </span>
+            </div>
+          </div>
+        </a>
+      )}
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {rest.map((service) => (
+          <a href={`/services/${service.slug}`} class="card group block">
+            <h3 class="font-display text-xl font-semibold mb-2 group-hover:text-accent-500 transition">
+              {service.name}
+            </h3>
+            <p class="text-ink-600 text-sm leading-relaxed">{service.short}</p>
+            <span class="mt-4 inline-flex items-center gap-1 text-sm text-accent-500 font-medium">
+              Learn more <span aria-hidden="true">→</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIAL ============ -->
+  <section class="py-20 lg:py-28">
+    <div class="container-prose">
+      <div class="eyebrow mb-4">In their words</div>
+      <blockquote class="font-display text-3xl lg:text-4xl leading-snug text-ink-900">
+        "Very innovative with the latest technology. They care about making sure
+        that every client is given the best value in technology. Caring people who
+        hold client care as their priority."
+      </blockquote>
+      <div class="mt-6 text-sm text-ink-500">
+        <span class="font-medium text-ink-700">Jamie Forbush</span> · Logan, UT
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="py-20 lg:py-24">
+    <div class="container-wide">
+      <div class="rounded-xl bg-ink-900 text-white p-10 lg:p-14 grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8">
+          <h2 class="font-display text-3xl lg:text-4xl font-semibold leading-tight">
+            Stop fighting with your IT. Start using it.
+          </h2>
+          <p class="mt-4 text-ink-300 text-lg max-w-2xl">
+            Tell us what's broken or what you're trying to build. We'll come back
+            with a plan — not a sales pitch.
+          </p>
+        </div>
+        <div class="lg:col-span-4 flex flex-wrap gap-3 lg:justify-end">
+          <a href="/contact" class="btn btn-accent">Start a conversation</a>
+          <a href={`tel:${site.phoneE164}`} class="btn btn-ghost bg-transparent border-ink-500 text-white hover:bg-white/5 font-mono">
+            {site.phone}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

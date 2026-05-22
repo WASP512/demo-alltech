@@ -1,0 +1,72 @@
+---
+import { site, services } from '~/lib/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-ink-900 text-ink-200 mt-24">
+  <div class="container-wide py-16">
+    <div class="grid gap-12 md:grid-cols-4">
+      <!-- Brand + NAP -->
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 font-display font-semibold text-white text-lg mb-3">
+          <span class="inline-block w-2 h-2 rounded-full bg-accent-400"></span>
+          AllTech
+        </div>
+        <p class="text-sm text-ink-300 max-w-sm leading-relaxed">
+          Managed IT, cybersecurity, and Cloudflare-powered network
+          infrastructure for businesses across Cache Valley, the Wasatch
+          Front, and southern Idaho.
+        </p>
+
+        <address class="mt-6 not-italic text-sm space-y-1.5 text-ink-300">
+          <div>{site.address.street}</div>
+          <div>{site.address.city}, {site.address.region} {site.address.postalCode}</div>
+          <div>
+            <a href={`tel:${site.phoneE164}`} class="hover:text-white font-mono">{site.phone}</a>
+          </div>
+          <div>
+            <a href={`mailto:${site.email}`} class="hover:text-white">{site.email}</a>
+          </div>
+        </address>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="font-display text-white text-sm uppercase tracking-wider mb-4">Services</h3>
+        <ul class="space-y-2 text-sm">
+          {services.map((s) => (
+            <li>
+              <a href={`/services/${s.slug}`} class="text-ink-300 hover:text-white transition">
+                {s.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Service area -->
+      <div>
+        <h3 class="font-display text-white text-sm uppercase tracking-wider mb-4">Service Area</h3>
+        <ul class="space-y-2 text-sm">
+          {site.serviceArea.map((loc) => (
+            <li>
+              <a href={`/locations/${loc.slug}`} class="text-ink-300 hover:text-white transition">
+                {loc.city}, {loc.region}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-ink-700 flex flex-col sm:flex-row justify-between gap-4 text-xs text-ink-400">
+      <div>© {year} AllTech. All rights reserved.</div>
+      <div class="flex gap-5">
+        <a href="/privacy" class="hover:text-white">Privacy</a>
+        <a href="/terms" class="hover:text-white">Terms</a>
+        <a href="https://remote.askalltech.com:8040" class="hover:text-white">Remote Assistance</a>
+      </div>
+    </div>
+  </div>
+</footer>

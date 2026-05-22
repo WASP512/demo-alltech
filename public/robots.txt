@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://askalltech.com/sitemap-index.xml

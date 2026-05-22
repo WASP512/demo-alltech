@@ -1,0 +1,101 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ContactForm from '~/components/ContactForm';
+import { site } from '~/lib/site';
+
+// Allow ?service=... to preselect the dropdown
+const defaultService = Astro.url.searchParams.get('service') ?? undefined;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<BaseLayout
+  title="Contact AllTech"
+  description="Reach AllTech for managed IT, cybersecurity, or Cloudflare deployments. Based in Hyde Park, UT — serving Cache Valley, Box Elder County, and southern Idaho."
+>
+  {turnstileSiteKey && (
+    <script
+      slot="head"
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      defer
+      is:inline
+    />
+  )}
+
+  <section class="bg-ink-900 text-white">
+    <div class="container-wide py-16 lg:py-20">
+      <div class="eyebrow mb-4">Contact</div>
+      <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-tight max-w-3xl">
+        Tell us what you're working on.
+      </h1>
+      <p class="mt-5 text-xl text-ink-200 max-w-2xl leading-relaxed">
+        An engineer reads every message. No sales reps in the middle.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-20">
+    <div class="container-wide grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7">
+        <div class="card p-8 lg:p-10">
+          <ContactForm
+            client:load
+            defaultService={defaultService}
+            turnstileSiteKey={turnstileSiteKey}
+          />
+        </div>
+      </div>
+
+      <aside class="lg:col-span-5 space-y-8">
+        <div>
+          <div class="eyebrow mb-3">Direct lines</div>
+          <div class="space-y-3 text-lg">
+            <div>
+              <div class="text-sm text-ink-500">Phone</div>
+              <a href={`tel:${site.phoneE164}`} class="font-mono font-medium text-ink-900 hover:text-accent-500">
+                {site.phone}
+              </a>
+            </div>
+            <div>
+              <div class="text-sm text-ink-500">Email</div>
+              <a href={`mailto:${site.email}`} class="font-medium text-ink-900 hover:text-accent-500">
+                {site.email}
+              </a>
+            </div>
+            <div>
+              <div class="text-sm text-ink-500">Remote support</div>
+              <a href="https://remote.askalltech.com:8040" class="font-medium text-ink-900 hover:text-accent-500">
+                remote.askalltech.com
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hairline"></div>
+
+        <div>
+          <div class="eyebrow mb-3">Office</div>
+          <address class="not-italic text-lg leading-relaxed">
+            {site.address.street}<br />
+            {site.address.city}, {site.address.region} {site.address.postalCode}
+          </address>
+        </div>
+
+        <div>
+          <div class="eyebrow mb-3">Hours</div>
+          <p class="text-ink-700">Monday – Friday · 8:00 AM – 5:00 PM</p>
+          <p class="text-sm text-ink-500 mt-1">After-hours emergencies: call the main line.</p>
+        </div>
+
+        <div class="rounded-lg overflow-hidden border border-ink-100 aspect-[4/3]">
+          <iframe
+            title="AllTech office map"
+            src="https://maps.google.com/maps?q=Alltech%2C%20Hyde%20Park%2C%20Ut%2C%2084318&t=m&z=14&output=embed&iwloc=near"
+            class="w-full h-full"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          />
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

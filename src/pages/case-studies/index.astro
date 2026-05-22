@@ -1,0 +1,46 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const studies = (await getCollection('caseStudies', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="Case Studies"
+  description="How AllTech delivers cybersecurity, Cloudflare Zero Trust, and managed IT projects for real businesses across northern Utah."
+>
+  <section class="bg-ink-900 text-white">
+    <div class="container-wide py-16">
+      <div class="eyebrow mb-4">Case Studies</div>
+      <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-tight max-w-3xl">
+        Real projects, real outcomes.
+      </h1>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container-prose">
+      {studies.length === 0 ? (
+        <p class="text-ink-600 text-lg">Case studies coming soon.</p>
+      ) : (
+        <ul class="space-y-6">
+          {studies.map((s) => (
+            <li>
+              <a href={`/case-studies/${s.slug}`} class="card block group">
+                <div class="text-xs font-mono text-accent-500 mb-2">{s.data.industry}</div>
+                <h2 class="font-display text-2xl font-semibold mb-2 group-hover:text-accent-500 transition">{s.data.title}</h2>
+                <p class="text-ink-600 leading-relaxed">{s.data.summary}</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {s.data.services.map((tag) => (
+                    <span class="text-xs px-2 py-1 rounded bg-ink-100 text-ink-700 font-medium">{tag}</span>
+                  ))}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</BaseLayout>

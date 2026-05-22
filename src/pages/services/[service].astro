@@ -1,0 +1,48 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { services, site } from '~/lib/site';
+
+// Render a stub page for every service except the ones with their own dedicated file.
+const customPages = new Set(['cloudflare-zero-trust']);
+
+export function getStaticPaths() {
+  return services
+    .filter((s) => !['cloudflare-zero-trust'].includes(s.slug))
+    .map((s) => ({ params: { service: s.slug }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+---
+
+<BaseLayout
+  title={service.name}
+  description={service.short}
+>
+  <section class="bg-ink-900 text-white">
+    <div class="container-wide py-20">
+      <div class="eyebrow mb-4">Service</div>
+      <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-tight max-w-3xl">
+        {service.name}
+      </h1>
+      <p class="mt-6 text-xl text-ink-200 max-w-2xl leading-relaxed">{service.short}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={`/contact?service=${encodeURIComponent(service.name)}`} class="btn btn-accent">
+          Scope an engagement
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="container-prose">
+      <div class="card p-8 lg:p-10">
+        <p class="text-ink-600 leading-relaxed">
+          Detailed page content coming soon. In the meantime, give us a call at{' '}
+          <a href={`tel:${site.phoneE164}`} class="text-accent-500 font-mono">{site.phone}</a>{' '}
+          or <a href="/contact" class="text-accent-500">send a message</a> and an
+          engineer will walk you through how we approach {service.name.toLowerCase()}.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

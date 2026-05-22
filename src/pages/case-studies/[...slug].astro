@@ -1,0 +1,40 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const studies = await getCollection('caseStudies', ({ data }) => !data.draft);
+  return studies.map((s) => ({ params: { slug: s.slug }, props: { study: s } }));
+}
+
+interface Props { study: CollectionEntry<'caseStudies'> }
+const { study } = Astro.props;
+const { Content } = await study.render();
+---
+
+<BaseLayout title={study.data.title} description={study.data.summary}>
+  <article class="py-16">
+    <div class="container-prose">
+      <a href="/case-studies" class="text-sm text-accent-500 font-medium">← Back to case studies</a>
+
+      <header class="mt-6 mb-10">
+        <div class="text-xs font-mono text-accent-500 mb-4">{study.data.industry} · {study.data.client}</div>
+        <h1 class="font-display text-4xl lg:text-5xl font-semibold leading-tight">{study.data.title}</h1>
+        <p class="mt-4 text-xl text-ink-600 leading-relaxed">{study.data.summary}</p>
+
+        <div class="mt-6 flex flex-wrap gap-2">
+          {study.data.services.map((tag) => (
+            <span class="text-xs px-2 py-1 rounded bg-ink-100 text-ink-700 font-medium">{tag}</span>
+          ))}
+        </div>
+
+        <div class="mt-8 p-5 rounded-lg bg-ink-50 border border-ink-100">
+          <div class="eyebrow mb-2">Outcome</div>
+          <p class="text-ink-800 font-medium">{study.data.outcome}</p>
+        </div>
+      </header>
+
+      <div class="prose-alltech"><Content /></div>
+    </div>
+  </article>
+</BaseLayout>

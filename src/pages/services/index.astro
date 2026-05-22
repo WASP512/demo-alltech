@@ -1,0 +1,41 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { services } from '~/lib/site';
+---
+
+<BaseLayout
+  title="IT Services & Cybersecurity in Northern Utah"
+  description="Managed IT, cybersecurity, Cloudflare Zero Trust, UniFi network design, VoIP, and Microsoft 365 services for businesses in Cache Valley and the Wasatch Front."
+>
+  <section class="bg-ink-900 text-white">
+    <div class="container-wide py-20">
+      <div class="eyebrow mb-4">Services</div>
+      <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-tight max-w-3xl">
+        Everything you need to run a modern business network.
+      </h1>
+      <p class="mt-6 text-xl text-ink-200 max-w-2xl leading-relaxed">
+        Pick a service to learn how we deliver it, or send us a note describing
+        what you're trying to fix.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-20">
+    <div class="container-wide grid md:grid-cols-2 gap-5">
+      {services.map((service) => (
+        <a href={`/services/${service.slug}`} class="card group block p-7">
+          {service.featured && (
+            <div class="eyebrow mb-2">Cloudflare Partner</div>
+          )}
+          <h2 class="font-display text-2xl font-semibold mb-3 group-hover:text-accent-500 transition">
+            {service.name}
+          </h2>
+          <p class="text-ink-600 leading-relaxed">{service.short}</p>
+          <span class="mt-5 inline-flex items-center gap-1 text-sm font-medium text-accent-500">
+            Read more <span aria-hidden="true">→</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

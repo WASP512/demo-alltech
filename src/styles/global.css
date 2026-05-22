@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+/* ============================================================
+   AllTech design tokens
+   Tailwind v4 reads theme values from @theme blocks.
+   ============================================================ */
+@theme {
+  /* Brand palette — refined, technical, confident. Not generic-MSP-shield. */
+  --color-ink-50:  #f4f6fa;
+  --color-ink-100: #e5eaf2;
+  --color-ink-200: #c7d0e0;
+  --color-ink-300: #94a2bc;
+  --color-ink-400: #5d6e8e;
+  --color-ink-500: #3a4a6b;
+  --color-ink-600: #25334f;
+  --color-ink-700: #18233a;
+  --color-ink-800: #0f1828;
+  --color-ink-900: #070d18;
+
+  --color-accent-50:  #e6fbff;
+  --color-accent-100: #b3f0ff;
+  --color-accent-200: #66dfff;
+  --color-accent-300: #1fc7ed;
+  --color-accent-400: #00a8cf;
+  --color-accent-500: #0089ab;
+  --color-accent-600: #006985;
+
+  --color-signal-amber: #f0a500;
+  --color-signal-red:   #d83a3a;
+  --color-signal-green: #1f9d55;
+
+  /* Fonts — Space Grotesk for display, Inter Tight for body.
+     Loaded via <link> in BaseLayout (preconnect + display=swap). */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Container widths */
+  --container-narrow: 64rem;  /* 1024px - prose, forms */
+  --container-prose:  72rem;  /* 1152px - content pages */
+  --container-wide:   80rem;  /* 1280px - hero, marketing */
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink-800);
+    background: var(--color-ink-50);
+    font-feature-settings: "ss01", "cv11"; /* Inter Tight stylistic tweaks */
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    color: var(--color-ink-900);
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  ::selection {
+    background: var(--color-accent-300);
+    color: var(--color-ink-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-400);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+/* ============================================================
+   Component primitives
+   ============================================================ */
+@layer components {
+  .container-wide   { @apply mx-auto px-6 lg:px-8; max-width: var(--container-wide); }
+  .container-prose  { @apply mx-auto px-6 lg:px-8; max-width: var(--container-prose); }
+  .container-narrow { @apply mx-auto px-6 lg:px-8; max-width: var(--container-narrow); }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md
+           font-medium text-sm tracking-tight transition
+           focus-visible:outline-2 focus-visible:outline-offset-2;
+  }
+  .btn-primary {
+    background: var(--color-ink-900);
+    color: var(--color-ink-50);
+  }
+  .btn-primary:hover {
+    background: var(--color-ink-700);
+    transform: translateY(-1px);
+  }
+  .btn-accent {
+    background: var(--color-accent-400);
+    color: var(--color-ink-900);
+  }
+  .btn-accent:hover {
+    background: var(--color-accent-300);
+    transform: translateY(-1px);
+  }
+  .btn-ghost {
+    color: var(--color-ink-700);
+    border: 1px solid var(--color-ink-200);
+    background: white;
+  }
+  .btn-ghost:hover { border-color: var(--color-ink-400); }
+
+  /* Eyebrow label used above section headings */
+  .eyebrow {
+    @apply text-xs font-mono uppercase tracking-[0.18em];
+    color: var(--color-accent-500);
+  }
+
+  /* Hairline divider used between sections */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent,
+      var(--color-ink-200) 20%,
+      var(--color-ink-200) 80%,
+      transparent);
+  }
+
+  /* Card surface */
+  .card {
+    @apply rounded-lg p-6 transition;
+    background: white;
+    border: 1px solid var(--color-ink-100);
+  }
+  .card:hover {
+    border-color: var(--color-ink-300);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px -8px rgba(15,24,40,0.08);
+  }
+
+  /* Subtle grid background for hero sections */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+}
+
+/* ============================================================
+   Prose (blog/case studies) — restrained, editorial
+   ============================================================ */
+.prose-alltech {
+  max-width: 65ch;
+  color: var(--color-ink-700);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+.prose-alltech h2 {
+  font-size: 1.875rem;
+  margin: 2.5rem 0 1rem;
+}
+.prose-alltech h3 {
+  font-size: 1.375rem;
+  margin: 2rem 0 0.75rem;
+}
+.prose-alltech p { margin: 1rem 0; }
+.prose-alltech a {
+  color: var(--color-accent-500);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.prose-alltech code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--color-ink-100);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+.prose-alltech pre {
+  background: var(--color-ink-900);
+  color: var(--color-ink-50);
+  padding: 1rem 1.25rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.875rem;
+}
+.prose-alltech pre code { background: transparent; padding: 0; }
+.prose-alltech ul, .prose-alltech ol { margin: 1rem 0; padding-left: 1.5rem; }
+.prose-alltech li { margin: 0.4rem 0; }
+.prose-alltech blockquote {
+  border-left: 3px solid var(--color-accent-400);
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--color-ink-600);
+}

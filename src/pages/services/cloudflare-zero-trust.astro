@@ -1,0 +1,199 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { site } from '~/lib/site';
+
+// Service-specific JSON-LD
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Cloudflare Zero Trust Deployment',
+  provider: { '@id': `${site.url}/#organization` },
+  areaServed: site.serviceArea.map((l) => `${l.city}, ${l.region}`),
+  name: 'Cloudflare Zero Trust',
+  description:
+    'Design, deployment, and ongoing management of Cloudflare Zero Trust networks including Tunnel, WARP, Gateway, Access, and Email Security.',
+};
+---
+
+<BaseLayout
+  title="Cloudflare Zero Trust Deployment"
+  description="As a Cloudflare Partner, AllTech designs and deploys Zero Trust networks for multi-site businesses across northern Utah. Tunnels, WARP, Gateway, Access, Email Security."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
+
+  <!-- HERO -->
+  <section class="bg-ink-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid opacity-40"></div>
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-accent-400/15 blur-3xl"></div>
+    <div class="relative container-wide py-20 lg:py-28">
+      <div class="max-w-3xl">
+        <div class="eyebrow mb-4">Cloudflare Partner · Featured Service</div>
+        <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-[0.95] tracking-tight">
+          Cloudflare Zero Trust, <br />deployed by people who run it daily.
+        </h1>
+        <p class="mt-6 text-xl text-ink-200 leading-relaxed">
+          Most teams find Zero Trust intimidating. We deploy it across multi-site
+          manufacturing, professional services, and SMB networks every week.
+          You get the security model the Fortune 500 uses — sized and priced for
+          your business.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="/contact?service=cloudflare-zero-trust" class="btn btn-accent">
+            Scope a deployment
+          </a>
+          <a href="#what-we-deploy" class="btn btn-ghost bg-transparent border-ink-500 text-white hover:bg-white/5">
+            What's included
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE DEPLOY -->
+  <section id="what-we-deploy" class="py-20 lg:py-24">
+    <div class="container-wide grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4">
+        <div class="eyebrow mb-3">Capabilities</div>
+        <h2 class="text-4xl font-semibold leading-tight">The full Cloudflare One stack.</h2>
+        <p class="mt-5 text-ink-600 leading-relaxed">
+          We're hands-on with every product in the Cloudflare One platform. Not
+          just configured once and forgotten — managed via Terraform, monitored,
+          and tuned.
+        </p>
+      </div>
+
+      <div class="lg:col-span-8 grid sm:grid-cols-2 gap-4">
+        {[
+          {
+            title: 'Cloudflare Tunnel',
+            body: 'Expose internal apps without opening firewall ports. Multi-site tunnel architectures with failover.',
+          },
+          {
+            title: 'WARP & Device Profiles',
+            body: 'Endpoint client deployed via RMM, with split-tunnel and posture-based policies tailored per role.',
+          },
+          {
+            title: 'Gateway (SWG/DNS)',
+            body: 'DNS filtering, HTTP inspection, and tenant control list policies replacing legacy on-prem proxies.',
+          },
+          {
+            title: 'Access (ZTNA)',
+            body: 'Identity-aware access to internal apps, SSH, and RDP — browser-based or via WARP private network.',
+          },
+          {
+            title: 'Email Security',
+            body: 'Cloudflare-area1 protection in front of Microsoft 365 or Google Workspace. Phishing, BEC, malware.',
+          },
+          {
+            title: 'Terraform-managed',
+            body: 'Your environment lives as code. Reviewable, reproducible, version-controlled across sites.',
+          },
+        ].map(({ title, body }) => (
+          <div class="card">
+            <h3 class="font-display text-lg font-semibold mb-2">{title}</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">{body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US (proof) -->
+  <section class="py-20 lg:py-24 bg-ink-50 border-y border-ink-100">
+    <div class="container-wide">
+      <div class="max-w-3xl">
+        <div class="eyebrow mb-3">Why AllTech for Cloudflare</div>
+        <h2 class="text-4xl font-semibold leading-tight">
+          We don't just resell. We operate.
+        </h2>
+        <p class="mt-5 text-lg text-ink-600 leading-relaxed">
+          Anyone can spin up a Tunnel. The hard parts are everywhere else:
+          OT networks talking to Allen-Bradley PLCs, post-quantum QUIC blocked
+          by an upstream Barracuda, Device Profile API requests injecting null
+          virtual networks, hourly invite quotas across a dozen accounts.
+          We've fixed all of that — usually last month.
+        </p>
+      </div>
+
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+        {[
+          {
+            stat: 'Multi-site',
+            label: 'Tunnel architectures live across Boise, Logan, Orem with distinct subnets.',
+          },
+          {
+            stat: 'OT-ready',
+            label: 'Cloudflare connecting industrial control networks to head office without VPNs.',
+          },
+          {
+            stat: 'IaC',
+            label: 'Terraform Cloud-managed config so changes ship safely and audit clean.',
+          },
+        ].map(({ stat, label }) => (
+          <div>
+            <div class="font-display text-3xl font-semibold text-ink-900">{stat}</div>
+            <div class="mt-2 text-ink-600 leading-relaxed">{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGAGEMENT MODEL -->
+  <section class="py-20 lg:py-24">
+    <div class="container-wide">
+      <div class="max-w-2xl mb-12">
+        <div class="eyebrow mb-3">How we engage</div>
+        <h2 class="text-4xl font-semibold leading-tight">Three ways to start.</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="card">
+          <div class="font-mono text-xs text-accent-500 mb-2">01 · ASSESS</div>
+          <h3 class="font-display text-xl font-semibold mb-3">Network & Security Audit</h3>
+          <p class="text-sm text-ink-600 leading-relaxed">
+            We map your current network, identify Zero Trust opportunities, and
+            deliver a written report. Often the right first step.
+          </p>
+        </div>
+        <div class="card border-accent-300">
+          <div class="font-mono text-xs text-accent-500 mb-2">02 · DEPLOY</div>
+          <h3 class="font-display text-xl font-semibold mb-3">Project-based Rollout</h3>
+          <p class="text-sm text-ink-600 leading-relaxed">
+            Fixed-scope deployment of Tunnel, WARP, Gateway, and Access. From
+            kickoff to production in 4–8 weeks depending on size.
+          </p>
+        </div>
+        <div class="card">
+          <div class="font-mono text-xs text-accent-500 mb-2">03 · OPERATE</div>
+          <h3 class="font-display text-xl font-semibold mb-3">Managed Cloudflare</h3>
+          <p class="text-sm text-ink-600 leading-relaxed">
+            Ongoing tuning, policy changes, user provisioning, and incident
+            response — billed monthly per seat.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 lg:py-24">
+    <div class="container-wide">
+      <div class="rounded-xl bg-ink-900 text-white p-10 lg:p-14 grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8">
+          <h2 class="font-display text-3xl lg:text-4xl font-semibold leading-tight">
+            Ready to retire your VPN?
+          </h2>
+          <p class="mt-4 text-ink-300 text-lg max-w-2xl">
+            Send us a short note about your environment. We'll book a 30-minute
+            scoping call and tell you whether Zero Trust is actually the right
+            move — sometimes it isn't.
+          </p>
+        </div>
+        <div class="lg:col-span-4 flex flex-wrap gap-3 lg:justify-end">
+          <a href="/contact?service=cloudflare-zero-trust" class="btn btn-accent">Start a conversation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
