@@ -1,7 +1,8 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -15,14 +16,14 @@ const blog = defineCollection({
 });
 
 const caseStudies = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/caseStudies' }),
   schema: z.object({
     title: z.string(),
-    client: z.string(),                  // can be "Confidential" if NDA
+    client: z.string(),
     industry: z.string(),
-    services: z.array(z.string()),       // e.g. ["Incident Response", "Darktrace"]
-    summary: z.string(),                 // shows on listing page
-    outcome: z.string(),                 // one-line result
+    services: z.array(z.string()),
+    summary: z.string(),
+    outcome: z.string(),
     pubDate: z.coerce.date(),
     heroImage: z.string().optional(),
     draft: z.boolean().default(false),

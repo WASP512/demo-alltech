@@ -1,47 +1,178 @@
 ---
 import { site } from '~/lib/site';
-
-const nav = [
-  { href: '/services', label: 'Services' },
-  { href: '/cloudflare', label: 'Cloudflare Partner' },
-  { href: '/case-studies', label: 'Case Studies' },
-  { href: '/about', label: 'About' },
-  { href: '/blog', label: 'Insights' },
-];
+import { menuCategories, simpleNavLinks } from '~/lib/menu';
 
 const pathname = Astro.url.pathname;
 const isActive = (href: string) =>
   href === '/' ? pathname === '/' : pathname.startsWith(href);
 ---
 
-<header class="sticky top-0 z-40 backdrop-blur-md bg-white/85 border-b border-ink-100">
+<header class="sticky top-0 z-40 backdrop-blur-xl bg-[#0a0f1a]/85 border-b border-[var(--color-border-subtle)]">
   <div class="container-wide flex items-center justify-between h-16">
-    <a href="/" class="flex items-center gap-2 font-display font-semibold text-ink-900 tracking-tight">
-      <span class="inline-block w-2 h-2 rounded-full bg-accent-400"></span>
+    <!-- Brand -->
+    <a href="/" class="flex items-center gap-2.5 font-display font-semibold tracking-tight" style="color: var(--color-text-primary)">
+      <span class="inline-block w-2 h-2 rounded-full" style="background: var(--color-amber-400); box-shadow: 0 0 12px rgba(255,170,51,0.6);"></span>
       AllTech
     </a>
 
-    <nav class="hidden md:flex items-center gap-7" aria-label="Primary">
-      {nav.map((item) => (
+    <!-- Desktop nav -->
+    <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
+      {menuCategories.map((cat) => (
+        <div class="mega-trigger">
+          <a
+            href={cat.href}
+            class:list={[
+              'flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition',
+              isActive(cat.href) ? 'text-white' : 'text-[var(--color-text-muted)] hover:text-white',
+            ]}
+            aria-haspopup="true"
+          >
+            {cat.label}
+            <svg class="w-3.5 h-3.5 opacity-60" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+
+          <!-- Mega panel -->
+          <div
+            class="mega-panel absolute left-1/2 top-full -translate-x-1/2 pt-3 z-50"
+            style="min-width: max(720px, 60vw);"
+          >
+            <div
+              class="rounded-xl p-7 shadow-2xl"
+              style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); box-shadow: 0 24px 64px -16px rgba(0,0,0,0.6);"
+            >
+              <div class:list={['grid gap-8', cat.columns.length === 2 ? 'grid-cols-2' : 'grid-cols-3']}>
+                {cat.columns.map((col) => (
+                  <div>
+                    <div class="eyebrow mb-4">{col.title}</div>
+                    <ul class="space-y-1">
+                      {col.tiles.map((tile) => (
+                        <li>
+                          <a
+                            href={tile.href}
+                            class="group block -mx-3 px-3 py-2.5 rounded-md transition"
+                            style="--hover-bg: var(--color-bg-elevated);"
+                            onmouseenter="this.style.background='var(--color-bg-elevated)'"
+                            onmouseleave="this.style.background='transparent'"
+                          >
+                            <div class="font-medium text-sm group-hover:text-[var(--color-amber-300)] transition" style="color: var(--color-text-primary);">
+                              {tile.title}
+                            </div>
+                            <div class="text-xs mt-0.5 leading-snug" style="color: var(--color-text-muted)">
+                              {tile.description}
+                            </div>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              <div class="hairline mt-7 mb-5"></div>
+              <a
+                href={cat.href}
+                class="inline-flex items-center gap-1.5 text-sm font-medium transition"
+                style="color: var(--color-amber-300)"
+              >
+                Explore all {cat.label.toLowerCase()} services <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <div class="mx-2 h-5 w-px" style="background: var(--color-border-subtle)"></div>
+
+      {simpleNavLinks.map((link) => (
         <a
-          href={item.href}
+          href={link.href}
           class:list={[
-            'text-sm font-medium transition',
-            isActive(item.href) ? 'text-ink-900' : 'text-ink-500 hover:text-ink-900',
+            'px-3 py-2 text-sm font-medium rounded-md transition',
+            isActive(link.href) ? 'text-white' : 'text-[var(--color-text-muted)] hover:text-white',
           ]}
         >
-          {item.label}
+          {link.label}
         </a>
       ))}
     </nav>
 
+    <!-- Right cluster -->
     <div class="flex items-center gap-2">
-      <a href={`tel:${site.phoneE164}`} class="hidden sm:inline text-sm font-mono text-ink-600 hover:text-ink-900">
+      <a
+        href={`tel:${site.phoneE164}`}
+        class="hidden md:inline text-sm font-mono transition"
+        style="color: var(--color-text-muted)"
+        onmouseover="this.style.color='var(--color-text-primary)'"
+        onmouseout="this.style.color='var(--color-text-muted)'"
+      >
         {site.phone}
       </a>
-      <a href="/contact" class="btn btn-primary text-sm">
-        Get in touch
-      </a>
+      <a href="/contact" class="btn btn-primary text-sm">Get in touch</a>
+
+      <!-- Mobile menu toggle -->
+      <button
+        id="mobile-nav-toggle"
+        class="lg:hidden p-2 rounded-md"
+        style="color: var(--color-text-primary); border: 1px solid var(--color-border-default);"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav drawer -->
+  <div
+    id="mobile-nav"
+    class="lg:hidden hidden border-t"
+    style="background: var(--color-bg-surface); border-color: var(--color-border-subtle);"
+  >
+    <div class="container-wide py-5 space-y-1">
+      {menuCategories.map((cat) => (
+        <details class="group">
+          <summary
+            class="flex items-center justify-between cursor-pointer py-3 font-medium"
+            style="color: var(--color-text-primary)"
+          >
+            {cat.label}
+            <svg class="w-4 h-4 transition group-open:rotate-180" viewBox="0 0 12 12" fill="none">
+              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <div class="pl-3 pb-3 space-y-1">
+            {cat.columns.flatMap((col) => col.tiles).map((tile) => (
+              <a
+                href={tile.href}
+                class="block py-2 text-sm"
+                style="color: var(--color-text-muted)"
+              >
+                {tile.title}
+              </a>
+            ))}
+          </div>
+        </details>
+      ))}
+      <div class="hairline my-3"></div>
+      {simpleNavLinks.map((link) => (
+        <a href={link.href} class="block py-2.5 font-medium" style="color: var(--color-text-primary)">
+          {link.label}
+        </a>
+      ))}
     </div>
   </div>
 </header>
+
+<script>
+  const btn = document.getElementById('mobile-nav-toggle');
+  const nav = document.getElementById('mobile-nav');
+  btn?.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    nav?.classList.toggle('hidden');
+  });
+</script>

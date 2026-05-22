@@ -6,28 +6,25 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
   title="Cloudflare Partner — Zero Trust, Email Security, WARP"
   description="AllTech is an authorized Cloudflare Partner. We deploy and manage Cloudflare Zero Trust, Email Security, Tunnel, and WARP for businesses across northern Utah."
 >
-  <section class="bg-ink-900 text-white relative overflow-hidden">
-    <div class="absolute inset-0 bg-grid opacity-40"></div>
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent-400/15 blur-3xl"></div>
+  <section class="surface-dark bg-motif relative overflow-hidden">
+    <div class="glow-amber" style="top: -200px; right: -100px;"></div>
     <div class="relative container-wide py-24">
       <div class="eyebrow mb-4">Cloudflare Partner</div>
       <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-[0.95] tracking-tight max-w-3xl">
-        The Cache Valley partner for Cloudflare.
+        The Cache Valley partner<br/>for <span style="color: var(--color-amber-300);">Cloudflare</span>.
       </h1>
-      <p class="mt-6 text-xl text-ink-200 max-w-2xl leading-relaxed">
+      <p class="mt-6 text-xl max-w-2xl leading-relaxed text-muted">
         AllTech is an authorized Cloudflare Partner delivering Zero Trust,
         Email Security, and edge networking to businesses across Utah and Idaho.
       </p>
       <div class="mt-9 flex flex-wrap gap-3">
-        <a href="/services/cloudflare-zero-trust" class="btn btn-accent">Zero Trust details</a>
-        <a href="/contact?service=Cloudflare+Zero+Trust" class="btn btn-ghost bg-transparent border-ink-500 text-white hover:bg-white/5">
-          Talk to an engineer
-        </a>
+        <a href="/services/cloudflare-zero-trust" class="btn btn-primary">Zero Trust details</a>
+        <a href="/contact?service=Cloudflare+Zero+Trust" class="btn btn-ghost">Talk to an engineer</a>
       </div>
     </div>
   </section>
 
-  <section class="py-20">
+  <section class="surface-dark py-20" style="border-top: 1px solid var(--color-line-faint);">
     <div class="container-wide">
       <div class="max-w-2xl mb-10">
         <div class="eyebrow mb-3">What we deliver</div>
@@ -44,8 +41,8 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
           ['Migration from VPN', 'Sunset legacy VPNs with a phased rollout to Zero Trust.', '/services/cloudflare-zero-trust'],
         ].map(([title, body, href]) => (
           <a href={href} class="card group block">
-            <h3 class="font-display text-lg font-semibold mb-2 group-hover:text-accent-500 transition">{title}</h3>
-            <p class="text-sm text-ink-600 leading-relaxed">{body}</p>
+            <h3 class="font-display text-lg font-semibold mb-2 group-hover:text-amber-300 transition-colors">{title}</h3>
+            <p class="text-sm text-muted leading-relaxed">{body}</p>
           </a>
         ))}
       </div>

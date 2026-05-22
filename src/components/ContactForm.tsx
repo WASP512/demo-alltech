@@ -13,11 +13,24 @@ const services = [
 ];
 
 interface Props {
-  /** Optional preselect from `?service=` query param */
   defaultService?: string;
-  /** Turnstile site key from PUBLIC_TURNSTILE_SITE_KEY env */
   turnstileSiteKey?: string;
 }
+
+const inputStyles =
+  'w-full rounded-md px-3.5 py-2.5 transition-colors ' +
+  'placeholder:text-[color:var(--color-text-tertiary)] ' +
+  'focus:outline-none focus:ring-2';
+
+const inputInlineStyle: React.CSSProperties = {
+  background: 'var(--color-surface-0)',
+  color: 'var(--color-text-primary)',
+  border: '1px solid var(--color-line-soft)',
+};
+
+const labelInlineStyle: React.CSSProperties = {
+  color: 'var(--color-text-secondary)',
+};
 
 export default function ContactForm({ defaultService, turnstileSiteKey }: Props) {
   const [status, setStatus] = useState<Status>('idle');
@@ -51,16 +64,24 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
 
   if (status === 'success') {
     return (
-      <div className="card text-center py-12">
-        <div className="inline-flex w-12 h-12 rounded-full bg-accent-100 text-accent-600 items-center justify-center mb-4">
+      <div className="text-center py-8">
+        <div
+          className="inline-flex w-12 h-12 rounded-full items-center justify-center mb-4"
+          style={{ background: 'var(--color-amber-glow)', color: 'var(--color-amber-300)' }}
+        >
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="font-display text-2xl font-semibold mb-2">Thanks — we got it.</h3>
-        <p className="text-ink-600">
+        <h3 className="font-display text-2xl font-semibold mb-2" style={{ color: 'var(--color-text-primary)' }}>
+          Thanks — we got it.
+        </h3>
+        <p style={{ color: 'var(--color-text-secondary)' }}>
           An engineer will reach out within one business day. For anything urgent,
-          call us at <a href="tel:+14355573232" className="text-accent-500 font-mono">(435) 557-3232</a>.
+          call us at{' '}
+          <a href="tel:+14355573232" className="font-mono" style={{ color: 'var(--color-amber-300)' }}>
+            (435) 557-3232
+          </a>.
         </p>
       </div>
     );
@@ -68,7 +89,6 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
 
   return (
     <form onSubmit={onSubmit} className="space-y-5" noValidate>
-      {/* Honeypot field — bots fill it, humans don't see it */}
       <div className="hidden" aria-hidden="true">
         <label>
           Leave this empty
@@ -86,22 +106,24 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
       </div>
 
       <div>
-        <label htmlFor="service" className="block text-sm font-medium text-ink-700 mb-1.5">
+        <label htmlFor="service" className="block text-sm font-medium mb-1.5" style={labelInlineStyle}>
           What do you need help with?
         </label>
         <select
           id="service"
           name="service"
           defaultValue={defaultService ?? services[0]}
-          className="w-full rounded-md border border-ink-200 bg-white px-3.5 py-2.5 text-ink-800
-                     focus:border-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-200"
+          className={inputStyles}
+          style={inputInlineStyle}
         >
-          {services.map((s) => <option key={s} value={s}>{s}</option>)}
+          {services.map((s) => (
+            <option key={s} value={s} style={{ background: 'var(--color-surface-0)' }}>{s}</option>
+          ))}
         </select>
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-ink-700 mb-1.5">
+        <label htmlFor="message" className="block text-sm font-medium mb-1.5" style={labelInlineStyle}>
           Tell us more
         </label>
         <textarea
@@ -110,17 +132,24 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
           required
           rows={5}
           placeholder="What's broken, what you're building, or what you're trying to figure out…"
-          className="w-full rounded-md border border-ink-200 bg-white px-3.5 py-2.5 text-ink-800
-                     focus:border-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-200 resize-y"
+          className={inputStyles + ' resize-y'}
+          style={inputInlineStyle}
         />
       </div>
 
       {turnstileSiteKey && (
-        <div className="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light" />
+        <div className="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="dark" />
       )}
 
       {status === 'error' && (
-        <div className="rounded-md border border-red-200 bg-red-50 text-red-800 px-4 py-3 text-sm">
+        <div
+          className="rounded-md px-4 py-3 text-sm"
+          style={{
+            background: 'rgba(248, 113, 113, 0.1)',
+            border: '1px solid rgba(248, 113, 113, 0.3)',
+            color: 'var(--color-signal-error)',
+          }}
+        >
           {errorMsg || 'Something went wrong. Please try again or call us directly.'}
         </div>
       )}
@@ -134,9 +163,11 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
         {status !== 'submitting' && <span aria-hidden="true">→</span>}
       </button>
 
-      <p className="text-xs text-ink-500">
+      <p className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
         We respond within one business day. For emergencies, call{' '}
-        <a href="tel:+14355573232" className="font-mono text-accent-500">(435) 557-3232</a>.
+        <a href="tel:+14355573232" className="font-mono" style={{ color: 'var(--color-amber-300)' }}>
+          (435) 557-3232
+        </a>.
       </p>
     </form>
   );
@@ -152,17 +183,17 @@ interface FieldProps {
 function Field({ label, name, type = 'text', required }: FieldProps) {
   return (
     <div>
-      <label htmlFor={name} className="block text-sm font-medium text-ink-700 mb-1.5">
+      <label htmlFor={name} className="block text-sm font-medium mb-1.5" style={labelInlineStyle}>
         {label}
-        {required && <span className="text-red-500 ml-0.5">*</span>}
+        {required && <span style={{ color: 'var(--color-signal-error)', marginLeft: '2px' }}>*</span>}
       </label>
       <input
         id={name}
         name={name}
         type={type}
         required={required}
-        className="w-full rounded-md border border-ink-200 bg-white px-3.5 py-2.5 text-ink-800
-                   focus:border-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-200"
+        className={inputStyles}
+        style={inputInlineStyle}
       />
     </div>
   );

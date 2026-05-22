@@ -10,33 +10,30 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   title="Insights"
   description="Technical writing from the AllTech engineering team — Cloudflare deployments, incident response, network design, and more."
 >
-  <section class="bg-ink-900 text-white">
-    <div class="container-wide py-16">
+  <section class="surface-dark bg-motif relative overflow-hidden">
+    <div class="glow-amber" style="top: -200px; right: -100px;"></div>
+    <div class="relative container-wide py-16">
       <div class="eyebrow mb-4">Insights</div>
       <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-tight max-w-3xl">
-        Field notes from the engineering team.
+        Field notes from the <span style="color: var(--color-amber-300);">engineering team</span>.
       </h1>
     </div>
   </section>
 
-  <section class="py-16">
+  <section class="surface-dark py-16">
     <div class="container-prose">
       {posts.length === 0 ? (
-        <p class="text-ink-600 text-lg">
-          Posts coming soon. In the meantime, follow us for updates.
-        </p>
+        <p class="text-lg text-muted">Posts coming soon. In the meantime, follow us for updates.</p>
       ) : (
         <ul class="space-y-6">
           {posts.map((post) => (
             <li>
               <a href={`/blog/${post.slug}`} class="card block group">
-                <div class="text-xs font-mono text-accent-500 mb-2">
+                <div class="text-xs font-mono mb-2" style="color: var(--color-amber-300);">
                   {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                 </div>
-                <h2 class="font-display text-2xl font-semibold mb-2 group-hover:text-accent-500 transition">
-                  {post.data.title}
-                </h2>
-                <p class="text-ink-600 leading-relaxed">{post.data.description}</p>
+                <h2 class="font-display text-2xl font-semibold mb-2 group-hover:text-amber-300 transition-colors">{post.data.title}</h2>
+                <p class="text-muted leading-relaxed">{post.data.description}</p>
               </a>
             </li>
           ))}

@@ -17,63 +17,60 @@ const fullName = `${location.city}, ${location.region}`;
   title={`IT Support & Cybersecurity in ${fullName}`}
   description={`AllTech provides managed IT, cybersecurity, Cloudflare Zero Trust, and UniFi network design for businesses in ${fullName}. Local engineers, fast response.`}
 >
-  <section class="bg-ink-900 text-white">
-    <div class="container-wide py-20">
+  <section class="surface-dark bg-motif relative overflow-hidden">
+    <div class="glow-amber" style="top: -200px; right: -100px;"></div>
+    <div class="relative container-wide py-20">
       <div class="eyebrow mb-4">Service Area · {location.region}</div>
       <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-tight max-w-3xl">
-        IT support and cybersecurity in {fullName}.
+        IT support and cybersecurity<br/>in <span style="color: var(--color-amber-300);">{fullName}</span>.
       </h1>
-      <p class="mt-6 text-xl text-ink-200 max-w-2xl leading-relaxed">
+      <p class="mt-6 text-xl max-w-2xl leading-relaxed text-muted">
         AllTech is headquartered in Hyde Park, UT — a short drive to {location.city}.
         Local engineers, real on-site response, no overseas help desks.
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href={`/contact?service=General+inquiry&location=${location.slug}`} class="btn btn-accent">
-          Request a quote
-        </a>
-        <a href="/services" class="btn btn-ghost bg-transparent border-ink-500 text-white hover:bg-white/5">
-          See all services
-        </a>
+        <a href={`/contact?service=General+inquiry&location=${location.slug}`} class="btn btn-primary">Request a quote</a>
+        <a href="/services" class="btn btn-ghost">See all services</a>
       </div>
     </div>
   </section>
 
-  <section class="py-16 lg:py-20">
+  <section class="surface-dark py-16 lg:py-20" style="border-top: 1px solid var(--color-line-faint);">
     <div class="container-wide grid lg:grid-cols-12 gap-12">
       <div class="lg:col-span-5">
         <div class="eyebrow mb-3">Local to {location.city}</div>
         <h2 class="text-4xl font-semibold leading-tight">
           What businesses in {location.city} typically need.
         </h2>
-        <p class="mt-5 text-ink-600 leading-relaxed">
+        <p class="mt-5 leading-relaxed text-muted">
           Whether you're running a manufacturing line, a professional services
           firm, or a multi-site operation, we've worked with businesses like
-          yours throughout the region. Below are the most common engagements.
+          yours throughout the region.
         </p>
       </div>
 
       <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
         {services.map((service) => (
           <a href={`/services/${service.slug}`} class="card group block">
-            <h3 class="font-display text-lg font-semibold mb-1.5 group-hover:text-accent-500 transition">
+            <h3 class="font-display text-lg font-semibold mb-1.5 group-hover:text-amber-300 transition-colors">
               {service.name}
             </h3>
-            <p class="text-sm text-ink-600 leading-relaxed">{service.short}</p>
+            <p class="text-sm text-muted leading-relaxed">{service.short}</p>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="py-16 bg-ink-50 border-y border-ink-100">
+  <section class="surface-light py-16">
     <div class="container-wide">
-      <div class="rounded-xl bg-white p-8 lg:p-10 border border-ink-100">
+      <div class="rounded-xl p-8 lg:p-10" style="background: white; border: 1px solid #e5e7eb;">
         <div class="grid lg:grid-cols-12 gap-6 items-center">
           <div class="lg:col-span-8">
             <h2 class="font-display text-2xl lg:text-3xl font-semibold">
               On-site in {location.city} when you need us.
             </h2>
-            <p class="mt-2 text-ink-600">
+            <p class="mt-2 text-muted">
               Remote-first for speed, on-site when it matters. Call us and an engineer answers.
             </p>
           </div>

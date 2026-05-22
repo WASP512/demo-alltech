@@ -13,24 +13,24 @@ const { Content } = await study.render();
 ---
 
 <BaseLayout title={study.data.title} description={study.data.summary}>
-  <article class="py-16">
+  <article class="surface-dark py-16">
     <div class="container-prose">
-      <a href="/case-studies" class="text-sm text-accent-500 font-medium">← Back to case studies</a>
+      <a href="/case-studies" class="text-sm font-medium" style="color: var(--color-amber-300);">← Back to case studies</a>
 
       <header class="mt-6 mb-10">
-        <div class="text-xs font-mono text-accent-500 mb-4">{study.data.industry} · {study.data.client}</div>
+        <div class="text-xs font-mono mb-4" style="color: var(--color-amber-300);">{study.data.industry} · {study.data.client}</div>
         <h1 class="font-display text-4xl lg:text-5xl font-semibold leading-tight">{study.data.title}</h1>
-        <p class="mt-4 text-xl text-ink-600 leading-relaxed">{study.data.summary}</p>
+        <p class="mt-4 text-xl leading-relaxed text-muted">{study.data.summary}</p>
 
         <div class="mt-6 flex flex-wrap gap-2">
           {study.data.services.map((tag) => (
-            <span class="text-xs px-2 py-1 rounded bg-ink-100 text-ink-700 font-medium">{tag}</span>
+            <span class="text-xs px-2 py-1 rounded font-medium" style="background: var(--color-surface-3); color: var(--color-text-secondary);">{tag}</span>
           ))}
         </div>
 
-        <div class="mt-8 p-5 rounded-lg bg-ink-50 border border-ink-100">
+        <div class="mt-8 p-5 rounded-lg" style="background: var(--color-surface-2); border: 1px solid var(--color-amber-400);">
           <div class="eyebrow mb-2">Outcome</div>
-          <p class="text-ink-800 font-medium">{study.data.outcome}</p>
+          <p class="font-medium" style="color: var(--color-text-primary);">{study.data.outcome}</p>
         </div>
       </header>
 

@@ -1,43 +1,43 @@
 ---
 import { site, services } from '~/lib/site';
-
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-ink-900 text-ink-200 mt-24">
+<footer class="mt-32 border-t" style="background: var(--color-bg-surface); border-color: var(--color-border-subtle)">
   <div class="container-wide py-16">
     <div class="grid gap-12 md:grid-cols-4">
-      <!-- Brand + NAP -->
       <div class="md:col-span-2">
-        <div class="flex items-center gap-2 font-display font-semibold text-white text-lg mb-3">
-          <span class="inline-block w-2 h-2 rounded-full bg-accent-400"></span>
+        <div class="flex items-center gap-2.5 font-display font-semibold text-lg mb-4" style="color: var(--color-text-primary)">
+          <span class="inline-block w-2 h-2 rounded-full" style="background: var(--color-amber-400); box-shadow: 0 0 12px rgba(255,170,51,0.6);"></span>
           AllTech
         </div>
-        <p class="text-sm text-ink-300 max-w-sm leading-relaxed">
-          Managed IT, cybersecurity, and Cloudflare-powered network
-          infrastructure for businesses across Cache Valley, the Wasatch
-          Front, and southern Idaho.
+        <p class="text-sm max-w-sm leading-relaxed" style="color: var(--color-text-muted)">
+          Managed IT, cybersecurity, and Cloudflare-powered network infrastructure
+          for businesses across Cache Valley, the Wasatch Front, and southern Idaho.
         </p>
 
-        <address class="mt-6 not-italic text-sm space-y-1.5 text-ink-300">
+        <address class="mt-6 not-italic text-sm space-y-1.5" style="color: var(--color-text-muted)">
           <div>{site.address.street}</div>
           <div>{site.address.city}, {site.address.region} {site.address.postalCode}</div>
           <div>
-            <a href={`tel:${site.phoneE164}`} class="hover:text-white font-mono">{site.phone}</a>
+            <a href={`tel:${site.phoneE164}`} class="font-mono hover:text-white transition" style="color: var(--color-text-default)">
+              {site.phone}
+            </a>
           </div>
           <div>
-            <a href={`mailto:${site.email}`} class="hover:text-white">{site.email}</a>
+            <a href={`mailto:${site.email}`} class="hover:text-white transition" style="color: var(--color-text-default)">
+              {site.email}
+            </a>
           </div>
         </address>
       </div>
 
-      <!-- Services -->
       <div>
-        <h3 class="font-display text-white text-sm uppercase tracking-wider mb-4">Services</h3>
+        <h3 class="font-display text-sm uppercase tracking-wider mb-4" style="color: var(--color-text-primary)">Services</h3>
         <ul class="space-y-2 text-sm">
           {services.map((s) => (
             <li>
-              <a href={`/services/${s.slug}`} class="text-ink-300 hover:text-white transition">
+              <a href={`/services/${s.slug}`} class="transition hover:text-white" style="color: var(--color-text-muted)">
                 {s.name}
               </a>
             </li>
@@ -45,13 +45,12 @@ const year = new Date().getFullYear();
         </ul>
       </div>
 
-      <!-- Service area -->
       <div>
-        <h3 class="font-display text-white text-sm uppercase tracking-wider mb-4">Service Area</h3>
+        <h3 class="font-display text-sm uppercase tracking-wider mb-4" style="color: var(--color-text-primary)">Service Area</h3>
         <ul class="space-y-2 text-sm">
           {site.serviceArea.map((loc) => (
             <li>
-              <a href={`/locations/${loc.slug}`} class="text-ink-300 hover:text-white transition">
+              <a href={`/locations/${loc.slug}`} class="transition hover:text-white" style="color: var(--color-text-muted)">
                 {loc.city}, {loc.region}
               </a>
             </li>
@@ -60,12 +59,12 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
-    <div class="mt-12 pt-8 border-t border-ink-700 flex flex-col sm:flex-row justify-between gap-4 text-xs text-ink-400">
+    <div class="mt-12 pt-8 border-t flex flex-col sm:flex-row justify-between gap-4 text-xs" style="border-color: var(--color-border-subtle); color: var(--color-text-subtle)">
       <div>© {year} AllTech. All rights reserved.</div>
       <div class="flex gap-5">
-        <a href="/privacy" class="hover:text-white">Privacy</a>
-        <a href="/terms" class="hover:text-white">Terms</a>
-        <a href="https://remote.askalltech.com:8040" class="hover:text-white">Remote Assistance</a>
+        <a href="/privacy" class="hover:text-white transition">Privacy</a>
+        <a href="/terms" class="hover:text-white transition">Terms</a>
+        <a href="https://remote.askalltech.com:8040" class="hover:text-white transition">Remote Assistance</a>
       </div>
     </div>
   </div>

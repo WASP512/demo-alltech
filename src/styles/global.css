@@ -1,44 +1,81 @@
 @import "tailwindcss";
 
 /* ============================================================
-   AllTech design tokens
-   Tailwind v4 reads theme values from @theme blocks.
+   AllTech design tokens — dark-first
+
+   Two layers:
+   1. SCALE tokens (ink-*, amber-*) — raw color steps. Avoid using
+      these directly in components; they're the source.
+   2. SEMANTIC tokens (--color-bg-page, --color-text-default, etc.)
+      — what components reference. Their meaning is fixed; their
+      value depends on theme.
+
+   This separation keeps contrast bugs out as the system grows.
    ============================================================ */
 @theme {
-  /* Brand palette — refined, technical, confident. Not generic-MSP-shield. */
+  /* ----- SCALE: deep navy ink ----- */
   --color-ink-50:  #f4f6fa;
-  --color-ink-100: #e5eaf2;
-  --color-ink-200: #c7d0e0;
-  --color-ink-300: #94a2bc;
-  --color-ink-400: #5d6e8e;
-  --color-ink-500: #3a4a6b;
-  --color-ink-600: #25334f;
-  --color-ink-700: #18233a;
-  --color-ink-800: #0f1828;
-  --color-ink-900: #070d18;
+  --color-ink-100: #cbd5e8;
+  --color-ink-200: #94a2bc;
+  --color-ink-300: #6b7a96;
+  --color-ink-400: #475569;
+  --color-ink-500: #2a3851;
+  --color-ink-600: #1f2a40;
+  --color-ink-700: #172033;
+  --color-ink-800: #0f1626;
+  --color-ink-900: #0a0f1a;
+  --color-ink-950: #050810;
 
-  --color-accent-50:  #e6fbff;
-  --color-accent-100: #b3f0ff;
-  --color-accent-200: #66dfff;
-  --color-accent-300: #1fc7ed;
-  --color-accent-400: #00a8cf;
-  --color-accent-500: #0089ab;
-  --color-accent-600: #006985;
+  /* ----- SCALE: warm amber accent ----- */
+  --color-amber-200: #ffd699;
+  --color-amber-300: #ffc266;
+  --color-amber-400: #ffaa33;
+  --color-amber-500: #ed8a00;
+  --color-amber-600: #c46d00;
 
-  --color-signal-amber: #f0a500;
-  --color-signal-red:   #d83a3a;
-  --color-signal-green: #1f9d55;
+  /* ----- SCALE: signal ----- */
+  --color-success: #2ee59d;
+  --color-warning: #ffaa33;
+  --color-danger:  #ff5a5a;
 
-  /* Fonts — Space Grotesk for display, Inter Tight for body.
-     Loaded via <link> in BaseLayout (preconnect + display=swap). */
+  /* ----- SEMANTIC: surfaces ----- */
+  --color-bg-page:     #0a0f1a;
+  --color-bg-surface:  #0f1626;
+  --color-bg-elevated: #172033;
+  --color-bg-inverse:  #f4f6fa;
+  --color-bg-tint:     #3a2a0a;
+
+  /* ----- SEMANTIC: borders ----- */
+  --color-border-subtle:  #1f2a40;
+  --color-border-default: #2a3851;
+  --color-border-strong:  #475569;
+
+  /* ----- SEMANTIC: text on dark surfaces ----- */
+  --color-text-primary: #f4f6fa;
+  --color-text-default: #cbd5e8;
+  --color-text-muted:   #94a2bc;
+  --color-text-subtle:  #6b7a96; /* AA-large only; for labels/captions */
+  --color-text-accent:  #ffaa33;
+  --color-text-link:    #ffc266;
+
+  /* ----- SEMANTIC: text on light "inverse" surfaces ----- */
+  --color-text-inverse-primary: #0a0f1a;
+  --color-text-inverse-default: #1f2a40;
+  --color-text-inverse-muted:   #475569;
+  --color-text-inverse-accent:  #ed8a00;
+
+  /* ----- Fonts ----- */
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Container widths */
-  --container-narrow: 64rem;  /* 1024px - prose, forms */
-  --container-prose:  72rem;  /* 1152px - content pages */
-  --container-wide:   80rem;  /* 1280px - hero, marketing */
+  /* ----- Containers ----- */
+  --container-narrow: 64rem;
+  --container-prose:  72rem;
+  --container-wide:   80rem;
+
+  /* ----- Motion ----- */
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ============================================================
@@ -50,33 +87,48 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
+    background: var(--color-bg-page);
   }
 
   body {
     font-family: var(--font-sans);
-    color: var(--color-ink-800);
-    background: var(--color-ink-50);
-    font-feature-settings: "ss01", "cv11"; /* Inter Tight stylistic tweaks */
+    color: var(--color-text-default);
+    background: var(--color-bg-page);
+    font-feature-settings: "ss01", "cv11";
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    color: var(--color-ink-900);
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary);
     text-wrap: balance;
+    font-weight: 600;
   }
-
-  p { text-wrap: pretty; }
+  h1 { letter-spacing: -0.035em; }
+  p  { text-wrap: pretty; }
 
   ::selection {
-    background: var(--color-accent-300);
-    color: var(--color-ink-900);
+    background: var(--color-amber-400);
+    color: var(--color-ink-950);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent-400);
-    outline-offset: 2px;
-    border-radius: 2px;
+    outline: 2px solid var(--color-amber-400);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* Light "interlude" sections — opt-in via .surface-inverse */
+  .surface-inverse {
+    background: var(--color-bg-inverse);
+    color: var(--color-text-inverse-default);
+  }
+  .surface-inverse h1,
+  .surface-inverse h2,
+  .surface-inverse h3,
+  .surface-inverse h4 {
+    color: var(--color-text-inverse-primary);
   }
 }
 
@@ -90,114 +142,234 @@
 
   .btn {
     @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md
-           font-medium text-sm tracking-tight transition
-           focus-visible:outline-2 focus-visible:outline-offset-2;
+           font-medium text-sm tracking-tight transition-all duration-200;
+    transition-timing-function: var(--ease-out-soft);
   }
   .btn-primary {
-    background: var(--color-ink-900);
-    color: var(--color-ink-50);
+    background: var(--color-amber-400);
+    color: var(--color-ink-950);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 0 0 1px rgba(255,170,51,0.4);
   }
   .btn-primary:hover {
+    background: var(--color-amber-300);
+    transform: translateY(-1px);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset,
+                0 0 0 1px rgba(255,170,51,0.6),
+                0 8px 24px -8px rgba(255,170,51,0.4);
+  }
+  .btn-secondary {
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-default);
+  }
+  .btn-secondary:hover {
     background: var(--color-ink-700);
-    transform: translateY(-1px);
-  }
-  .btn-accent {
-    background: var(--color-accent-400);
-    color: var(--color-ink-900);
-  }
-  .btn-accent:hover {
-    background: var(--color-accent-300);
-    transform: translateY(-1px);
+    border-color: var(--color-border-strong);
   }
   .btn-ghost {
-    color: var(--color-ink-700);
-    border: 1px solid var(--color-ink-200);
-    background: white;
+    color: var(--color-text-default);
+    border: 1px solid var(--color-border-default);
+    background: transparent;
   }
-  .btn-ghost:hover { border-color: var(--color-ink-400); }
+  .btn-ghost:hover {
+    border-color: var(--color-text-muted);
+    color: var(--color-text-primary);
+  }
 
-  /* Eyebrow label used above section headings */
   .eyebrow {
     @apply text-xs font-mono uppercase tracking-[0.18em];
-    color: var(--color-accent-500);
+    color: var(--color-amber-400);
+  }
+  .surface-inverse .eyebrow {
+    color: var(--color-amber-500);
   }
 
-  /* Hairline divider used between sections */
   .hairline {
     height: 1px;
     background: linear-gradient(90deg,
       transparent,
-      var(--color-ink-200) 20%,
-      var(--color-ink-200) 80%,
+      var(--color-border-default) 20%,
+      var(--color-border-default) 80%,
       transparent);
   }
 
-  /* Card surface */
   .card {
-    @apply rounded-lg p-6 transition;
-    background: white;
-    border: 1px solid var(--color-ink-100);
+    @apply rounded-lg p-6 transition-all duration-200;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-subtle);
+    transition-timing-function: var(--ease-out-soft);
   }
   .card:hover {
-    border-color: var(--color-ink-300);
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-strong);
+    transform: translateY(-2px);
+  }
+  .surface-inverse .card {
+    background: white;
+    border-color: var(--color-ink-100);
+    color: var(--color-text-inverse-default);
+  }
+  .surface-inverse .card:hover {
+    border-color: var(--color-ink-200);
     box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px -8px rgba(15,24,40,0.08);
   }
 
-  /* Subtle grid background for hero sections */
-  .bg-grid {
-    background-image:
-      linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 64px 64px;
+  .card-amber {
+    @apply rounded-lg p-6 transition-all duration-200;
+    background: linear-gradient(135deg, var(--color-bg-tint) 0%, var(--color-bg-surface) 100%);
+    border: 1px solid var(--color-amber-500);
+    transition-timing-function: var(--ease-out-soft);
   }
+  .card-amber:hover { transform: translateY(-2px); }
+
+  /* Motif: subtle dot grid (the AllTech equivalent of Cloudflare's edge motif) */
+  .bg-dot-grid {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1.5px);
+    background-size: 22px 22px;
+    background-position: center center;
+  }
+  .bg-dot-grid-fade {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1.5px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  .bg-glow-amber {
+    background: radial-gradient(circle at 80% 0%, rgba(255,170,51,0.12) 0%, transparent 50%);
+  }
+
+  /* Helper text classes — prefer over raw ink-* in components */
+  .text-default { color: var(--color-text-default); }
+  .text-muted   { color: var(--color-text-muted); }
+  .text-subtle  { color: var(--color-text-subtle); }
+  .text-accent  { color: var(--color-text-accent); }
 }
 
 /* ============================================================
-   Prose (blog/case studies) — restrained, editorial
+   Prose (blog & case studies)
    ============================================================ */
 .prose-alltech {
   max-width: 65ch;
-  color: var(--color-ink-700);
+  color: var(--color-text-default);
   font-size: 1.0625rem;
   line-height: 1.7;
 }
-.prose-alltech h2 {
-  font-size: 1.875rem;
-  margin: 2.5rem 0 1rem;
-}
-.prose-alltech h3 {
-  font-size: 1.375rem;
-  margin: 2rem 0 0.75rem;
-}
-.prose-alltech p { margin: 1rem 0; }
+.prose-alltech h2 { font-size: 1.875rem; margin: 2.5rem 0 1rem; color: var(--color-text-primary); }
+.prose-alltech h3 { font-size: 1.375rem; margin: 2rem 0 0.75rem; color: var(--color-text-primary); }
+.prose-alltech p  { margin: 1rem 0; }
 .prose-alltech a {
-  color: var(--color-accent-500);
+  color: var(--color-text-link);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
+  text-decoration-color: rgba(255,194,102,0.4);
 }
+.prose-alltech a:hover { text-decoration-color: var(--color-text-link); }
 .prose-alltech code {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  background: var(--color-ink-100);
-  padding: 0.1em 0.35em;
-  border-radius: 3px;
+  font-family: var(--font-mono); font-size: 0.9em;
+  background: var(--color-bg-elevated);
+  padding: 0.1em 0.35em; border-radius: 3px;
+  border: 1px solid var(--color-border-subtle);
 }
 .prose-alltech pre {
-  background: var(--color-ink-900);
-  color: var(--color-ink-50);
-  padding: 1rem 1.25rem;
-  border-radius: 6px;
-  overflow-x: auto;
-  font-size: 0.875rem;
+  background: var(--color-ink-950); color: var(--color-ink-50);
+  padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto;
+  font-size: 0.875rem; border: 1px solid var(--color-border-subtle);
 }
-.prose-alltech pre code { background: transparent; padding: 0; }
+.prose-alltech pre code { background: transparent; padding: 0; border: 0; }
 .prose-alltech ul, .prose-alltech ol { margin: 1rem 0; padding-left: 1.5rem; }
 .prose-alltech li { margin: 0.4rem 0; }
 .prose-alltech blockquote {
-  border-left: 3px solid var(--color-accent-400);
-  padding-left: 1.25rem;
-  margin: 1.5rem 0;
-  font-style: italic;
-  color: var(--color-ink-600);
+  border-left: 3px solid var(--color-amber-400);
+  padding-left: 1.25rem; margin: 1.5rem 0;
+  font-style: italic; color: var(--color-text-muted);
+}
+
+/* ============================================================
+   Compatibility aliases
+   Earlier page authoring used these class names; rather than
+   touch a dozen files, we alias them here.
+   ============================================================ */
+@layer components {
+  .surface-dark {
+    background: var(--color-bg-page);
+    color: var(--color-text-default);
+  }
+  .surface-dark h1, .surface-dark h2, .surface-dark h3, .surface-dark h4 {
+    color: var(--color-text-primary);
+  }
+
+  .surface-light {
+    background: var(--color-bg-inverse);
+    color: var(--color-text-inverse-default);
+  }
+  .surface-light h1, .surface-light h2, .surface-light h3, .surface-light h4 {
+    color: var(--color-text-inverse-primary);
+  }
+  .surface-light .eyebrow { color: var(--color-amber-500); }
+  .surface-light .card {
+    background: white;
+    border-color: var(--color-ink-100);
+    color: var(--color-text-inverse-default);
+  }
+
+  .bg-motif {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1.5px);
+    background-size: 22px 22px;
+    background-position: center center;
+  }
+  .surface-light.bg-motif,
+  .surface-light .bg-motif {
+    background-image: radial-gradient(circle, rgba(15,22,38,0.08) 1px, transparent 1.5px);
+  }
+
+  .glow-amber {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(255,170,51,0.18) 0%, transparent 60%);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* Token aliases for legacy names used in pages */
+@theme {
+  --color-line:       #2a3851; /* alias of border-default */
+  --color-line-faint: #1f2a40; /* alias of border-subtle */
+}
+
+/* ============================================================
+   Mega-menu — hover-triggered panel
+   ============================================================ */
+.mega-trigger {
+  position: relative;
+}
+.mega-panel {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 200ms var(--ease-out-soft),
+              transform 200ms var(--ease-out-soft),
+              visibility 0s linear 200ms;
+}
+.mega-trigger:hover .mega-panel,
+.mega-trigger:focus-within .mega-panel,
+.mega-panel:hover {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+/* Reduced-motion: respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
