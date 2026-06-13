@@ -4,7 +4,7 @@ import { services, site } from '~/lib/site';
 
 export function getStaticPaths() {
   return services
-    .filter((s) => !['cloudflare-zero-trust'].includes(s.slug))
+    .filter((s) => !['cloudflare-zero-trust', 'cybersecurity'].includes(s.slug))
     .map((s) => ({ params: { service: s.slug }, props: { service: s } }));
 }
 

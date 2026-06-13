@@ -1,0 +1,217 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { site } from '~/lib/site';
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Managed Cybersecurity Services',
+  provider: { '@id': `${site.url}/#organization` },
+  areaServed: site.serviceArea.map((l) => `${l.city}, ${l.region}`),
+  name: 'Cybersecurity Services',
+  description: 'AllTech provides managed cybersecurity for businesses in northern Utah — EDR, email security, Darktrace AI NDR, 24/7 SOC monitoring, penetration testing, and incident response.',
+};
+---
+
+<BaseLayout
+  title="Cybersecurity Services"
+  description="AllTech provides managed cybersecurity for businesses in northern Utah — EDR, email security, Darktrace AI, 24/7 SOC monitoring, penetration testing, and incident response."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
+
+  <!-- Hero -->
+  <section class="surface-dark relative overflow-hidden bg-motif">
+    <div class="glow-amber" style="top: -200px; right: -100px;"></div>
+    <div class="relative container-wide py-20 lg:py-28">
+      <div class="max-w-3xl">
+        <div class="eyebrow mb-4">Cybersecurity · Managed Security Services</div>
+        <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-[0.95] tracking-tight">
+          Security run by engineers who <span style="color: var(--color-amber-300);">know your environment</span>.
+        </h1>
+        <p class="mt-6 text-xl leading-relaxed text-muted">
+          EDR, email filtering, Darktrace AI, 24/7 SOC monitoring, penetration testing, and
+          incident response — operated by the same team that handles your day-to-day IT.
+          No handoffs to a generic security vendor. No context lost.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="/contact?service=cybersecurity" class="btn btn-primary">Scope an engagement</a>
+          <a href="#what-we-deploy" class="btn btn-ghost">What's included</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we deploy — capability grid with anchor IDs -->
+  <section id="what-we-deploy" class="surface-dark py-20 lg:py-24" style="border-top: 1px solid var(--color-line-faint);">
+    <div class="container-wide">
+      <div class="max-w-2xl mb-12">
+        <div class="eyebrow mb-3">Capabilities</div>
+        <h2 class="text-4xl font-semibold leading-tight">What we deploy.</h2>
+        <p class="mt-5 text-muted leading-relaxed">
+          Six disciplines, one team. Each capability is operated hands-on — not
+          contracted out, not monitored by a dashboard nobody watches.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <section id="endpoint" class="card scroll-mt-24">
+          <h3 class="font-display text-lg font-semibold mb-3">Endpoint Security</h3>
+          <ul class="text-sm text-muted leading-relaxed space-y-2">
+            <li>EDR deployed and monitored across workstations and servers via Datto RMM — real-time threat detection, not signature-only antivirus.</li>
+            <li>Automated isolation of compromised endpoints during active incidents.</li>
+            <li>Patch management and vulnerability remediation on the same platform — security and maintenance aren't separate tools.</li>
+          </ul>
+        </section>
+
+        <section id="email" class="card scroll-mt-24">
+          <h3 class="font-display text-lg font-semibold mb-3">Email Security</h3>
+          <ul class="text-sm text-muted leading-relaxed space-y-2">
+            <li>Advanced filtering in front of Microsoft 365 and Google Workspace — catches phishing, BEC, and malware before delivery.</li>
+            <li>Mailbox security audits via Exchange Online PowerShell: risky forwarding rules, legacy auth, suspicious sign-ins.</li>
+            <li>Deliverable via Cloudflare Email Security as part of a Zero Trust deployment, or as a standalone layer.</li>
+          </ul>
+        </section>
+
+        <section id="darktrace" class="card scroll-mt-24">
+          <h3 class="font-display text-lg font-semibold mb-3">Darktrace AI</h3>
+          <ul class="text-sm text-muted leading-relaxed space-y-2">
+            <li>AI-driven Network Detection & Response (NDR) — learns the normal pattern of life for your network and flags deviations, not just known signatures.</li>
+            <li>We actively tune Antigena across multiple client environments, adjusting policies to cut false positives while keeping real threats blocked.</li>
+            <li>Catches lateral movement and C2 traffic that signature-based tools miss entirely.</li>
+          </ul>
+        </section>
+
+        <section id="soc" class="card scroll-mt-24">
+          <h3 class="font-display text-lg font-semibold mb-3">Managed SOC</h3>
+          <ul class="text-sm text-muted leading-relaxed space-y-2">
+            <li>24/7 monitoring across endpoint, network, and email signals.</li>
+            <li>Alerts triaged by engineers who know your environment — not a generic offshore SOC reading from a playbook.</li>
+            <li>Integrated with the same tools used for IR, so when something gets flagged, the same team that's been watching it can respond immediately.</li>
+          </ul>
+        </section>
+
+        <section id="pentest" class="card scroll-mt-24">
+          <h3 class="font-display text-lg font-semibold mb-3">Penetration Testing</h3>
+          <ul class="text-sm text-muted leading-relaxed space-y-2">
+            <li>Conducted via vPenTest — external, internal, and web application testing.</li>
+            <li>Plain-English reports: findings grouped by severity (Critical / High / Medium / Low), each with a concrete remediation note.</li>
+            <li>Designed as a recurring program, not a one-time checkbox — year-over-year trend tracking shows whether the environment is actually getting more secure.</li>
+            <li>Recent engagements include multi-site businesses with office and OT network segments.</li>
+          </ul>
+        </section>
+
+        <section id="ir" class="card scroll-mt-24">
+          <h3 class="font-display text-lg font-semibold mb-3">Incident Response</h3>
+          <ul class="text-sm text-muted leading-relaxed space-y-2">
+            <li>Active investigation and containment — not just "restore from backup and hope."</li>
+            <li>Malware analysis, PowerShell-based collection and eradication scripting deployed via RMM at scale, identification and removal of persistence mechanisms.</li>
+            <li>Experience eradicating multi-system C2 compromises while keeping the business running.</li>
+            <li>Every engagement includes a written summary: what happened, what we did, what changes prevent recurrence.</li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why us -->
+  <section class="surface-light py-20 lg:py-24">
+    <div class="container-wide">
+      <div class="max-w-3xl">
+        <div class="eyebrow mb-3">Why AllTech for Cybersecurity</div>
+        <h2 class="text-4xl font-semibold leading-tight">
+          Not a reseller. Not a silo.
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-muted">
+          Darktrace tuning, EDR monitoring, email audits, and penetration testing are run
+          by the same engineers who handle your day-to-day IT. Security context carries
+          over — we already know which servers matter, which users are high-risk, and
+          which parts of your network you can't afford to take down.
+        </p>
+      </div>
+
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+        {[
+          {
+            stat: 'Integrated',
+            label: 'SOC, EDR, and IR are operated by the same team — no handoffs, no lost context between security and IT.',
+          },
+          {
+            stat: 'Trained',
+            label: 'We run an internal homelab with Wazuh and a Caldera server specifically for attack simulation and pentest practice.',
+          },
+          {
+            stat: 'Current',
+            label: 'Active CompTIA CySA+ candidacy, B.S. Cybersecurity in progress — credentials are being earned now, not carried from a decade ago.',
+          },
+        ].map(({ stat, label }) => (
+          <div>
+            <div class="font-display text-3xl font-semibold" style="color: var(--color-amber-500);">{stat}</div>
+            <div class="mt-2 leading-relaxed text-muted">{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How we engage -->
+  <section class="surface-dark py-20 lg:py-24">
+    <div class="container-wide">
+      <div class="max-w-2xl mb-12">
+        <div class="eyebrow mb-3">How we engage</div>
+        <h2 class="text-4xl font-semibold leading-tight">Three ways to start.</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        {[
+          {
+            n: '01',
+            label: 'ASSESS',
+            title: 'Security Assessment / Pentest',
+            body: 'A vPenTest engagement or full posture review. Often the right first step for a business that\'s never had an outside look at their security.',
+          },
+          {
+            n: '02',
+            label: 'DEPLOY',
+            title: 'Harden & Implement',
+            body: 'Rolling out EDR, email security, Darktrace, and closing the gaps found in the assessment. Fixed-scope; timeline depends on environment size.',
+            highlight: true,
+          },
+          {
+            n: '03',
+            label: 'OPERATE',
+            title: 'Managed SOC',
+            body: 'Ongoing 24/7 monitoring, alert triage, quarterly pentests, and incident response retainer. Billed monthly per endpoint/user.',
+          },
+        ].map(({ n, label, title, body, highlight }) => (
+          <div class="card" style={highlight ? 'border-color: var(--color-amber-400);' : ''}>
+            <div class="font-mono text-xs mb-2 tracking-wider" style="color: var(--color-amber-300);">{n} · {label}</div>
+            <h3 class="font-display text-xl font-semibold mb-3">{title}</h3>
+            <p class="text-sm text-muted leading-relaxed">{body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="surface-dark py-20 lg:py-24">
+    <div class="container-wide">
+      <div class="rounded-xl p-10 lg:p-14 grid lg:grid-cols-12 gap-8 items-center relative overflow-hidden"
+           style="background: linear-gradient(135deg, var(--color-surface-1), var(--color-surface-2)); border: 1px solid var(--color-line-soft);">
+        <div class="glow-amber" style="top: -300px; left: -150px; width: 500px; height: 500px;"></div>
+        <div class="lg:col-span-8 relative">
+          <h2 class="font-display text-3xl lg:text-4xl font-semibold leading-tight">Ready to find out where you actually stand?</h2>
+          <p class="mt-4 text-lg max-w-2xl text-muted">
+            Send us a short note about your environment. We'll book a 30-minute call,
+            talk through your exposure, and tell you honestly what's worth doing first.
+          </p>
+        </div>
+        <div class="lg:col-span-4 flex flex-wrap gap-3 lg:justify-end relative">
+          <a href="/contact?service=cybersecurity" class="btn btn-primary">Start a conversation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
