@@ -371,8 +371,10 @@
 
    Pure CSS. No JS state management needed.
    ============================================================ */
+/* The panel is centered on the header's inner container (.nav-host), not on
+   the narrow trigger — so it stays centered and never overflows a page edge.
+   The zone is just the hover/focus region for the "Services" trigger. */
 .mega-zone {
-  position: relative;
   display: flex;
   align-items: center;
   gap: 4px;
