@@ -31,7 +31,7 @@ const isActive = (href: string) =>
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
+    <nav class="hidden xl:flex items-center gap-1.5" aria-label="Primary">
 
       <!-- ===================================================================
            MEGA ZONE — all category triggers + the single shared panel
@@ -41,7 +41,7 @@ const isActive = (href: string) =>
           <a
             href={cat.href}
             class:list={[
-              'mega-trigger flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition',
+              'mega-trigger flex items-center gap-1 whitespace-nowrap px-3.5 py-2 text-sm font-medium rounded-md transition',
               isActive(cat.href) ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]',
             ]}
             aria-haspopup="true"
@@ -118,12 +118,12 @@ const isActive = (href: string) =>
       </div>
 
       <!-- Divider + simple links -->
-      <div class="mx-2 h-5 w-px" style="background: var(--color-border-subtle)"></div>
+      <div class="mx-3 h-5 w-px" style="background: var(--color-border-subtle)"></div>
       {simpleNavLinks.map((link) => (
         <a
           href={link.href}
           class:list={[
-            'px-3 py-2 text-sm font-medium rounded-md transition',
+            'whitespace-nowrap px-3.5 py-2 text-sm font-medium rounded-md transition',
             isActive(link.href) ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]',
           ]}
         >
@@ -133,7 +133,7 @@ const isActive = (href: string) =>
     </nav>
 
     <!-- Right cluster -->
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-3">
       <a
         href={`tel:${site.phoneE164}`}
         class="hidden md:inline text-sm font-mono transition"
@@ -148,7 +148,7 @@ const isActive = (href: string) =>
       <!-- Mobile menu toggle -->
       <button
         id="mobile-nav-toggle"
-        class="lg:hidden p-2 rounded-md"
+        class="xl:hidden p-2 rounded-md"
         style="color: var(--color-text-primary); border: 1px solid var(--color-border-default);"
         aria-label="Open menu"
         aria-expanded="false"
@@ -163,7 +163,7 @@ const isActive = (href: string) =>
   <!-- Mobile nav drawer (mega-menu collapses to accordions per category) -->
   <div
     id="mobile-nav"
-    class="lg:hidden hidden border-t"
+    class="xl:hidden hidden border-t"
     style="background: var(--color-bg-surface); border-color: var(--color-border-subtle);"
   >
     <div class="container-wide py-5 space-y-1">
