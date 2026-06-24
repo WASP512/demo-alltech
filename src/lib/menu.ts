@@ -49,7 +49,7 @@ export const menuCategories: MenuCategory[] = [
     ],
   },
   {
-    label: 'Network and Infrastructure',
+    label: 'Network & Infrastructure',
     href: '/services/network-design',
     tiles: [
       { title: 'UniFi Network',      description: 'Business-grade switching, APs, gateways',  href: '/services/network-design#unifi' },
