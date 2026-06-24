@@ -46,6 +46,17 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
     const selectedServices = fd.getAll('services').map(String);
     const message = (fd.get('message') ?? '').toString().trim();
 
+    // Name, company, and email are required (the form is noValidate, so the
+    // `required` attribute alone won't block submission).
+    const name = (fd.get('name') ?? '').toString().trim();
+    const company = (fd.get('company') ?? '').toString().trim();
+    const email = (fd.get('email') ?? '').toString().trim();
+    if (!name || !company || !email) {
+      setStatus('error');
+      setErrorMsg('Name, company, and email are required.');
+      return;
+    }
+
     // At least ONE of "What do you need help with?" or "Tell us more" must be
     // provided — not both. (Name + email are still required via the inputs.)
     if (selectedServices.length === 0 && !message) {
@@ -121,7 +132,7 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
 
       <div className="grid sm:grid-cols-2 gap-5">
         <Field label="Name" name="name" required />
-        <Field label="Company" name="company" />
+        <Field label="Company" name="company" required />
       </div>
       <div className="grid sm:grid-cols-2 gap-5">
         <Field label="Email" name="email" type="email" required />
