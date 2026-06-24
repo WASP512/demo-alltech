@@ -3,9 +3,8 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 import { services, site } from '~/lib/site';
 
 const featured = services.find((s) => s.featured);
-// Second section embeds the Services page. VOIP is intentionally excluded here
-// (pending Mark's call on removing it site-wide).
-const rest = services.filter((s) => !s.featured && s.slug !== 'voip');
+// Second section embeds the Services page (all non-featured services).
+const rest = services.filter((s) => !s.featured);
 ---
 
 <BaseLayout

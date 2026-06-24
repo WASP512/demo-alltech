@@ -23,7 +23,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
         Tell us what you're <span style="color: var(--color-amber-300);">working on</span>.
       </h1>
       <p class="mt-5 text-xl max-w-2xl leading-relaxed text-muted">
-        An engineer reads every message. No sales reps in the middle.
+        A real person reads every message and connects you with the right expert on our team.
       </p>
     </div>
   </section>
@@ -49,12 +49,6 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               <a href={`tel:${site.phoneE164}`} class="font-mono font-medium transition-colors" style="color: var(--color-text-primary);"
                  onmouseover="this.style.color='var(--color-amber-300)'"
                  onmouseout="this.style.color='var(--color-text-primary)'">{site.phone}</a>
-            </div>
-            <div>
-              <div class="text-sm text-subtle">Email</div>
-              <a href={`mailto:${site.email}`} class="font-medium transition-colors" style="color: var(--color-text-primary);"
-                 onmouseover="this.style.color='var(--color-amber-300)'"
-                 onmouseout="this.style.color='var(--color-text-primary)'">{site.email}</a>
             </div>
           </div>
         </div>

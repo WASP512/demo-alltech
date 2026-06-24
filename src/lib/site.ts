@@ -17,6 +17,9 @@ export const site = {
   // NAP — used in LocalBusiness schema, footer, contact page
   phone: "(435) 557-3232",
   phoneE164: "+14355573232",
+  // Existing contract customers only — intentionally NOT displayed on the public
+  // site. New/prospective inquiries come through the contact form, which routes
+  // to the shared leadership/sales mailbox (address TBD).
   email: "help@askalltech.com",
   address: {
     street: "865 West Center Street, Bldg F",
@@ -82,12 +85,6 @@ export const services = [
     name: "Network & Infrastructure",
     short: "Business-grade Wi-Fi, switching, and firewalls — plus the full UniFi line: Network, Protect cameras, and Access door entry. Ubiquiti UniFi specialists.",
     icon: "network",
-  },
-  {
-    slug: "voip",
-    name: "VoIP Phone Service",
-    short: "High-quality cloud phone systems with porting, IVR, and mobile apps.",
-    icon: "phone",
   },
   {
     slug: "cloud-microsoft-365",
