@@ -30,9 +30,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return json({ ok: true });
   }
 
-  // 2. Required fields — name + email are always required.
-  if (!data.name?.trim() || !data.email?.trim()) {
-    return json({ ok: false, message: 'Name and email are required.' }, 400);
+  // 2. Required fields — name, company, and email are always required.
+  if (!data.name?.trim() || !data.company?.trim() || !data.email?.trim()) {
+    return json({ ok: false, message: 'Name, company, and email are required.' }, 400);
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
     return json({ ok: false, message: 'Please enter a valid email address.' }, 400);
