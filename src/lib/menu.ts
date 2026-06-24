@@ -30,7 +30,7 @@ export const menuCategories: MenuCategory[] = [
     tiles: [
       { title: 'Endpoint Security',   description: 'EDR & XDR for workstations and servers',     href: '/services/cybersecurity#endpoint' },
       { title: 'Email Security',      description: 'Stop phishing, BEC, malware before delivery', href: '/services/cybersecurity#email' },
-      { title: 'Darktrace AI',        description: 'Anomaly-based network threat detection',      href: '/services/cybersecurity#darktrace' },
+      { title: 'Network Detection (NDR)', description: 'AI anomaly-based network threat detection',  href: '/services/cybersecurity#ndr' },
       { title: 'Managed SOC',         description: '24/7 monitoring & response',                  href: '/services/cybersecurity#soc' },
       { title: 'Penetration Testing', description: 'External, internal, web-app testing',         href: '/services/cybersecurity#pentest' },
       { title: 'Incident Response',   description: 'Active intrusion containment & forensics',    href: '/services/cybersecurity#ir' },
@@ -49,15 +49,15 @@ export const menuCategories: MenuCategory[] = [
     ],
   },
   {
-    label: 'Network',
+    label: 'Network and Infrastructure',
     href: '/services/network-design',
     tiles: [
-      { title: 'UniFi Networks',     description: 'Business-grade switching, AP, security',  href: '/services/network-design#unifi' },
+      { title: 'UniFi Network',      description: 'Business-grade switching, APs, gateways',  href: '/services/network-design#unifi' },
+      { title: 'UniFi Protect',      description: 'Surveillance cameras & NVR management',    href: '/services/network-design#protect' },
+      { title: 'UniFi Access',       description: 'Door access control & entry management',   href: '/services/network-design#access' },
       { title: 'Wi-Fi Design',       description: 'Site survey, coverage, capacity',         href: '/services/network-design#wifi' },
-      { title: 'Firewall & Routing', description: 'Edge security & multi-WAN failover',      href: '/services/network-design#firewall' },
-      { title: 'Cabling',            description: 'Structured cabling for office build-outs', href: '/services/network-design#cabling' },
-      { title: 'Network Monitoring', description: 'Uptime, performance, alerting',           href: '/services/network-design#monitoring' },
-      { title: 'Site-to-Site',       description: 'VPN, SD-WAN, multi-location',             href: '/services/network-design#site-to-site' },
+      { title: 'Firewall & Routing', description: 'Edge security & multi-WAN failover',       href: '/services/network-design#firewall' },
+      { title: 'Cabling & Site-to-Site', description: 'Structured cabling, VPN, SD-WAN',      href: '/services/network-design#cabling' },
     ],
   },
   {
@@ -69,7 +69,6 @@ export const menuCategories: MenuCategory[] = [
       { title: 'Vendor Management',     description: 'One number for all your tech vendors',   href: '/services/managed-it#vendors' },
       { title: 'Microsoft 365',         description: 'Tenant design, licensing, migration',    href: '/services/cloud-microsoft-365#m365' },
       { title: 'Entra ID & Intune',     description: 'Identity & device management',           href: '/services/cloud-microsoft-365#intune' },
-      { title: 'VoIP Phone Service',    description: 'Cloud PBX with porting & mobile',        href: '/services/voip' },
     ],
   },
 ];
@@ -80,5 +79,6 @@ export const menuCategories: MenuCategory[] = [
 export const simpleNavLinks = [
   { href: '/case-studies', label: 'Case Studies' },
   { href: '/about',        label: 'About' },
+  { href: '/team',         label: 'Our Team' },
   { href: '/blog',         label: 'Insights' },
 ];

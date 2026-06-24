@@ -9,7 +9,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 <BaseLayout
   title="Contact AllTech"
-  description="Reach AllTech for managed IT, cybersecurity, or Cloudflare deployments. Based in Hyde Park, UT — serving Cache Valley, Box Elder County, and southern Idaho."
+  description="Reach AllTech for managed IT, cybersecurity, or Cloudflare deployments. Based in Hyde Park, UT — serving Northern Utah, Box Elder County, and southern Idaho."
 >
   {turnstileSiteKey && (
     <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer is:inline />
@@ -23,7 +23,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
         Tell us what you're <span style="color: var(--color-amber-300);">working on</span>.
       </h1>
       <p class="mt-5 text-xl max-w-2xl leading-relaxed text-muted">
-        An engineer reads every message. No sales reps in the middle.
+        A real person reads every message and connects you with the right expert on our team.
       </p>
     </div>
   </section>
@@ -49,18 +49,6 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               <a href={`tel:${site.phoneE164}`} class="font-mono font-medium transition-colors" style="color: var(--color-text-primary);"
                  onmouseover="this.style.color='var(--color-amber-300)'"
                  onmouseout="this.style.color='var(--color-text-primary)'">{site.phone}</a>
-            </div>
-            <div>
-              <div class="text-sm text-subtle">Email</div>
-              <a href={`mailto:${site.email}`} class="font-medium transition-colors" style="color: var(--color-text-primary);"
-                 onmouseover="this.style.color='var(--color-amber-300)'"
-                 onmouseout="this.style.color='var(--color-text-primary)'">{site.email}</a>
-            </div>
-            <div>
-              <div class="text-sm text-subtle">Remote support</div>
-              <a href="https://remote.askalltech.com:8040" class="font-medium transition-colors" style="color: var(--color-text-primary);"
-                 onmouseover="this.style.color='var(--color-amber-300)'"
-                 onmouseout="this.style.color='var(--color-text-primary)'">remote.askalltech.com</a>
             </div>
           </div>
         </div>
@@ -88,7 +76,6 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
             class="w-full h-full"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            style="filter: invert(0.9) hue-rotate(180deg);"
           />
         </div>
       </aside>

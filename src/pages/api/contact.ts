@@ -10,7 +10,8 @@ interface ContactPayload {
   email?: string;
   phone?: string;
   company?: string;
-  service?: string;
+  services?: string[]; // checkbox selections
+  service?: string; // legacy single-select (kept for backward compatibility)
   message?: string;
   company_website?: string; // honeypot
   'cf-turnstile-response'?: string;
@@ -29,12 +30,26 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return json({ ok: true });
   }
 
-  // 2. Required fields
-  if (!data.name?.trim() || !data.email?.trim() || !data.message?.trim()) {
-    return json({ ok: false, message: 'Name, email, and message are required.' }, 400);
+  // 2. Required fields — name + email are always required.
+  if (!data.name?.trim() || !data.email?.trim()) {
+    return json({ ok: false, message: 'Name and email are required.' }, 400);
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
     return json({ ok: false, message: 'Please enter a valid email address.' }, 400);
+  }
+
+  // Normalize the service selection (new checkbox array, or legacy single value).
+  const selectedServices = (data.services ?? (data.service ? [data.service] : []))
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  // At least ONE of "what do you need help with?" (services) OR "tell us more"
+  // (message) must be provided — not both.
+  if (selectedServices.length === 0 && !data.message?.trim()) {
+    return json(
+      { ok: false, message: 'Tell us what you need help with — select at least one option or add a message.' },
+      400,
+    );
   }
 
   // 3. Turnstile verification (only if secret is configured)
@@ -57,16 +72,21 @@ export const POST: APIRoute = async ({ request, locals }) => {
   // 4. Forward — easiest path is Cloudflare Email Routing's send_email binding,
   //    or any transactional service (Resend, Postmark, SendGrid).
   //    For now we log and return success. Replace this block with your sender of choice.
-  const subject = `[Web Inquiry] ${data.service || 'General'} — ${data.name}`;
+  //
+  //    Routing note: help@askalltech.com is reserved for EXISTING customers.
+  //    New/prospective inquiries from this form should go to the shared managers'
+  //    inbox — set CONTACT_FORWARD_TO to that address (not help@).
+  const servicesLabel = selectedServices.length ? selectedServices.join(', ') : 'General';
+  const subject = `[Web Inquiry] ${servicesLabel} — ${data.name}`;
   const body = [
-    `Service:  ${data.service || '—'}`,
+    `Services: ${selectedServices.length ? selectedServices.join(', ') : '—'}`,
     `Name:     ${data.name}`,
     `Email:    ${data.email}`,
     `Phone:    ${data.phone || '—'}`,
     `Company:  ${data.company || '—'}`,
     '',
     'Message:',
-    data.message,
+    data.message || '—',
   ].join('\n');
 
   console.log(`[contact] ${subject}\n${body}`);

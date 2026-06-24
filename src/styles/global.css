@@ -26,43 +26,57 @@
   --color-ink-900: #0a0f1a;
   --color-ink-950: #050810;
 
-  /* ----- SCALE: warm amber accent ----- */
+  /* ----- SCALE: warm amber accent -----
+     Light-mode tuned: amber-400 is the vivid fill (buttons, brand, large
+     display highlights); amber-300 is intentionally deepened so it stays
+     readable as small accent text / links on white. */
   --color-amber-200: #ffd699;
-  --color-amber-300: #ffc266;
-  --color-amber-400: #ffaa33;
-  --color-amber-500: #ed8a00;
-  --color-amber-600: #c46d00;
+  --color-amber-300: #b45309; /* readable accent TEXT on white (AA) */
+  --color-amber-400: #ec8c00; /* vivid FILL: buttons, brand dot, highlights */
+  --color-amber-500: #c46d00;
+  --color-amber-600: #9a5400;
 
   /* ----- SCALE: signal ----- */
-  --color-success: #2ee59d;
-  --color-warning: #ffaa33;
-  --color-danger:  #ff5a5a;
+  --color-success: #15a06b;
+  --color-warning: #c46d00;
+  --color-danger:  #dc2626;
 
-  /* ----- SEMANTIC: surfaces ----- */
-  --color-bg-page:     #0a0f1a;
-  --color-bg-surface:  #0f1626;
-  --color-bg-elevated: #172033;
-  --color-bg-inverse:  #f4f6fa;
-  --color-bg-tint:     #3a2a0a;
+  /* ----- SEMANTIC: surfaces (light-first) ----- */
+  --color-bg-page:     #f7f9fc;
+  --color-bg-surface:  #ffffff;
+  --color-bg-elevated: #eef2f8;
+  --color-bg-inverse:  #f1f4f9; /* subtle alternate light surface */
+  --color-bg-tint:     #fff6e6; /* light amber wash for card-amber */
 
   /* ----- SEMANTIC: borders ----- */
-  --color-border-subtle:  #1f2a40;
-  --color-border-default: #2a3851;
-  --color-border-strong:  #475569;
+  --color-border-subtle:  #e4e9f2;
+  --color-border-default: #cfd8e8;
+  --color-border-strong:  #a7b3c9;
 
-  /* ----- SEMANTIC: text on dark surfaces ----- */
-  --color-text-primary: #f4f6fa;
-  --color-text-default: #cbd5e8;
-  --color-text-muted:   #94a2bc;
+  /* ----- SEMANTIC: text on light surfaces ----- */
+  --color-text-primary: #0a0f1a;
+  --color-text-default: #243045;
+  --color-text-muted:   #51617c;
   --color-text-subtle:  #6b7a96; /* AA-large only; for labels/captions */
-  --color-text-accent:  #ffaa33;
-  --color-text-link:    #ffc266;
+  --color-text-accent:  #b45309;
+  --color-text-link:    #b45309;
 
-  /* ----- SEMANTIC: text on light "inverse" surfaces ----- */
+  /* ----- SEMANTIC: text on light "inverse"/interlude surfaces ----- */
   --color-text-inverse-primary: #0a0f1a;
-  --color-text-inverse-default: #1f2a40;
-  --color-text-inverse-muted:   #475569;
-  --color-text-inverse-accent:  #ed8a00;
+  --color-text-inverse-default: #243045;
+  --color-text-inverse-muted:   #51617c;
+  --color-text-inverse-accent:  #b45309;
+
+  /* ----- SEMANTIC: secondary/tertiary text + input surfaces -----
+     (referenced by ContactForm and a few pages; previously undefined) */
+  --color-text-secondary: #243045;
+  --color-text-tertiary:  #6b7a96;
+  --color-surface-0: #ffffff;
+  --color-surface-1: #ffffff;
+  --color-surface-2: #f1f4f9;
+  --color-line-soft: #e4e9f2;
+  --color-amber-glow: rgba(236, 140, 0, 0.12);
+  --color-signal-error: #dc2626;
 
   /* ----- Fonts ----- */
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -103,7 +117,7 @@
     letter-spacing: -0.025em;
     color: var(--color-text-primary);
     text-wrap: balance;
-    font-weight: 600;
+    font-weight: 700;
   }
   h1 { letter-spacing: -0.035em; }
   p  { text-wrap: pretty; }
@@ -151,11 +165,11 @@
     box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 0 0 1px rgba(255,170,51,0.4);
   }
   .btn-primary:hover {
-    background: var(--color-amber-300);
+    background: var(--color-amber-500);
     transform: translateY(-1px);
     box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset,
-                0 0 0 1px rgba(255,170,51,0.6),
-                0 8px 24px -8px rgba(255,170,51,0.4);
+                0 0 0 1px rgba(236,140,0,0.6),
+                0 8px 24px -8px rgba(236,140,0,0.35);
   }
   .btn-secondary {
     background: var(--color-bg-elevated);
@@ -178,10 +192,10 @@
 
   .eyebrow {
     @apply text-xs font-mono uppercase tracking-[0.18em];
-    color: var(--color-amber-400);
+    color: var(--color-amber-600);
   }
   .surface-inverse .eyebrow {
-    color: var(--color-amber-500);
+    color: var(--color-amber-600);
   }
 
   .hairline {
@@ -224,18 +238,18 @@
 
   /* Motif: subtle dot grid (the AllTech equivalent of Cloudflare's edge motif) */
   .bg-dot-grid {
-    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1.5px);
+    background-image: radial-gradient(circle, rgba(15,22,38,0.07) 1px, transparent 1.5px);
     background-size: 22px 22px;
     background-position: center center;
   }
   .bg-dot-grid-fade {
-    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1.5px);
+    background-image: radial-gradient(circle, rgba(15,22,38,0.07) 1px, transparent 1.5px);
     background-size: 22px 22px;
     mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
     -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
   }
   .bg-glow-amber {
-    background: radial-gradient(circle at 80% 0%, rgba(255,170,51,0.12) 0%, transparent 50%);
+    background: radial-gradient(circle at 80% 0%, rgba(236,140,0,0.10) 0%, transparent 50%);
   }
 
   /* Helper text classes — prefer over raw ink-* in components */
@@ -314,13 +328,9 @@
   }
 
   .bg-motif {
-    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1.5px);
+    background-image: radial-gradient(circle, rgba(15,22,38,0.07) 1px, transparent 1.5px);
     background-size: 22px 22px;
     background-position: center center;
-  }
-  .surface-light.bg-motif,
-  .surface-light .bg-motif {
-    background-image: radial-gradient(circle, rgba(15,22,38,0.08) 1px, transparent 1.5px);
   }
 
   .glow-amber {
@@ -328,7 +338,7 @@
     width: 600px;
     height: 600px;
     border-radius: 9999px;
-    background: radial-gradient(circle, rgba(255,170,51,0.18) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(236,140,0,0.14) 0%, transparent 60%);
     filter: blur(40px);
     pointer-events: none;
     z-index: 0;
@@ -337,8 +347,8 @@
 
 /* Token aliases for legacy names used in pages */
 @theme {
-  --color-line:       #2a3851; /* alias of border-default */
-  --color-line-faint: #1f2a40; /* alias of border-subtle */
+  --color-line:       #cfd8e8; /* alias of border-default */
+  --color-line-faint: #e4e9f2; /* alias of border-subtle */
 }
 
 /* ============================================================
