@@ -9,9 +9,9 @@
 export const site = {
   name: "AllTech",
   legalName: "AllTech",
-  tagline: "IT, cybersecurity, and network infrastructure for Cache Valley & beyond.",
+  tagline: "IT, cybersecurity, and network infrastructure for Northern Utah & beyond.",
   description:
-    "AllTech is a Cache Valley-based managed IT and cybersecurity provider serving businesses across northern Utah and southern Idaho. Cloudflare partner, UniFi specialist, Datto RMM, Darktrace.",
+    "AllTech is a Northern Utah-based managed IT and cybersecurity provider serving businesses across northern Utah and southern Idaho. Cloudflare partner, UniFi specialist, Datto RMM.",
   url: "https://askalltech.com",
 
   // NAP — used in LocalBusiness schema, footer, contact page
@@ -79,8 +79,8 @@ export const services = [
   },
   {
     slug: "network-design",
-    name: "Network Design & UniFi",
-    short: "Business-grade Wi-Fi, switching, firewalls. Ubiquiti UniFi specialists.",
+    name: "Network & Infrastructure",
+    short: "Business-grade Wi-Fi, switching, and firewalls — plus the full UniFi line: Network, Protect cameras, and Access door entry. Ubiquiti UniFi specialists.",
     icon: "network",
   },
   {

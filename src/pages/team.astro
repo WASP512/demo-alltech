@@ -1,0 +1,128 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+
+/**
+ * Our Team — scaffold.
+ *
+ * PLACEHOLDER CONTENT. Headshots and final bios are pending (see the action
+ * items: "Gather employee headshots" / "Write employee bios"). Replace each
+ * member's `bio` with the real copy, and swap the initials avatar for a real
+ * photo by setting `photo` to an image path under /public (e.g. "/team/jane.jpg").
+ */
+interface Member {
+  name: string;
+  role: string;
+  photo?: string; // e.g. "/team/jane-doe.jpg" — falls back to initials when unset
+  bio: string;
+}
+
+const team: Member[] = [
+  {
+    name: 'Team Member',
+    role: 'Founder & Principal Engineer',
+    bio: 'Placeholder bio — replace with a short paragraph covering this person’s background, focus areas, and what they handle for clients. Two or three sentences works well.',
+  },
+  {
+    name: 'Team Member',
+    role: 'Lead Network Engineer',
+    bio: 'Placeholder bio — UniFi networks, firewalls, and site-to-site design. Replace with real copy once approved.',
+  },
+  {
+    name: 'Team Member',
+    role: 'Security Engineer',
+    bio: 'Placeholder bio — EDR, SOC monitoring, penetration testing, and incident response. Replace with real copy once approved.',
+  },
+  {
+    name: 'Team Member',
+    role: 'Cloud & Microsoft 365 Specialist',
+    bio: 'Placeholder bio — M365 tenant design, Entra ID, Intune, and migrations. Replace with real copy once approved.',
+  },
+  {
+    name: 'Team Member',
+    role: 'Help Desk Engineer',
+    bio: 'Placeholder bio — first line of support, fast local response. Replace with real copy once approved.',
+  },
+  {
+    name: 'Team Member',
+    role: 'Account Manager',
+    bio: 'Placeholder bio — the person clients talk to about scope, scheduling, and vendor coordination. Replace with real copy once approved.',
+  },
+];
+
+const initials = (name: string) =>
+  name
+    .split(' ')
+    .map((p) => p[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
+---
+
+<BaseLayout
+  title="Our Team"
+  description="Meet the engineers behind AllTech — the team that designs, deploys, and runs IT, cybersecurity, and network infrastructure for businesses across Northern Utah."
+>
+  <section class="surface-dark bg-motif relative overflow-hidden">
+    <div class="glow-amber" style="top: -200px; right: -100px;"></div>
+    <div class="relative container-wide py-20">
+      <div class="eyebrow mb-4">Our Team</div>
+      <h1 class="font-display text-5xl lg:text-6xl font-bold leading-tight max-w-3xl">
+        The people who <span style="color: var(--color-amber-300);">build and run</span> your infrastructure.
+      </h1>
+      <p class="mt-6 text-xl max-w-2xl leading-relaxed text-muted">
+        Real engineers, local since 2009. When you call AllTech, you reach the
+        same people who designed your network — not a faceless queue.
+      </p>
+    </div>
+  </section>
+
+  <section class="surface-dark py-16 lg:py-20" style="border-top: 1px solid var(--color-line-faint);">
+    <div class="container-wide">
+      <!-- Editor note — remove once real headshots and bios are in. -->
+      <div
+        class="mb-10 rounded-md px-4 py-3 text-sm"
+        style="background: var(--color-amber-glow); border: 1px solid var(--color-amber-500); color: var(--color-text-default);"
+      >
+        <strong>Placeholder content.</strong> Headshots and bios are pending — swap the
+        initials avatars for real photos and replace each placeholder bio before launch.
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {team.map((member) => (
+          <article class="card flex flex-col items-start">
+            {member.photo ? (
+              <img
+                src={member.photo}
+                alt={member.name}
+                class="w-20 h-20 rounded-full object-cover mb-4"
+                loading="lazy"
+              />
+            ) : (
+              <div
+                class="w-20 h-20 rounded-full flex items-center justify-center mb-4 font-display text-xl font-bold"
+                style="background: var(--color-bg-elevated); color: var(--color-amber-600); border: 1px solid var(--color-border-default);"
+                aria-hidden="true"
+              >
+                {initials(member.name)}
+              </div>
+            )}
+            <h2 class="font-display text-lg font-bold" style="color: var(--color-text-primary);">{member.name}</h2>
+            <div class="text-sm font-medium mb-3" style="color: var(--color-amber-600);">{member.role}</div>
+            <p class="text-sm leading-relaxed text-muted">{member.bio}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="surface-dark py-16" style="border-top: 1px solid var(--color-line-faint);">
+    <div class="container-wide flex flex-wrap items-center gap-4 justify-between">
+      <div>
+        <h2 class="font-display text-2xl font-bold" style="color: var(--color-text-primary);">Want to work with this team?</h2>
+        <p class="mt-2 text-muted">Tell us what you're working on — we'll point you to the right engineer.</p>
+      </div>
+      <a href="/contact" class="btn btn-primary">Start a conversation</a>
+    </div>
+  </section>
+</BaseLayout>

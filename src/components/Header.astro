@@ -22,7 +22,7 @@ const isActive = (href: string) =>
   landing page — hover opens the panel, click navigates.
 -->
 
-<header class="sticky top-0 z-40 backdrop-blur-xl bg-[#0a0f1a]/85 border-b border-[var(--color-border-subtle)]">
+<header class="sticky top-0 z-40 backdrop-blur-xl bg-white/85 border-b border-[var(--color-border-subtle)]">
   <div class="container-wide flex items-center justify-between h-16">
     <!-- Brand -->
     <a href="/" class="flex items-center gap-2.5 font-display font-semibold tracking-tight" style="color: var(--color-text-primary)">
@@ -42,7 +42,7 @@ const isActive = (href: string) =>
             href={cat.href}
             class:list={[
               'mega-trigger flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition',
-              isActive(cat.href) ? 'text-white' : 'text-[var(--color-text-muted)] hover:text-white',
+              isActive(cat.href) ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]',
             ]}
             aria-haspopup="true"
           >
@@ -60,14 +60,14 @@ const isActive = (href: string) =>
             class="rounded-xl shadow-2xl overflow-hidden"
             style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); box-shadow: 0 24px 64px -16px rgba(0,0,0,0.6);"
           >
-            <!-- Columns: one per category -->
-            <div class="grid grid-cols-4 gap-x-2 p-6">
+            <!-- Columns: one per category, separated by a vertical divider -->
+            <div class="grid grid-cols-4 p-6">
               {menuCategories.map((cat) => (
-                <div class="min-w-0">
+                <div class="min-w-0 px-5 first:pl-0 last:pr-0 border-r last:border-r-0" style="border-color: var(--color-border-subtle)">
                   <a
                     href={cat.href}
-                    class="block mb-3 font-display text-sm font-semibold hover:text-[var(--color-amber-300)] transition"
-                    style="color: var(--color-text-primary)"
+                    class="block mb-2 pb-2 font-display text-base font-bold tracking-tight hover:text-[var(--color-amber-600)] transition border-b"
+                    style="color: var(--color-text-primary); border-color: var(--color-border-subtle)"
                   >
                     {cat.label}
                   </a>
@@ -103,7 +103,7 @@ const isActive = (href: string) =>
               style="background: var(--color-bg-page); border-color: var(--color-border-subtle)"
             >
               <span class="text-[11px] font-mono uppercase tracking-[0.18em]" style="color: var(--color-text-subtle)">
-                Cloudflare Partner · Cache Valley
+                Cloudflare Partner · Northern Utah
               </span>
               <a
                 href="/services"
@@ -124,7 +124,7 @@ const isActive = (href: string) =>
           href={link.href}
           class:list={[
             'px-3 py-2 text-sm font-medium rounded-md transition',
-            isActive(link.href) ? 'text-white' : 'text-[var(--color-text-muted)] hover:text-white',
+            isActive(link.href) ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]',
           ]}
         >
           {link.label}

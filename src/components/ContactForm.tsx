@@ -2,14 +2,15 @@ import { useState, type FormEvent } from 'react';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
+// Service options shown as checkboxes. "General inquiry" and "VoIP" were
+// removed per the latest revision; "Other" was added.
 const services = [
-  'General inquiry',
   'Managed IT',
   'Cybersecurity',
   'Cloudflare Zero Trust',
-  'Network design / UniFi',
-  'VoIP',
+  'Network & Infrastructure',
   'Microsoft 365 / Cloud',
+  'Other',
 ];
 
 interface Props {
@@ -38,17 +39,39 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus('submitting');
     setErrorMsg('');
 
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const fd = new FormData(form);
+    const selectedServices = fd.getAll('services').map(String);
+    const message = (fd.get('message') ?? '').toString().trim();
+
+    // At least ONE of "What do you need help with?" or "Tell us more" must be
+    // provided — not both. (Name + email are still required via the inputs.)
+    if (selectedServices.length === 0 && !message) {
+      setStatus('error');
+      setErrorMsg('Pick at least one option or tell us more — we need at least one to point your message the right way.');
+      return;
+    }
+
+    setStatus('submitting');
+
+    const payload = {
+      name: fd.get('name'),
+      email: fd.get('email'),
+      phone: fd.get('phone'),
+      company: fd.get('company'),
+      services: selectedServices,
+      message,
+      company_website: fd.get('company_website'),
+      'cf-turnstile-response': fd.get('cf-turnstile-response'),
+    };
 
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
@@ -67,7 +90,7 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
       <div className="text-center py-8">
         <div
           className="inline-flex w-12 h-12 rounded-full items-center justify-center mb-4"
-          style={{ background: 'var(--color-amber-glow)', color: 'var(--color-amber-300)' }}
+          style={{ background: 'var(--color-amber-glow)', color: 'var(--color-amber-600)' }}
         >
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -77,9 +100,9 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
           Thanks — we got it.
         </h3>
         <p style={{ color: 'var(--color-text-secondary)' }}>
-          An engineer will reach out within one business day. For anything urgent,
+          A member of our team will reach out within one business day. For anything urgent,
           call us at{' '}
-          <a href="tel:+14355573232" className="font-mono" style={{ color: 'var(--color-amber-300)' }}>
+          <a href="tel:+14355573232" className="font-mono" style={{ color: 'var(--color-amber-600)' }}>
             (435) 557-3232
           </a>.
         </p>
@@ -105,22 +128,30 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
         <Field label="Phone" name="phone" type="tel" />
       </div>
 
-      <div>
-        <label htmlFor="service" className="block text-sm font-medium mb-1.5" style={labelInlineStyle}>
+      <fieldset>
+        <legend className="block text-sm font-medium mb-2" style={labelInlineStyle}>
           What do you need help with?
-        </label>
-        <select
-          id="service"
-          name="service"
-          defaultValue={defaultService ?? services[0]}
-          className={inputStyles}
-          style={inputInlineStyle}
-        >
+        </legend>
+        <div className="grid sm:grid-cols-2 gap-2">
           {services.map((s) => (
-            <option key={s} value={s} style={{ background: 'var(--color-surface-0)' }}>{s}</option>
+            <label
+              key={s}
+              className="flex items-center gap-2.5 rounded-md px-3 py-2 cursor-pointer transition-colors"
+              style={inputInlineStyle}
+            >
+              <input
+                type="checkbox"
+                name="services"
+                value={s}
+                defaultChecked={defaultService === s}
+                className="h-4 w-4 rounded"
+                style={{ accentColor: 'var(--color-amber-500)' }}
+              />
+              <span className="text-sm" style={{ color: 'var(--color-text-primary)' }}>{s}</span>
+            </label>
           ))}
-        </select>
-      </div>
+        </div>
+      </fieldset>
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium mb-1.5" style={labelInlineStyle}>
@@ -129,24 +160,26 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
         <textarea
           id="message"
           name="message"
-          required
           rows={5}
           placeholder="What's broken, what you're building, or what you're trying to figure out…"
           className={inputStyles + ' resize-y'}
           style={inputInlineStyle}
         />
+        <p className="mt-1.5 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+          Fill out at least one of the options above or this field — you don't need both.
+        </p>
       </div>
 
       {turnstileSiteKey && (
-        <div className="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="dark" />
+        <div className="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light" />
       )}
 
       {status === 'error' && (
         <div
           className="rounded-md px-4 py-3 text-sm"
           style={{
-            background: 'rgba(248, 113, 113, 0.1)',
-            border: '1px solid rgba(248, 113, 113, 0.3)',
+            background: 'rgba(220, 38, 38, 0.08)',
+            border: '1px solid rgba(220, 38, 38, 0.3)',
             color: 'var(--color-signal-error)',
           }}
         >
@@ -164,8 +197,8 @@ export default function ContactForm({ defaultService, turnstileSiteKey }: Props)
       </button>
 
       <p className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
-        We respond within one business day. For emergencies, call{' '}
-        <a href="tel:+14355573232" className="font-mono" style={{ color: 'var(--color-amber-300)' }}>
+        We typically respond within one business day. For emergencies, call{' '}
+        <a href="tel:+14355573232" className="font-mono" style={{ color: 'var(--color-amber-600)' }}>
           (435) 557-3232
         </a>.
       </p>

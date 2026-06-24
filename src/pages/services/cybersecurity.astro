@@ -9,13 +9,13 @@ const serviceSchema = {
   provider: { '@id': `${site.url}/#organization` },
   areaServed: site.serviceArea.map((l) => `${l.city}, ${l.region}`),
   name: 'Cybersecurity Services',
-  description: 'AllTech provides managed cybersecurity for businesses in northern Utah — EDR, email security, Darktrace AI NDR, 24/7 SOC monitoring, penetration testing, and incident response.',
+  description: 'AllTech provides managed cybersecurity for businesses in northern Utah — EDR, email security, AI-driven network detection (NDR), 24/7 SOC monitoring, penetration testing, and incident response.',
 };
 ---
 
 <BaseLayout
   title="Cybersecurity Services"
-  description="AllTech provides managed cybersecurity for businesses in northern Utah — EDR, email security, Darktrace AI, 24/7 SOC monitoring, penetration testing, and incident response."
+  description="AllTech provides managed cybersecurity for businesses in northern Utah — EDR, email security, AI-driven network detection, 24/7 SOC monitoring, penetration testing, and incident response."
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
 
@@ -29,7 +29,7 @@ const serviceSchema = {
           Security run by engineers who <span style="color: var(--color-amber-300);">know your environment</span>.
         </h1>
         <p class="mt-6 text-xl leading-relaxed text-muted">
-          EDR, email filtering, Darktrace AI, 24/7 SOC monitoring, penetration testing, and
+          EDR, email filtering, AI-driven network detection, 24/7 SOC monitoring, penetration testing, and
           incident response — operated by the same team that handles your day-to-day IT.
           No handoffs to a generic security vendor. No context lost.
         </p>
@@ -73,11 +73,11 @@ const serviceSchema = {
           </ul>
         </section>
 
-        <section id="darktrace" class="card scroll-mt-24">
-          <h3 class="font-display text-lg font-semibold mb-3">Darktrace AI</h3>
+        <section id="ndr" class="card scroll-mt-24">
+          <h3 class="font-display text-lg font-semibold mb-3">Network Detection &amp; Response</h3>
           <ul class="text-sm text-muted leading-relaxed space-y-2">
-            <li>AI-driven Network Detection & Response (NDR) — learns the normal pattern of life for your network and flags deviations, not just known signatures.</li>
-            <li>We actively tune Antigena across multiple client environments, adjusting policies to cut false positives while keeping real threats blocked.</li>
+            <li>AI-driven Network Detection &amp; Response (NDR) — learns the normal pattern of life for your network and flags deviations, not just known signatures.</li>
+            <li>We actively tune detection policies across multiple client environments, cutting false positives while keeping real threats blocked.</li>
             <li>Catches lateral movement and C2 traffic that signature-based tools miss entirely.</li>
           </ul>
         </section>
@@ -124,7 +124,7 @@ const serviceSchema = {
           Not a reseller. Not a silo.
         </h2>
         <p class="mt-5 text-lg leading-relaxed text-muted">
-          Darktrace tuning, EDR monitoring, email audits, and penetration testing are run
+          NDR tuning, EDR monitoring, email audits, and penetration testing are run
           by the same engineers who handle your day-to-day IT. Security context carries
           over — we already know which servers matter, which users are high-risk, and
           which parts of your network you can't afford to take down.
@@ -175,7 +175,7 @@ const serviceSchema = {
             n: '02',
             label: 'DEPLOY',
             title: 'Harden & Implement',
-            body: 'Rolling out EDR, email security, Darktrace, and closing the gaps found in the assessment. Fixed-scope; timeline depends on environment size.',
+            body: 'Rolling out EDR, email security, network detection, and closing the gaps found in the assessment. Fixed-scope; timeline depends on environment size.',
             highlight: true,
           },
           {
