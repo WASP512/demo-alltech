@@ -11,12 +11,14 @@ const rest = services.filter((s) => !s.featured);
   title="Managed IT, Cybersecurity & Cloudflare Zero Trust"
   description="AllTech is a Northern Utah managed IT and cybersecurity provider. Cloudflare Partner, UniFi specialist, 24/7 emergency response. Serving Logan, Tremonton, Brigham City, Preston, and northern Utah."
 >
-  <!-- ============ SECTION 1 · HERO ============ -->
-  <section class="relative overflow-hidden">
-    <!-- Layered motif backgrounds -->
-    <div class="absolute inset-0 bg-dot-grid-fade"></div>
-    <div class="absolute inset-0 bg-glow-amber"></div>
+  <!-- Page-wide ambient background — dot grid + amber glow span every section,
+       not just the hero. Sections below are transparent so this shows through. -->
+  <div class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-dot-grid"></div>
+    <div class="absolute inset-0 -z-10 bg-glow-amber"></div>
 
+  <!-- ============ SECTION 1 · HERO ============ -->
+  <section class="relative">
     <!-- Decorative topology SVG on the right -->
     <svg
       class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 -z-0 opacity-50 pointer-events-none"
@@ -129,4 +131,5 @@ const rest = services.filter((s) => !s.featured);
       </div>
     </div>
   </section>
+  </div>
 </BaseLayout>
