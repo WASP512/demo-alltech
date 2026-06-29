@@ -103,7 +103,19 @@ export const services = [
     name: "Utah Data Recovery",
     short: "Professional recovery for failed drives, SSDs, RAID arrays, and NAS systems — local, confidential, and handled in-house.",
     icon: "database",
+    // Routes to our dedicated data-recovery site rather than an internal page.
+    url: "https://utahdatarecovery.com/",
   },
 ] as const;
 
 export type ServiceSlug = typeof services[number]["slug"];
+
+/**
+ * Resolve a service's link target. If a service defines an external `url`
+ * (e.g. Utah Data Recovery), link out to it; otherwise link to its detail page.
+ */
+export function serviceLink(s: { slug: string; url?: string }) {
+  return s.url
+    ? { href: s.url, external: true as const }
+    : { href: `/services/${s.slug}`, external: false as const };
+}

@@ -41,7 +41,7 @@ const isActive = (href: string) =>
           href="/services"
           class:list={[
             'mega-trigger flex items-center gap-1 whitespace-nowrap px-3.5 py-2 text-sm font-medium rounded-md transition',
-            pathname.startsWith('/services') || pathname.startsWith('/cloudflare') ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]',
+            pathname.startsWith('/services') ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]',
           ]}
           aria-haspopup="true"
         >
@@ -98,12 +98,6 @@ const isActive = (href: string) =>
                       </li>
                     ))}
                   </ul>
-                  {cat.vendors && (
-                    <div class="mt-auto pt-3 text-[10px] leading-snug" style="color: var(--color-text-subtle)">
-                      <span class="font-mono uppercase tracking-[0.12em]">We install</span><br />
-                      {cat.vendors}
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
