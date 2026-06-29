@@ -399,9 +399,9 @@
 }
 
 /* Width is locked to the wider container so the panel never juts outside
-   the page edges, while still being roomy enough for 4 equal columns. */
+   the page edges, while still being roomy enough for 6 equal columns. */
 .mega-panel > div {
-  width: min(1100px, calc(100vw - 48px));
+  width: min(1320px, calc(100vw - 48px));
 }
 
 /* Reduced-motion: respect user preference */

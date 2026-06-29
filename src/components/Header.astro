@@ -59,16 +59,23 @@ const isActive = (href: string) =>
             style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); box-shadow: 0 24px 64px -16px rgba(0,0,0,0.6);"
           >
             <!-- Columns: one per category, separated by a vertical divider -->
-            <div class="grid grid-cols-4 p-6">
+            <div class="grid grid-cols-6 p-6">
               {menuCategories.map((cat) => (
-                <div class="min-w-0 px-5 first:pl-0 last:pr-0 border-r last:border-r-0" style="border-color: var(--color-border-subtle)">
-                  <a
-                    href={cat.href}
-                    class="block mb-2 pb-2 font-display text-base font-bold tracking-tight hover:text-[var(--color-amber-600)] transition border-b"
-                    style="color: var(--color-text-primary); border-color: var(--color-border-subtle)"
-                  >
-                    {cat.label}
-                  </a>
+                <div class="min-w-0 flex flex-col px-4 first:pl-0 last:pr-0 border-r last:border-r-0" style="border-color: var(--color-border-subtle)">
+                  <div class="mb-2 pb-2 border-b" style="border-color: var(--color-border-subtle)">
+                    <a
+                      href={cat.href}
+                      class="block font-display text-base font-bold tracking-tight hover:text-[var(--color-amber-600)] transition"
+                      style="color: var(--color-text-primary);"
+                    >
+                      {cat.label}
+                    </a>
+                    {cat.sublabel && (
+                      <div class="text-[10px] font-mono uppercase tracking-[0.12em] mt-0.5" style="color: var(--color-text-subtle)">
+                        {cat.sublabel}
+                      </div>
+                    )}
+                  </div>
                   <ul class="space-y-0.5">
                     {cat.tiles.map((tile) => (
                       <li>
@@ -91,6 +98,12 @@ const isActive = (href: string) =>
                       </li>
                     ))}
                   </ul>
+                  {cat.vendors && (
+                    <div class="mt-auto pt-3 text-[10px] leading-snug" style="color: var(--color-text-subtle)">
+                      <span class="font-mono uppercase tracking-[0.12em]">We install</span><br />
+                      {cat.vendors}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -171,7 +184,10 @@ const isActive = (href: string) =>
             class="flex items-center justify-between cursor-pointer py-3 font-medium"
             style="color: var(--color-text-primary)"
           >
-            {cat.label}
+            <span>
+              {cat.label}
+              {cat.sublabel && <span class="text-xs font-normal ml-2" style="color: var(--color-text-subtle)">{cat.sublabel}</span>}
+            </span>
             <svg class="w-4 h-4 transition group-open:rotate-180" viewBox="0 0 12 12" fill="none">
               <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
