@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import SegmentHeader from '~/components/SegmentHeader.astro';
-import { services, site } from '~/lib/site';
+import { services, site, serviceLink } from '~/lib/site';
 
 const featured = services.find((s) => s.featured);
 // Second section embeds the Services page (all non-featured services).
@@ -120,17 +120,24 @@ const rest = services.filter((s) => !s.featured);
       )}
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {rest.map((service) => (
-          <a href={`/services/${service.slug}`} class="card group block">
-            <h3 class="font-display text-xl font-bold mb-2 group-hover:text-[var(--color-amber-600)] transition" style="color: var(--color-text-primary)">
-              {service.name}
-            </h3>
-            <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">{service.short}</p>
-            <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium" style="color: var(--color-amber-600)">
-              Learn more <span aria-hidden="true">→</span>
-            </span>
-          </a>
-        ))}
+        {rest.map((service) => {
+          const { href, external } = serviceLink(service);
+          return (
+            <a
+              href={href}
+              class="card group block"
+              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              <h3 class="font-display text-xl font-bold mb-2 group-hover:text-[var(--color-amber-600)] transition" style="color: var(--color-text-primary)">
+                {service.name}
+              </h3>
+              <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">{service.short}</p>
+              <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium" style="color: var(--color-amber-600)">
+                {external ? 'Visit site' : 'Learn more'} <span aria-hidden="true">{external ? '↗' : '→'}</span>
+              </span>
+            </a>
+          );
+        })}
       </div>
 
       <div class="mt-12 flex flex-wrap items-center gap-3">
