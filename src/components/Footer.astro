@@ -1,9 +1,12 @@
 ---
 import { site, services, serviceLink } from '~/lib/site';
 const year = new Date().getFullYear();
+
+// Technology we deploy & support (replaces the old service-area list).
+const partners = ['Cloudflare', 'Ubiquiti UniFi', 'Microsoft 365', 'Datto', 'Entra ID'];
 ---
 
-<footer class="bg-dot-grid" style="background-color: var(--color-bg-page)">
+<footer class="bg-dot-grid border-t" style="background-color: var(--color-bg-page); border-color: var(--color-border-subtle)">
   <div class="container-wide py-16">
     <div class="grid gap-12 md:grid-cols-4">
       <div class="md:col-span-2">
@@ -49,14 +52,10 @@ const year = new Date().getFullYear();
       </div>
 
       <div>
-        <h3 class="font-display text-sm uppercase tracking-wider mb-4" style="color: var(--color-text-primary)">Service Area</h3>
+        <h3 class="font-display text-sm uppercase tracking-wider mb-4" style="color: var(--color-text-primary)">Technology</h3>
         <ul class="space-y-2 text-sm">
-          {site.serviceArea.map((loc) => (
-            <li>
-              <a href={`/locations/${loc.slug}`} class="transition hover:text-[var(--color-text-primary)]" style="color: var(--color-text-muted)">
-                {loc.city}, {loc.region}
-              </a>
-            </li>
+          {partners.map((p) => (
+            <li style="color: var(--color-text-muted)">{p}</li>
           ))}
         </ul>
       </div>

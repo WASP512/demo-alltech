@@ -4,7 +4,6 @@ import SEO from '~/components/SEO.astro';
 import LocalBusinessSchema from '~/components/LocalBusinessSchema.astro';
 import Header from '~/components/Header.astro';
 import Footer from '~/components/Footer.astro';
-import LogoCloud from '~/components/LogoCloud.astro';
 
 interface Props {
   title: string;
@@ -57,7 +56,6 @@ const { title, description, image, noindex, canonical } = Astro.props;
     <main class="flex-1">
       <slot />
     </main>
-    <LogoCloud />
     <Footer />
   </body>
 </html>
