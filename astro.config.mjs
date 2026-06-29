@@ -13,6 +13,12 @@ const SITE_URL = 'https://askalltech.com';
 export default defineConfig({
   site: SITE_URL,
 
+  // Consolidated the old /cloudflare landing into the Cloudflare Zero Trust
+  // service page — redirect so old links/bookmarks/SEO don't break.
+  redirects: {
+    '/cloudflare': '/services/cloudflare-zero-trust',
+  },
+
   // Static by default; opt specific routes into SSR with `export const prerender = false`
   // (currently just /api/contact). Everything else is static HTML served from Cloudflare's edge.
   output: 'static',
