@@ -16,31 +16,56 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <section class="surface-dark py-20" style="border-top: 1px solid var(--color-line-faint);">
-    <div class="container-prose space-y-6 text-lg leading-relaxed text-muted">
-      <p>
-        AllTech was founded in 2009 to meet the technical needs of Utah businesses.
-        We've spent thousands of hours perfecting the relationship between
-        technology and business processes — and with the way security and
-        infrastructure are changing, that work has never mattered more.
-      </p>
-      <p>
-        Today we run real infrastructure for manufacturing operations, schools,
-        title companies, and multi-site SMBs. We bring enterprise tooling —
-        Cloudflare Zero Trust, Datto RMM, Ubiquiti UniFi — down to
-        where mid-market businesses can actually use it.
-      </p>
-      <p>
-        We're not the cheapest. We're the team you call when you need it to
-        actually work.
-      </p>
+  <section class="surface-dark py-16 lg:py-20" style="border-top: 1px solid var(--color-line-faint);">
+    <div class="container-prose">
+      <div class="eyebrow mb-4">Who we are today</div>
+      <div class="space-y-6 text-lg leading-relaxed text-muted">
+        <p>
+          AllTech is a Northern Utah team of engineers who design, deploy, and run
+          technology for small and mid-sized businesses. We're a security-led managed
+          IT provider — not a one-person help desk, and not a faceless national NOC.
+        </p>
+        <p>
+          Local since 2009, we run real infrastructure for manufacturing operations,
+          schools, title companies, and multi-site businesses across the Wasatch Front
+          and southern Idaho. When you call, you reach the same people who designed
+          your network.
+        </p>
+        <p>
+          Our approach is simple: <strong style="color: var(--color-text-primary);">proactive,
+          preventative, professional</strong>. We bring enterprise tooling — Cloudflare,
+          Ubiquiti UniFi, Datto, and Microsoft 365 — down to where mid-market businesses
+          can actually use it, and we stand behind it.
+        </p>
+      </div>
+
+      <div class="hairline my-10"></div>
+
+      <div class="eyebrow mb-5">What we do today</div>
+      <div class="grid sm:grid-cols-2 gap-x-8 gap-y-3 not-prose mb-2">
+        {[
+          'Managed IT & help desk',
+          'Cybersecurity & the AllTech Top 10',
+          'SASE / Zero Trust (Powered by Cloudflare)',
+          'Networks, cameras & low-voltage install',
+          'Microsoft 365 & cloud',
+          'Utah data recovery',
+        ].map((item) => (
+          <div class="flex items-start gap-2.5">
+            <svg class="w-5 h-5 mt-0.5 shrink-0" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M4 10.5l3.5 3.5L16 6" stroke="var(--color-amber-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span style="color: var(--color-text-default)">{item}</span>
+          </div>
+        ))}
+      </div>
 
       <div class="hairline my-10"></div>
 
       <div class="grid sm:grid-cols-3 gap-6 not-prose">
         <div>
           <div class="font-display text-3xl font-semibold" style="color: var(--color-amber-400);">2009</div>
-          <div class="text-sm text-subtle mt-1">Founded in Northern Utah</div>
+          <div class="text-sm text-subtle mt-1">Local since</div>
         </div>
         <div>
           <div class="font-display text-3xl font-semibold" style="color: var(--color-amber-400);">Cloudflare</div>

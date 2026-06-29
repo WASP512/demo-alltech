@@ -30,7 +30,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
             <li>
               <a href={`/blog/${post.slug}`} class="card block group">
                 <div class="text-xs font-mono mb-2" style="color: var(--color-amber-300);">
-                  {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
                 </div>
                 <h2 class="font-display text-2xl font-semibold mb-2 group-hover:text-amber-300 transition-colors">{post.data.title}</h2>
                 <p class="text-muted leading-relaxed">{post.data.description}</p>

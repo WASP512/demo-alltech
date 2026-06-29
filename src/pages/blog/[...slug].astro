@@ -30,7 +30,7 @@ const articleSchema = {
       <a href="/blog" class="text-sm font-medium" style="color: var(--color-amber-300);">← Back to insights</a>
       <header class="mt-6 mb-10">
         <div class="text-xs font-mono mb-4" style="color: var(--color-amber-300);">
-          {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
         </div>
         <h1 class="font-display text-4xl lg:text-5xl font-semibold leading-tight">{post.data.title}</h1>
         <p class="mt-4 text-xl leading-relaxed text-muted">{post.data.description}</p>

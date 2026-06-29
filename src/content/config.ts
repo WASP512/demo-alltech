@@ -25,6 +25,10 @@ const caseStudies = defineCollection({
     outcome: z.string(),
     pubDate: z.coerce.date(),
     heroImage: z.string().optional(),
+    // Optional proof points:
+    testimonial: z.string().optional(),        // short client quote
+    testimonialAuthor: z.string().optional(),  // e.g. "IT Director, Manufacturing"
+    pentestSnippet: z.string().optional(),     // sanitized pentest finding(s)
     draft: z.boolean().default(false),
   }),
 });

@@ -34,7 +34,27 @@ const { Content } = await study.render();
         </div>
       </header>
 
+      {study.data.pentestSnippet && (
+        <div class="mb-10 rounded-lg overflow-hidden" style="border: 1px solid var(--color-border-subtle);">
+          <div class="px-5 py-2 text-[11px] font-mono uppercase tracking-wider" style="background: var(--color-bg-elevated); color: var(--color-text-subtle);">
+            Sanitized pentest findings
+          </div>
+          <pre class="px-5 py-4 text-sm overflow-x-auto whitespace-pre-wrap" style="background: var(--color-bg-surface); color: var(--color-text-default);"><code>{study.data.pentestSnippet}</code></pre>
+        </div>
+      )}
+
       <div class="prose-alltech"><Content /></div>
+
+      {study.data.testimonial && (
+        <blockquote class="mt-12 border-l-4 pl-6 py-2" style="border-color: var(--color-amber-400);">
+          <p class="text-xl lg:text-2xl font-display leading-relaxed" style="color: var(--color-text-primary);">
+            “{study.data.testimonial}”
+          </p>
+          {study.data.testimonialAuthor && (
+            <footer class="mt-3 text-sm" style="color: var(--color-text-subtle);">— {study.data.testimonialAuthor}</footer>
+          )}
+        </blockquote>
+      )}
     </div>
   </article>
 </BaseLayout>
