@@ -140,11 +140,63 @@ const rest = services.filter((s) => !s.featured);
     </div>
   </section>
 
-  <!-- ============ SECTION 3 · FREE ASSESSMENT ============ -->
+  <!-- ============ SECTION 3 · WHY ALLTECH (differentiation + P/P/P) ============ -->
+  <section class="py-24 lg:py-32 scroll-mt-20">
+    <div class="container-wide">
+      <div class="max-w-2xl mb-14">
+        <SegmentHeader index="02" label="Why AllTech" />
+        <h2 class="text-4xl lg:text-5xl font-bold leading-tight">
+          Proactive. Preventative.<br />
+          <span style="color: var(--color-amber-400)">Professional.</span>
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed" style="color: var(--color-text-default)">
+          Most small businesses outgrow the one-person "IT guy" the moment something
+          critical breaks. AllTech is a full team of engineers — security-led,
+          framework-driven, and on call 24/7 — so you're never one person (or one
+          vacation) away from disaster.
+        </p>
+      </div>
+
+      <!-- P / P / P pillars -->
+      <div class="grid md:grid-cols-3 gap-4 mb-12">
+        {[
+          ['Proactive', 'We monitor, patch, and harden before problems start — not after the call comes in.'],
+          ['Preventative', 'Layered security built on real frameworks (CIS, NIST), continually updated to stop threats you haven’t seen yet.'],
+          ['Professional', 'Documented, accountable, and responsive — a team that shows up, communicates, and follows through.'],
+        ].map(([title, body]) => (
+          <div class="card">
+            <h3 class="font-display text-xl font-bold mb-2" style="color: var(--color-text-primary)">{title}</h3>
+            <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">{body}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- What sets us apart from a one-person shop -->
+      <div class="grid sm:grid-cols-2 gap-x-10 gap-y-3 max-w-3xl">
+        {[
+          'A full team of engineers — not a single point of failure',
+          'Security-led, not just break/fix',
+          'Enterprise tooling: Cloudflare, UniFi, Datto, Microsoft 365',
+          '24/7 emergency response',
+          'Framework-based and refined as new threats emerge',
+          'Local since 2009, on-site when it matters',
+        ].map((point) => (
+          <div class="flex items-start gap-2.5">
+            <svg class="w-5 h-5 mt-0.5 shrink-0" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M4 10.5l3.5 3.5L16 6" stroke="var(--color-amber-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="leading-snug" style="color: var(--color-text-default)">{point}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4 · FREE ASSESSMENT ============ -->
   <section class="py-24 lg:py-32 scroll-mt-20">
     <div class="container-wide">
       <div class="max-w-2xl">
-        <SegmentHeader index="02" label="Free assessment" />
+        <SegmentHeader index="03" label="Free assessment" />
         <h2 class="text-4xl lg:text-5xl font-bold leading-tight">
           Not sure where your <span style="color: var(--color-amber-400)">gaps</span> are?
         </h2>

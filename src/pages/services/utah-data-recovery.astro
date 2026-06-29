@@ -1,0 +1,93 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { site } from '~/lib/site';
+
+/**
+ * Utah Data Recovery service page.
+ *
+ * PLACEHOLDER CONTENT: recovery types, the process steps, and the trust points
+ * below are reasonable defaults. Refine with AllTech's actual capabilities
+ * (cleanroom? turnaround times? no-recovery-no-fee? pricing) when confirmed.
+ */
+const recover = [
+  ['Failed Hard Drives', 'Mechanical failures, bad sectors, and drives that no longer mount.'],
+  ['SSDs & Flash', 'Solid-state drives, USB sticks, and memory cards.'],
+  ['RAID Arrays', 'Degraded or failed RAID 0/1/5/6/10 across multiple disks.'],
+  ['NAS & SAN', 'Synology, QNAP, and other network storage volumes.'],
+  ['Accidental Deletion', 'Reformatted, repartitioned, or deleted files and volumes.'],
+  ['Ransomware & Corruption', 'Assessment and recovery options after encryption or corruption.'],
+];
+
+const steps = [
+  ['1 · Evaluation', 'Bring it in or ship it to us. We assess the device and what is recoverable.'],
+  ['2 · Quote', 'You get a clear scope and quote before any recovery work begins.'],
+  ['3 · Recovery', 'Our team recovers your data in-house — your media never leaves Utah.'],
+  ['4 · Secure Return', 'Recovered data is returned on fresh media, then originals are wiped or returned.'],
+];
+---
+
+<BaseLayout
+  title="Utah Data Recovery"
+  description="Professional data recovery in Northern Utah — failed hard drives, SSDs, RAID arrays, and NAS systems. Local, confidential, handled in-house by AllTech."
+>
+  <section class="surface-dark bg-motif relative overflow-hidden">
+    <div class="glow-amber" style="top: -200px; right: -100px;"></div>
+    <div class="relative container-wide py-16 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="eyebrow mb-4">Data Recovery · Northern Utah</div>
+        <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-[0.95] tracking-tight">
+          Lost data? <span style="color: var(--color-amber-400);">We get it back.</span>
+        </h1>
+        <p class="mt-6 text-xl leading-relaxed text-muted">
+          Failed drive, dead RAID, or a NAS that won't mount? AllTech recovers data
+          locally and in-house — your media never leaves Utah, and your data stays confidential.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/contact?service=Utah%20Data%20Recovery" class="btn btn-primary">Start a recovery <span aria-hidden="true">→</span></a>
+          <a href={`tel:${site.phoneE164}`} class="btn btn-ghost font-mono">{site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="surface-dark py-16 lg:py-20" style="border-top: 1px solid var(--color-line-faint);">
+    <div class="container-wide">
+      <div class="max-w-2xl mb-12">
+        <div class="eyebrow mb-4">What we recover</div>
+        <h2 class="font-display text-3xl lg:text-4xl font-bold leading-tight" style="color: var(--color-text-primary);">
+          From single drives to full arrays
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
+        {recover.map(([title, body]) => (
+          <div class="card">
+            <h3 class="font-display text-lg font-bold mb-2" style="color: var(--color-text-primary);">{title}</h3>
+            <p class="text-sm leading-relaxed" style="color: var(--color-text-default);">{body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="max-w-2xl mb-12">
+        <div class="eyebrow mb-4">How it works</div>
+        <h2 class="font-display text-3xl lg:text-4xl font-bold leading-tight" style="color: var(--color-text-primary);">
+          A simple, confidential process
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {steps.map(([title, body]) => (
+          <div class="card">
+            <h3 class="font-display text-base font-bold mb-2" style="color: var(--color-amber-600);">{title}</h3>
+            <p class="text-sm leading-relaxed" style="color: var(--color-text-default);">{body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 flex flex-wrap items-center gap-3">
+        <a href="/contact?service=Utah%20Data%20Recovery" class="btn btn-primary">Start a recovery</a>
+        <a href={`tel:${site.phoneE164}`} class="btn btn-ghost font-mono">{site.phone}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
