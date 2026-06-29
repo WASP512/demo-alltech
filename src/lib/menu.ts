@@ -76,6 +76,7 @@ export const menuCategories: MenuCategory[] = [
       { title: 'Door Access Control',     description: 'Readers, mobile & card unlock',    href: '/services/network-design#access' },
       { title: 'Structured Cabling',      description: 'Low-voltage cabling & drops',      href: '/services/network-design#cabling' },
       { title: 'Point-to-Point Wireless', description: 'Bridge buildings & remote sites',  href: '/services/network-design#cabling' },
+      { title: 'Rack & Server Rooms',     description: 'Racking & server-room buildouts',  href: '/services/network-design#cabling' },
     ],
   },
   {

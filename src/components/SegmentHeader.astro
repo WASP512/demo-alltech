@@ -1,0 +1,20 @@
+---
+/**
+ * Segmented section header for the home page.
+ *
+ * Renders a numbered index + accent tick + label, e.g.  01 — WHAT WE DO
+ * Gives each home-page section a consistent, clearly segmented header without
+ * heavy full-width dividers. Add new sections as 02, 03, … to extend.
+ */
+interface Props {
+  index: string; // e.g. "01"
+  label: string; // e.g. "What we do"
+}
+const { index, label } = Astro.props;
+---
+
+<div class="flex items-center gap-3 mb-4">
+  <span class="font-mono text-xs font-bold tracking-[0.2em]" style="color: var(--color-amber-500)">{index}</span>
+  <span class="h-px w-8" style="background: var(--color-amber-500)"></span>
+  <span class="font-mono text-xs uppercase tracking-[0.18em]" style="color: var(--color-amber-600)">{label}</span>
+</div>
