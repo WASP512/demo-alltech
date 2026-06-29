@@ -1,0 +1,35 @@
+---
+/**
+ * Partner / vendor logo cloud, shown site-wide just above the footer.
+ *
+ * PLACEHOLDER: these are text wordmarks for now. To use real logos, drop SVG/PNG
+ * files in /public/logos/ and swap the <span> for an <img>, e.g.
+ *   <img src="/logos/cloudflare.svg" alt="Cloudflare" class="h-7 w-auto" />
+ * Keep them grayscale/muted so the row reads as a quiet trust strip.
+ *
+ * Edit the list to match the vendors/partners you actually deploy.
+ */
+const partners = [
+  'Cloudflare',
+  'Ubiquiti UniFi',
+  'Microsoft 365',
+  'Datto',
+  'Entra ID',
+];
+---
+
+<section style="background-color: var(--color-bg-page)">
+  <div class="container-wide py-12 border-t" style="border-color: var(--color-border-subtle)">
+    <p class="text-center eyebrow mb-8">Technology we deploy &amp; support</p>
+    <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+      {partners.map((p) => (
+        <span
+          class="font-display text-lg lg:text-xl font-semibold"
+          style="color: var(--color-text-subtle); opacity: 0.85;"
+        >
+          {p}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,89 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+
+/**
+ * AllTech Top 10 — a pre-selected security stack for SMB.
+ *
+ * PLACEHOLDER CONTENT: the ten controls below are a sensible starting list
+ * mapped to CIS Controls / NIST CSF and aligned with our gap assessment.
+ * Refine the wording, order, and framework tags to match how AllTech packages
+ * and sells this offering.
+ */
+const controls = [
+  ['Modern Endpoint Protection', 'Behavioral EDR with AI detection — stops ransomware and unknown threats, not just known viruses.', 'CIS 10 · NIST PR.DS'],
+  ['MFA Everywhere', 'Multi-factor authentication on email, VPN, and every critical system.', 'CIS 6 · NIST PR.AC'],
+  ['Advanced Email Security', 'Filtering for spam, phishing, and business email compromise before delivery.', 'CIS 9 · NIST PR.DS'],
+  ['Patch & Vulnerability Management', 'Continuous patching and remediation of risky configs and end-of-life devices.', 'CIS 7 · NIST PR.IP'],
+  ['Immutable, Tested Backups', '3-2-1 backups with an immutable copy — and restores we actually test.', 'CIS 11 · NIST PR.IP'],
+  ['Network Segmentation & Zero Trust', 'Least-privilege access; IoT/OT and guests kept off critical systems.', 'CIS 12 · NIST PR.AC'],
+  ['DNS & Web Filtering', 'Block malicious domains and risky web content at the edge.', 'CIS 9 · NIST PR.PT'],
+  ['Security Awareness Training', 'Recurring phishing simulations and training to build a cyber-aware culture.', 'CIS 14 · NIST PR.AT'],
+  ['Centralized Logging & 24/7 Monitoring', 'Security logs reviewed and monitored so threats are caught early.', 'CIS 8 · NIST DE.CM'],
+  ['Documented Incident Response', 'A tested plan to contain, eradicate, and recover — with near-real-time isolation.', 'CIS 17 · NIST RS.RP'],
+];
+---
+
+<BaseLayout
+  title="AllTech Top 10 — Security Stack for SMB"
+  description="The AllTech Top 10: a pre-selected set of security controls for small and mid-sized business, mapped to CIS Controls and NIST CSF and continually refined as new threats emerge."
+>
+  <section class="surface-dark bg-motif relative overflow-hidden">
+    <div class="glow-amber" style="top: -200px; right: -100px;"></div>
+    <div class="relative container-wide py-16 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="eyebrow mb-4">AllTech Top 10 · For Small & Mid-Sized Business</div>
+        <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-[0.95] tracking-tight">
+          Ten controls. <span style="color: var(--color-amber-400);">One hardened business.</span>
+        </h1>
+        <p class="mt-6 text-xl leading-relaxed text-muted">
+          Most small businesses don't need fifty security tools — they need the right ten,
+          deployed correctly. The AllTech Top 10 is our pre-selected security stack, drawn
+          from leading cyber frameworks and <strong>continually refined</strong> as new threats emerge.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/assessment" class="btn btn-primary">See where you stand <span aria-hidden="true">→</span></a>
+          <a href="/contact" class="btn btn-ghost">Talk to an engineer</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="surface-dark py-16 lg:py-20" style="border-top: 1px solid var(--color-line-faint);">
+    <div class="container-wide">
+      <div class="max-w-2xl mb-12">
+        <div class="eyebrow mb-4">The stack</div>
+        <h2 class="font-display text-3xl lg:text-4xl font-bold leading-tight" style="color: var(--color-text-primary);">
+          What's in the Top 10
+        </h2>
+        <p class="mt-4 text-muted leading-relaxed">
+          Each control maps to recognized frameworks (CIS Controls, NIST CSF). We deploy,
+          manage, and verify them as a single hardened baseline.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        {controls.map(([title, body, tag], i) => (
+          <div class="card flex gap-4">
+            <div class="font-display text-2xl font-bold shrink-0" style="color: var(--color-amber-500);">
+              {String(i + 1).padStart(2, '0')}
+            </div>
+            <div>
+              <h3 class="font-display text-lg font-bold mb-1" style="color: var(--color-text-primary);">{title}</h3>
+              <p class="text-sm leading-relaxed mb-2" style="color: var(--color-text-default);">{body}</p>
+              <div class="text-[11px] font-mono uppercase tracking-wider" style="color: var(--color-text-subtle);">{tag}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 rounded-lg p-6 lg:p-8" style="background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle);">
+        <h3 class="font-display text-xl font-bold mb-2" style="color: var(--color-text-primary);">Continually refined</h3>
+        <p class="text-muted leading-relaxed max-w-2xl">
+          Threats change, and so does the list. We review the AllTech Top 10 against the
+          evolving threat landscape and update the stack so your baseline never goes stale.
+        </p>
+        <a href="/assessment" class="btn btn-primary mt-6">Take the free gap assessment <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

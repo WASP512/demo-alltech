@@ -92,6 +92,18 @@ export const services = [
     short: "M365 tenant setup, migration, Intune, Entra ID, and ongoing administration.",
     icon: "cloud",
   },
+  {
+    slug: "alltech-top-10",
+    name: "AllTech Top 10",
+    short: "A pre-selected security stack for small and mid-sized business — the ten controls we deploy first, mapped to leading frameworks and continually refined as threats evolve.",
+    icon: "shield",
+  },
+  {
+    slug: "utah-data-recovery",
+    name: "Utah Data Recovery",
+    short: "Professional recovery for failed drives, SSDs, RAID arrays, and NAS systems — local, confidential, and handled in-house.",
+    icon: "database",
+  },
 ] as const;
 
 export type ServiceSlug = typeof services[number]["slug"];
