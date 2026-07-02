@@ -2,13 +2,14 @@
 /**
  * Client logo marquee, shown site-wide just above the footer.
  *
- * The logo row auto-scrolls in a seamless loop (the list is rendered twice and
- * the track is translated by -50%). It pauses on hover/focus, fades at both
- * edges, and falls back to a static centered row for reduced-motion users.
+ * Uses the robust two-group marquee pattern: two identical groups, each at least
+ * as wide as the viewport (min-width:100%), both translating -100% in sync — so
+ * the row is always full and loops seamlessly on any screen width. Pauses on
+ * hover/focus, fades at both edges, and falls back to a static wrapped row for
+ * reduced-motion users.
  *
- * Add each logo file to /public/logos/ using the `src` names below. Missing
- * files hide themselves (onerror) until uploaded. To add more clients, just
- * append to this array — the marquee lengthens automatically.
+ * Add each logo file to /public/logos/ and append to this array (keep the real
+ * file extension — the set is a mix of png/jpeg/webp).
  */
 const clients = [
   { src: '/logos/als.jpeg', alt: "AL'S" },
@@ -21,70 +22,81 @@ const clients = [
   { src: '/logos/richmond-utah.jpeg', alt: 'Richmond, Utah' },
   { src: '/logos/spartan.webp', alt: 'Spartan' },
 ];
-
-// Rendered twice for a seamless loop; the second pass is decorative.
-const loop = [...clients, ...clients];
 ---
 
 <section class="py-12 border-t" style="background-color: var(--color-bg-page); border-color: var(--color-border-subtle)">
-  <p class="text-center eyebrow mb-8">Trusted by dozens of businesses</p>
+  <p class="text-center eyebrow mb-10">Trusted by dozens of businesses</p>
   <div class="marquee" aria-label="Businesses we serve">
-    <div class="marquee-track">
-      {loop.map((c, i) => (
-        <img
-          src={c.src}
-          alt={i < clients.length ? c.alt : ''}
-          aria-hidden={i >= clients.length ? 'true' : undefined}
-          class="marquee-item client-logo h-12 lg:h-14 w-auto object-contain"
-          loading="lazy"
-          onerror="this.style.display='none'"
-        />
+    <ul class="marquee-group">
+      {clients.map((c) => (
+        <li>
+          <img src={c.src} alt={c.alt} class="client-logo" loading="lazy" onerror="this.style.display='none'" />
+        </li>
       ))}
-    </div>
+    </ul>
+    <ul class="marquee-group" aria-hidden="true">
+      {clients.map((c) => (
+        <li>
+          <img src={c.src} alt="" class="client-logo" loading="lazy" onerror="this.style.display='none'" />
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 
 <style>
   .marquee {
+    --gap: 3.5rem;
+    display: flex;
+    gap: var(--gap);
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
   }
-  .marquee-track {
+  .marquee-group {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
-    width: max-content;
-    animation: client-marquee 55s linear infinite;
+    justify-content: space-around;
+    gap: var(--gap);
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    animation: client-marquee 42s linear infinite;
   }
-  .marquee:hover .marquee-track,
-  .marquee:focus-within .marquee-track {
+  .marquee:hover .marquee-group,
+  .marquee:focus-within .marquee-group {
     animation-play-state: paused;
   }
-  .marquee-item {
-    margin-right: 3.5rem;
-  }
   .client-logo {
+    height: 3.5rem;              /* 56px mobile */
+    width: auto;
+    max-width: 190px;
+    object-fit: contain;
     filter: grayscale(1);
-    opacity: 0.7;
+    opacity: 0.72;
     transition: filter 0.2s var(--ease-out-soft), opacity 0.2s var(--ease-out-soft);
+  }
+  @media (min-width: 1024px) {
+    .client-logo { height: 4.5rem; }  /* 72px desktop — bigger so small logos read */
   }
   .client-logo:hover {
     filter: grayscale(0);
     opacity: 1;
   }
   @keyframes client-marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    to { transform: translateX(calc(-100% - var(--gap))); }
   }
   @media (prefers-reduced-motion: reduce) {
     .marquee { mask-image: none; -webkit-mask-image: none; }
-    .marquee-track {
+    .marquee-group {
       animation: none;
       flex-wrap: wrap;
       justify-content: center;
-      width: auto;
-      gap: 1.5rem 3rem;
+      min-width: 0;
+      row-gap: 2rem;
     }
-    .marquee-item { margin-right: 0; }
+    .marquee-group[aria-hidden='true'] { display: none; }
   }
 </style>
