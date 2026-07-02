@@ -1,0 +1,48 @@
+---
+/**
+ * Client logo strip, shown site-wide just above the footer.
+ *
+ * Add each logo file to /public/logos/ using the `src` names below. Missing
+ * files hide themselves (onerror) so the strip degrades gracefully until the
+ * images are uploaded. To add more clients later, append to this array.
+ *
+ * Logos render desaturated for a consistent look and return to full color on
+ * hover.
+ */
+const clients = [
+  { src: '/logos/als.png', alt: 'ALS' },
+  { src: '/logos/beazer-lock-key.png', alt: 'Beazer Lock & Key' },
+  { src: '/logos/caspers-ice-cream.png', alt: "Casper's Ice Cream" },
+  { src: '/logos/ducworks.png', alt: 'Ducworks, Inc.' },
+  { src: '/logos/double-l-ranch-meats.png', alt: 'Double L Ranch Meats' },
+];
+---
+
+<section style="background-color: var(--color-bg-page)">
+  <div class="container-wide py-12 border-t" style="border-color: var(--color-border-subtle)">
+    <p class="text-center eyebrow mb-8">Trusted by Northern Utah businesses</p>
+    <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+      {clients.map((c) => (
+        <img
+          src={c.src}
+          alt={c.alt}
+          class="client-logo h-12 lg:h-14 w-auto object-contain"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .client-logo {
+    filter: grayscale(1);
+    opacity: 0.7;
+    transition: filter 0.2s var(--ease-out-soft), opacity 0.2s var(--ease-out-soft);
+  }
+  .client-logo:hover {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+</style>
