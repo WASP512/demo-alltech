@@ -1,0 +1,90 @@
+---
+/**
+ * Client logo marquee, shown site-wide just above the footer.
+ *
+ * The logo row auto-scrolls in a seamless loop (the list is rendered twice and
+ * the track is translated by -50%). It pauses on hover/focus, fades at both
+ * edges, and falls back to a static centered row for reduced-motion users.
+ *
+ * Add each logo file to /public/logos/ using the `src` names below. Missing
+ * files hide themselves (onerror) until uploaded. To add more clients, just
+ * append to this array — the marquee lengthens automatically.
+ */
+const clients = [
+  { src: '/logos/als.png', alt: 'ALS' },
+  { src: '/logos/beazer-lock-key.png', alt: 'Beazer Lock & Key' },
+  { src: '/logos/caspers-ice-cream.png', alt: "Casper's Ice Cream" },
+  { src: '/logos/ducworks.png', alt: 'Ducworks, Inc.' },
+  { src: '/logos/double-l-ranch-meats.png', alt: 'Double L Ranch Meats' },
+  { src: '/logos/northern-title.png', alt: 'Northern Title' },
+  { src: '/logos/plastics-resources.png', alt: 'Plastics Resources Incorporated' },
+  { src: '/logos/richmond-utah.png', alt: 'Richmond, Utah' },
+  { src: '/logos/spartan.png', alt: 'Spartan' },
+];
+
+// Rendered twice for a seamless loop; the second pass is decorative.
+const loop = [...clients, ...clients];
+---
+
+<section class="py-12 border-t" style="background-color: var(--color-bg-page); border-color: var(--color-border-subtle)">
+  <p class="text-center eyebrow mb-8">Trusted by dozens of businesses</p>
+  <div class="marquee" aria-label="Businesses we serve">
+    <div class="marquee-track">
+      {loop.map((c, i) => (
+        <img
+          src={c.src}
+          alt={i < clients.length ? c.alt : ''}
+          aria-hidden={i >= clients.length ? 'true' : undefined}
+          class="marquee-item client-logo h-12 lg:h-14 w-auto object-contain"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: client-marquee 55s linear infinite;
+  }
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+  .marquee-item {
+    margin-right: 3.5rem;
+  }
+  .client-logo {
+    filter: grayscale(1);
+    opacity: 0.7;
+    transition: filter 0.2s var(--ease-out-soft), opacity 0.2s var(--ease-out-soft);
+  }
+  .client-logo:hover {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+  @keyframes client-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee { mask-image: none; -webkit-mask-image: none; }
+    .marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: auto;
+      gap: 1.5rem 3rem;
+    }
+    .marquee-item { margin-right: 0; }
+  }
+</style>
