@@ -2,9 +2,11 @@
 /**
  * Segmented section header for the home page.
  *
- * Renders a numbered index + accent tick + label, e.g.  01 — WHAT WE DO
- * Gives each home-page section a consistent, clearly segmented header without
- * heavy full-width dividers. Add new sections as 02, 03, … to extend.
+ * Renders a numbered index + accent tick + label, then a hairline rule that
+ * extends from the label out to the right edge of the section — a "labeled
+ * divider" that separates each segment. Place it as a full-width child of the
+ * section container (not inside a narrow max-w wrapper) so the rule reaches the
+ * edge. Add new sections as 02, 03, … to extend.
  */
 interface Props {
   index: string; // e.g. "01"
@@ -13,8 +15,9 @@ interface Props {
 const { index, label } = Astro.props;
 ---
 
-<div class="flex items-center gap-3 mb-4">
+<div class="flex items-center gap-3 mb-5">
   <span class="font-mono text-xs font-bold tracking-[0.2em]" style="color: var(--color-amber-500)">{index}</span>
   <span class="h-px w-8" style="background: var(--color-amber-500)"></span>
-  <span class="font-mono text-xs uppercase tracking-[0.18em]" style="color: var(--color-amber-600)">{label}</span>
+  <span class="font-mono text-xs uppercase tracking-[0.18em] whitespace-nowrap" style="color: var(--color-amber-600)">{label}</span>
+  <span class="h-px flex-1" style="background: var(--color-border-subtle)"></span>
 </div>
