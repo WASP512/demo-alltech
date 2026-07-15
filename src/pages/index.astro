@@ -42,42 +42,6 @@ const aNormalWeek = [
   'A staff member locked out of email before a meeting they can\'t miss',
 ];
 
-// Decorative "orbit" flourish behind the hero CTA. A pair of open gold
-// elliptical arcs sweep around the button, layered with one wider, fainter
-// arc and a handful of graduated node dots — echoing the site's topology
-// motif (frames + nodes) rather than a busy sunburst. The arcs are open at
-// the top and bottom, so nothing crosses the paragraph above or the trust
-// row below, and the whole thing stays airy: a few intentional strokes with
-// lots of negative space, not a dense ring.
-const CX = 380, CY = 120;        // center of the 760 x 240 SVG box
-const arcPts = (rx: number, ry: number, a0: number, a1: number, step = 3) => {
-  const pts: string[] = [];
-  for (let a = a0; a <= a1; a += step) {
-    const r = (a * Math.PI) / 180;
-    pts.push(`${(CX + rx * Math.cos(r)).toFixed(1)},${(CY + ry * Math.sin(r)).toFixed(1)}`);
-  }
-  return pts.join(' ');
-};
-const dotAt = (a: number, rx: number, ry: number, r: number, o: number, c: string) => {
-  const rad = (a * Math.PI) / 180;
-  return { cx: +(CX + rx * Math.cos(rad)).toFixed(1), cy: +(CY + ry * Math.sin(rad)).toFixed(1), r, o, c };
-};
-// Angles use the SVG convention (0° = right, 90° = down). Gaps are left
-// around 270° (top) and 90° (bottom).
-const ctaArcs = [
-  { points: arcPts(196, 50, 104, 256), w: 1.75, o: 0.55, c: 'var(--color-amber-500)' }, // left sweep
-  { points: arcPts(196, 50, 284, 436), w: 1.75, o: 0.55, c: 'var(--color-amber-500)' }, // right sweep
-  { points: arcPts(224, 60, 298, 422), w: 1.5,  o: 0.28, c: 'var(--color-amber-400)' }, // wider echo, upper right
-];
-const ctaDots = [
-  dotAt(104, 196, 50, 2.6, 0.75, 'var(--color-amber-500)'),  // arc end caps
-  dotAt(256, 196, 50, 2.6, 0.75, 'var(--color-amber-500)'),
-  dotAt(284, 196, 50, 2.6, 0.75, 'var(--color-amber-500)'),
-  dotAt(436, 196, 50, 2.6, 0.75, 'var(--color-amber-500)'),
-  dotAt(298, 224, 60, 3.6, 0.9,  'var(--color-amber-400)'),  // comet trail, upper right
-  dotAt(311, 240, 68, 2.4, 0.6,  'var(--color-amber-400)'),
-  dotAt(325, 256, 76, 1.7, 0.4,  'var(--color-amber-400)'),
-];
 ---
 
 <BaseLayout
@@ -133,25 +97,11 @@ const ctaDots = [
           When you call, you get the same engineers who built your network — not a ticket queue.
         </p>
 
-        <div class="mt-9 relative inline-block">
-          <!-- Gold orbit flourish (desktop only) sweeping around the primary
-               CTA — see ctaArcs / ctaDots in the frontmatter. -->
-          <div class="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 pointer-events-none" aria-hidden="true">
-            <svg width="760" height="240" viewBox="0 0 760 240" fill="none">
-              {ctaArcs.map((a) => (
-                <polyline points={a.points} fill="none" stroke={a.c} stroke-width={a.w} stroke-linecap="round" stroke-linejoin="round" opacity={a.o} />
-              ))}
-              {ctaDots.map((d) => (
-                <circle cx={d.cx} cy={d.cy} r={d.r} fill={d.c} opacity={d.o} />
-              ))}
-            </svg>
-          </div>
-          <div class="relative flex flex-wrap items-center gap-3">
-            <a href="/assessment" class="btn btn-primary">
-              Take the free security gap assessment
-              <span aria-hidden="true">→</span>
-            </a>
-          </div>
+        <div class="mt-9 flex flex-wrap items-center gap-3">
+          <a href="/assessment" class="btn btn-primary hero-cta">
+            Take the free security gap assessment
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
 
         <div class="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm" style="color: var(--color-text-muted)">
@@ -445,3 +395,41 @@ const ctaDots = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* Technical "targeting" corner brackets on the primary hero CTA — two
+     diagonally-opposite L-marks (top-left, bottom-right) drawn as clipped
+     borders on the button's pseudo-elements. Uses the brand amber token and
+     hugs the button (inset), so it frames the CTA without crossing any
+     surrounding copy. Matches the blueprint/mono detailing used elsewhere. */
+  .hero-cta {
+    position: relative;
+  }
+  .hero-cta::before,
+  .hero-cta::after {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    border-radius: 11px;
+    pointer-events: none;
+    opacity: 0.75;
+    transition: opacity 0.2s var(--ease-out-soft), inset 0.2s var(--ease-out-soft);
+  }
+  .hero-cta::before {
+    clip-path: polygon(0 0, 20px 0, 20px 2px, 2px 2px, 2px 20px, 0 20px);
+    border-top: 2px solid var(--color-amber-400);
+    border-left: 2px solid var(--color-amber-400);
+  }
+  .hero-cta::after {
+    clip-path: polygon(calc(100% - 20px) calc(100% - 2px), 100% calc(100% - 2px), 100% calc(100% - 20px), calc(100% - 2px) calc(100% - 20px), calc(100% - 2px) 100%, calc(100% - 20px) 100%);
+    border-right: 2px solid var(--color-amber-400);
+    border-bottom: 2px solid var(--color-amber-400);
+  }
+  /* On hover the brackets ease outward a touch and brighten — a subtle
+     "locking on" cue that pairs with the button's existing lift. */
+  .hero-cta:hover::before,
+  .hero-cta:hover::after {
+    opacity: 1;
+    inset: -9px;
+  }
+</style>
