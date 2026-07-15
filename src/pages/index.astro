@@ -41,6 +41,39 @@ const aNormalWeek = [
   'A cyber-insurance renewal asking for proof of MFA and backups',
   'A staff member locked out of email before a meeting they can\'t miss',
 ];
+
+// Decorative "audio burst" ring behind the hero CTA — a dense ring of gold
+// tick lines radiating outward, with an organic wavy outer edge (a few
+// summed harmonics) so it reads like a sound-wave / radar sweep rather than
+// a mechanical starburst. Generated here so the geometry is exact; rendered
+// as thin amber lines on the page's cream background (no filled panel), so it
+// draws the eye without weighing the section down. Length is damped toward
+// the top and bottom so the ring hugs the wide button and never reaches the
+// paragraph above or the trust row below.
+const ctaBurst = (() => {
+  const cx = 360, cy = 116;      // center of the SVG box (720 x 232)
+  const rxIn = 178, ryIn = 45;   // inner ellipse — clears the pill button
+  const N = 104;
+  return Array.from({ length: N }, (_, i) => {
+    const t = (i / N) * Math.PI * 2;
+    const wave =
+      Math.sin(t * 3 + 0.5) * 0.55 +
+      Math.sin(t * 5 + 1.9) * 0.30 +
+      Math.sin(t * 2 - 0.7) * 0.35;
+    const vert = Math.abs(Math.cos(t));            // 1 at the sides, 0 top/bottom
+    const damp = 0.38 + 0.62 * Math.pow(vert, 0.7);
+    const len = (15 + 15 * (0.5 + 0.5 * wave)) * damp;
+    const dx = Math.cos(t), dy = Math.sin(t);
+    const x1 = cx + rxIn * dx, y1 = cy + ryIn * dy;
+    return {
+      x1: +x1.toFixed(1), y1: +y1.toFixed(1),
+      x2: +(x1 + len * dx).toFixed(1), y2: +(y1 + len * dy).toFixed(1),
+      o: +(0.3 + 0.55 * Math.min(1, len / 30)).toFixed(2),
+      w: len > 24 ? 1.6 : 1.3,
+      c: len > 24 ? 'var(--color-amber-400)' : 'var(--color-amber-500)',
+    };
+  });
+})();
 ---
 
 <BaseLayout
@@ -96,11 +129,22 @@ const aNormalWeek = [
           When you call, you get the same engineers who built your network — not a ticket queue.
         </p>
 
-        <div class="mt-9 flex flex-wrap items-center gap-3">
-          <a href="/assessment" class="btn btn-primary">
-            Take the free security gap assessment
-            <span aria-hidden="true">→</span>
-          </a>
+        <div class="mt-9 relative inline-block">
+          <!-- Gold audio-burst ring (desktop only) radiating from behind the
+               primary CTA — see ctaBurst in the frontmatter. -->
+          <div class="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 pointer-events-none" aria-hidden="true">
+            <svg width="720" height="232" viewBox="0 0 720 232" fill="none">
+              {ctaBurst.map((l) => (
+                <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={l.c} stroke-width={l.w} stroke-linecap="round" opacity={l.o} />
+              ))}
+            </svg>
+          </div>
+          <div class="relative flex flex-wrap items-center gap-3">
+            <a href="/assessment" class="btn btn-primary">
+              Take the free security gap assessment
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
 
         <div class="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm" style="color: var(--color-text-muted)">
