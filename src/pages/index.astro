@@ -52,18 +52,23 @@ const rest = services.filter((s) => !s.featured);
       <circle cx="336" cy="72" r="14" fill="var(--color-teal-400)" opacity="0.18" />
       <circle cx="336" cy="72" r="6" fill="var(--color-teal-500)" />
 
-      <!-- Satellite: secured system (right) -->
-      <path d="M502 168L474 182V220C474 240 488 253 502 264C516 253 530 240 530 220V182Z" fill="var(--color-bg-tint)" stroke="var(--color-amber-500)" stroke-width="2" stroke-linejoin="round" filter="url(#hero-shadow)" />
-      <path d="M482 202l14 14l24-28" stroke="var(--color-amber-600)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <!-- Satellite: secured system (right) — same double-hump shield-check
+           glyph used by the shared Icon kit's shield icon, scaled up. -->
+      <g transform="translate(436,152) scale(4)" filter="url(#hero-shadow)">
+        <path d="M9 3L16 6L23 3C23 3 26 6 26 10V15C26 21 21 26 16 28C11 26 6 21 6 15V10C6 6 9 3 9 3Z" fill="var(--color-bg-tint)" stroke="var(--color-amber-500)" stroke-width="0.5" stroke-linejoin="round" />
+        <path d="M12 16.5l3 3l5.5-6.5" stroke="var(--color-amber-600)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
 
-      <!-- Satellite: cloud (bottom-left). A clean cloud silhouette with a
-           small sync badge overlapping its bottom-right corner — like an
-           app icon's notification badge — rather than a large loose arrow
-           arc, which reads as disconnected floating linework at this scale. -->
-      <path d="M148 460a24 24 0 01-4-47.6a29 29 0 0155.7-10a21.5 21.5 0 011.3 43.6z" fill="var(--color-bg-surface)" stroke="var(--color-slate-400)" stroke-width="2" stroke-linejoin="round" filter="url(#hero-shadow)" />
-      <circle cx="197" cy="447" r="17" fill="var(--color-amber-400)" stroke="var(--color-bg-page)" stroke-width="4" filter="url(#hero-shadow)" />
-      <path d="M189 439a9 9 0 1 1-2.3 12.5" stroke="var(--color-ink-900)" stroke-width="2.5" stroke-linecap="round" fill="none" />
-      <path d="M192.5 435l-4.5 5l5.5 2" stroke="var(--color-ink-900)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <!-- Satellite: cloud (bottom-left) — same cloud + stacked-server-rack
+           glyph used by the shared Icon kit's cloud icon, scaled up, so the
+           motif matches everywhere it appears on the site. -->
+      <g transform="translate(118,376) scale(3.6)" filter="url(#hero-shadow)">
+        <path d="M9 22a5 5 0 01-1-9.9a6 6 0 0111.6-2.1a4.5 4.5 0 01.4 9z" fill="var(--color-bg-surface)" stroke="var(--color-slate-400)" stroke-width="0.56" stroke-linejoin="round" />
+        <rect x="9" y="12.3" width="10" height="3" rx="0.8" stroke="var(--color-amber-500)" stroke-width="0.42" />
+        <circle cx="16.6" cy="13.8" r="0.55" fill="var(--color-amber-500)" />
+        <rect x="9" y="16.3" width="10" height="3" rx="0.8" stroke="var(--color-amber-500)" stroke-width="0.42" />
+        <circle cx="16.6" cy="17.8" r="0.55" fill="var(--color-amber-500)" />
+      </g>
     </svg>
 
     <div class="relative container-wide pt-24 pb-32 lg:pt-32 lg:pb-40">
@@ -234,9 +239,9 @@ const rest = services.filter((s) => !s.featured);
 
           <rect x="660" y="15" width="260" height="170" rx="14" fill="var(--color-bg-surface)" stroke="var(--color-border-default)" stroke-width="1.5" filter="url(#ppp-shadow)" />
           <rect x="680" y="35" width="36" height="5" rx="2.5" fill="var(--color-amber-400)" />
-          <g transform="translate(762,58)">
-            <path d="M22 2L4 10V27C4 40 11 49 22 55C33 49 40 40 40 27V10Z" fill="var(--color-bg-tint)" stroke="var(--color-amber-500)" stroke-width="2" stroke-linejoin="round" />
-            <path d="M12 27l7 7l14-16" stroke="var(--color-amber-600)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          <g transform="translate(747.3,48.2) scale(2.444)">
+            <path d="M9 3L16 6L23 3C23 3 26 6 26 10V15C26 21 21 26 16 28C11 26 6 21 6 15V10C6 6 9 3 9 3Z" fill="var(--color-bg-tint)" stroke="var(--color-amber-500)" stroke-width="0.82" stroke-linejoin="round" />
+            <path d="M12 16.5l3 3l5.5-6.5" stroke="var(--color-amber-600)" stroke-width="1.02" stroke-linecap="round" stroke-linejoin="round" />
           </g>
           <text x="790" y="165" text-anchor="middle" font-family="var(--font-display)" font-weight="700" font-size="20" fill="var(--color-text-primary)">Professional</text>
         </svg>
