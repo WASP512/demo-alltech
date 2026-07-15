@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/Icon.astro';
 import { services, serviceLink } from '~/lib/site';
 ---
 
@@ -31,6 +32,7 @@ import { services, serviceLink } from '~/lib/site';
             class="card group block p-7"
             {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           >
+            <Icon name={service.icon} size={36} class="mb-4" />
             {service.featured && (
               <div class="eyebrow mb-2">Cloudflare Partner</div>
             )}

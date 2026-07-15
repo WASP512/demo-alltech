@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import SegmentHeader from '~/components/SegmentHeader.astro';
+import Icon from '~/components/Icon.astro';
 import { services, site, serviceLink } from '~/lib/site';
 
 const featured = services.find((s) => s.featured);
@@ -14,32 +15,38 @@ const rest = services.filter((s) => !s.featured);
 >
   <!-- ============ SECTION 1 · HERO ============ -->
   <section class="relative">
-    <!-- Decorative topology SVG on the right -->
+    <!-- Hero illustration: AllTech (the hub) connected to a monitored device,
+         a secured system, and the cloud — the ecosystem at a glance. Built
+         from the same icon-kit primitives (squares, nodes, lines) as every
+         other illustration on the site, just composed at a larger scale.
+         A faint dashed square is kept as a quiet echo of the original motif. -->
     <svg
-      class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 -z-0 opacity-50 pointer-events-none"
+      class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 -z-0 pointer-events-none"
       width="560" height="560" viewBox="0 0 560 560" fill="none" aria-hidden="true"
     >
-      <!-- Concentric square frames (the AllTech motif — squares not circles, distinct from Cloudflare) -->
-      <rect x="60"  y="60"  width="440" height="440" rx="6" stroke="rgba(236,140,0,0.12)" stroke-width="1" stroke-dasharray="2 4" />
-      <rect x="110" y="110" width="340" height="340" rx="6" stroke="rgba(236,140,0,0.16)" stroke-width="1" stroke-dasharray="2 4" />
-      <rect x="180" y="180" width="200" height="200" rx="6" stroke="rgba(236,140,0,0.20)" stroke-width="1" />
+      <rect x="80" y="80" width="400" height="400" rx="8" stroke="var(--color-border-default)" stroke-width="1" stroke-dasharray="2 4" opacity="0.5" />
 
-      <!-- Node dots at the intersections -->
-      <g fill="rgba(236,140,0,0.55)">
-        <circle cx="60"  cy="60"  r="3" />
-        <circle cx="500" cy="60"  r="3" />
-        <circle cx="60"  cy="500" r="3" />
-        <circle cx="500" cy="500" r="3" />
-        <circle cx="110" cy="110" r="2" />
-        <circle cx="450" cy="110" r="2" />
-        <circle cx="110" cy="450" r="2" />
-        <circle cx="450" cy="450" r="2" />
-        <circle cx="280" cy="280" r="4" fill="rgba(236,140,0,0.9)" />
-      </g>
+      <!-- Connecting lines from the hub -->
+      <line x1="280" y1="250" x2="280" y2="165" stroke="var(--color-slate-400)" stroke-width="1.5" />
+      <line x1="308" y1="262" x2="395" y2="225" stroke="var(--color-slate-400)" stroke-width="1.5" />
+      <line x1="262" y1="308" x2="175" y2="385" stroke="var(--color-slate-400)" stroke-width="1.5" />
 
-      <!-- Crosshair through center node -->
-      <line x1="280" y1="180" x2="280" y2="380" stroke="rgba(236,140,0,0.15)" stroke-width="1" />
-      <line x1="180" y1="280" x2="380" y2="280" stroke="rgba(236,140,0,0.15)" stroke-width="1" />
+      <!-- Hub (the center: AllTech) -->
+      <rect x="250" y="250" width="60" height="60" rx="8" fill="var(--color-bg-page)" stroke="var(--color-amber-500)" stroke-width="2" />
+      <circle cx="280" cy="280" r="5" fill="var(--color-amber-500)" />
+
+      <!-- Satellite: monitored endpoint (top) -->
+      <rect x="255" y="108" width="50" height="34" rx="3" fill="var(--color-bg-page)" stroke="var(--color-slate-500)" stroke-width="1.5" />
+      <line x1="245" y1="150" x2="315" y2="150" stroke="var(--color-slate-500)" stroke-width="1.5" stroke-linecap="round" />
+      <circle cx="280" cy="125" r="3" fill="var(--color-teal-500)" />
+
+      <!-- Satellite: secured system (right) -->
+      <path d="M403 195h34v22l-17 16-17-16z" fill="var(--color-bg-page)" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linejoin="round" />
+      <path d="M412 208l4 4l8-9" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+
+      <!-- Satellite: cloud (bottom-left) -->
+      <path d="M148 407a10 10 0 01-2-19.8a12 12 0 0123.2-4.2a9 9 0 01.8 18z" fill="var(--color-bg-page)" stroke="var(--color-slate-500)" stroke-width="1.5" stroke-linejoin="round" />
+      <path d="M155 396l-4 4l4 4M167 396l4 4l-4 4" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 
     <div class="relative container-wide pt-24 pb-32 lg:pt-32 lg:pb-40">
@@ -97,6 +104,7 @@ const rest = services.filter((s) => !s.featured);
           <div class="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none" style="background: rgba(236,140,0,0.12)"></div>
           <div class="relative grid lg:grid-cols-12 gap-6 items-center">
             <div class="lg:col-span-8">
+              <Icon name={featured.icon} size={40} class="mb-4" />
               <div class="eyebrow mb-3">Featured · Cloudflare Partner</div>
               <h3 class="font-display text-3xl lg:text-4xl font-bold mb-3" style="color: var(--color-text-primary)">
                 {featured.name}
@@ -122,6 +130,7 @@ const rest = services.filter((s) => !s.featured);
               class="card group block"
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
+              <Icon name={service.icon} size={32} class="mb-3" />
               <h3 class="font-display text-xl font-bold mb-2 group-hover:text-[var(--color-amber-600)] transition" style="color: var(--color-text-primary)">
                 {service.name}
               </h3>
@@ -189,22 +198,54 @@ const rest = services.filter((s) => !s.featured);
         </div>
       </div>
 
-      <!-- What sets us apart from a one-person shop -->
-      <div class="grid sm:grid-cols-2 gap-x-10 gap-y-3 max-w-3xl">
-        {[
-          'A full team of engineers — not a single point of failure',
-          'Enterprise tooling: Cloudflare, UniFi, Datto, Microsoft 365',
-          '24/7 emergency response',
-          'Framework-based and refined as new threats emerge',
-          'Local since 2009, on-site when it matters',
-        ].map((point) => (
-          <div class="flex items-start gap-2.5">
-            <svg class="w-5 h-5 mt-0.5 shrink-0" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M4 10.5l3.5 3.5L16 6" stroke="var(--color-amber-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <span class="leading-snug" style="color: var(--color-text-default)">{point}</span>
-          </div>
-        ))}
+      <!-- What sets us apart from a one-person shop, paired with a small
+           illustration: one hub watching several systems — most quietly
+           "connected" (teal), one flagged (amber) — the visual version of
+           "there's always someone who knows your systems." -->
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8 grid sm:grid-cols-2 gap-x-10 gap-y-3">
+          {[
+            'A full team of engineers — not a single point of failure',
+            'Enterprise tooling: Cloudflare, UniFi, Datto, Microsoft 365',
+            '24/7 emergency response',
+            'Framework-based and refined as new threats emerge',
+            'Local since 2009, on-site when it matters',
+          ].map((point) => (
+            <div class="flex items-start gap-2.5">
+              <svg class="w-5 h-5 mt-0.5 shrink-0" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M4 10.5l3.5 3.5L16 6" stroke="var(--color-amber-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span class="leading-snug" style="color: var(--color-text-default)">{point}</span>
+            </div>
+          ))}
+        </div>
+        <div class="hidden lg:flex lg:col-span-4 items-center justify-center">
+          <svg width="260" height="220" viewBox="0 0 300 240" fill="none" aria-hidden="true">
+            <line x1="60" y1="120" x2="154" y2="60" stroke="var(--color-slate-400)" stroke-width="1.5" />
+            <line x1="60" y1="120" x2="214" y2="102" stroke="var(--color-slate-400)" stroke-width="1.5" />
+            <line x1="60" y1="120" x2="214" y2="162" stroke="var(--color-slate-400)" stroke-width="1.5" />
+            <line x1="60" y1="120" x2="154" y2="196" stroke="var(--color-slate-400)" stroke-width="1.5" />
+            <line x1="60" y1="120" x2="266" y2="132" stroke="var(--color-slate-400)" stroke-width="1.5" />
+
+            <rect x="40" y="100" width="40" height="40" rx="6" fill="var(--color-bg-page)" stroke="var(--color-amber-500)" stroke-width="2" />
+            <circle cx="60" cy="120" r="4" fill="var(--color-amber-500)" />
+
+            <rect x="140" y="46" width="28" height="24" rx="3" fill="var(--color-bg-page)" stroke="var(--color-slate-500)" stroke-width="1.5" />
+            <circle cx="154" cy="58" r="2.5" fill="var(--color-teal-500)" />
+
+            <rect x="200" y="90" width="28" height="24" rx="3" fill="var(--color-bg-page)" stroke="var(--color-slate-500)" stroke-width="1.5" />
+            <circle cx="214" cy="102" r="2.5" fill="var(--color-teal-500)" />
+
+            <rect x="200" y="150" width="28" height="24" rx="3" fill="var(--color-bg-page)" stroke="var(--color-slate-500)" stroke-width="1.5" />
+            <circle cx="214" cy="162" r="2.5" fill="var(--color-teal-500)" />
+
+            <rect x="140" y="184" width="28" height="24" rx="3" fill="var(--color-bg-page)" stroke="var(--color-slate-500)" stroke-width="1.5" />
+            <circle cx="154" cy="196" r="2.5" fill="var(--color-teal-500)" />
+
+            <rect x="252" y="120" width="28" height="24" rx="3" fill="var(--color-bg-page)" stroke="var(--color-amber-500)" stroke-width="1.5" />
+            <circle cx="266" cy="132" r="2.5" fill="var(--color-amber-500)" />
+          </svg>
+        </div>
       </div>
     </div>
   </section>
@@ -213,20 +254,40 @@ const rest = services.filter((s) => !s.featured);
   <section class="py-24 lg:py-32 scroll-mt-20">
     <div class="container-wide">
       <SegmentHeader index="03" label="Free assessment" />
-      <div class="max-w-2xl">
-        <h2 class="text-4xl lg:text-5xl font-bold leading-tight">
-          Not sure where your <span style="color: var(--color-amber-400)">gaps</span> are?
-        </h2>
-        <p class="mt-5 text-lg leading-relaxed" style="color: var(--color-text-default)">
-          Take our free security gap assessment — a few quick questions across 12 domains,
-          from backups and patching to firewalls, identity, and endpoints. You'll get a
-          score right away, and we'll follow up to walk through what it means for your business.
-        </p>
-        <div class="mt-8 flex flex-wrap items-center gap-3">
-          <a href="/assessment" class="btn btn-primary">
-            Take the assessment <span aria-hidden="true">→</span>
-          </a>
-          <a href="/contact" class="btn btn-ghost">Talk to an engineer</a>
+      <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7">
+          <h2 class="text-4xl lg:text-5xl font-bold leading-tight">
+            Not sure where your <span style="color: var(--color-amber-400)">gaps</span> are?
+          </h2>
+          <p class="mt-5 text-lg leading-relaxed max-w-2xl" style="color: var(--color-text-default)">
+            Take our free security gap assessment — a few quick questions across 12 domains,
+            from backups and patching to firewalls, identity, and endpoints. You'll get a
+            score right away, and we'll follow up to walk through what it means for your business.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <a href="/assessment" class="btn btn-primary">
+              Take the assessment <span aria-hidden="true">→</span>
+            </a>
+            <a href="/contact" class="btn btn-ghost">Talk to an engineer</a>
+          </div>
+        </div>
+
+        <!-- Score-panel illustration: what taking the assessment actually
+             produces — a gauge reading, not an abstract "quiz" graphic. -->
+        <div class="hidden lg:flex lg:col-span-5 items-center justify-center">
+          <svg width="280" height="200" viewBox="0 0 300 210" fill="none" aria-hidden="true">
+            <rect x="20" y="15" width="260" height="180" rx="10" fill="var(--color-bg-surface)" stroke="var(--color-border-default)" stroke-width="1.5" />
+            <circle cx="40" cy="33" r="2.5" fill="var(--color-border-strong)" />
+            <circle cx="50" cy="33" r="2.5" fill="var(--color-border-strong)" />
+            <circle cx="60" cy="33" r="2.5" fill="var(--color-border-strong)" />
+
+            <path d="M100 145a50 50 0 0 1 100 0" stroke="var(--color-border-default)" stroke-width="8" stroke-linecap="round" />
+            <path d="M100 145a50 50 0 0 1 88.5-40.4" stroke="var(--color-amber-500)" stroke-width="8" stroke-linecap="round" />
+            <line x1="150" y1="145" x2="176" y2="115" stroke="var(--color-amber-600)" stroke-width="2" stroke-linecap="round" />
+            <circle cx="150" cy="145" r="4" fill="var(--color-amber-600)" />
+
+            <text x="150" y="180" text-anchor="middle" font-family="var(--font-display)" font-weight="700" font-size="22" fill="var(--color-text-primary)">Your score</text>
+          </svg>
         </div>
       </div>
     </div>
