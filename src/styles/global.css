@@ -306,7 +306,10 @@
    ============================================================ */
 @layer components {
   .surface-dark {
-    background: var(--color-bg-page);
+    /* Transparent (not --color-bg-page) so the page-wide ambient dot grid,
+       set once in BaseLayout, shows through every section consistently
+       instead of each section painting over it with its own flat fill. */
+    background: transparent;
     color: var(--color-text-default);
   }
   .surface-dark h1, .surface-dark h2, .surface-dark h3, .surface-dark h4 {

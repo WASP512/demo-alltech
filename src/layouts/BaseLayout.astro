@@ -54,7 +54,12 @@ const { title, description, image, noindex, canonical } = Astro.props;
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
-    <main class="flex-1">
+    <!-- Page-wide ambient background — dot grid + amber glow span every section
+         on every page. `.surface-dark` sections are transparent (see global.css)
+         so this shows through consistently, not just on the home page. -->
+    <main class="flex-1 relative overflow-hidden isolate">
+      <div class="absolute inset-0 -z-10 bg-dot-grid"></div>
+      <div class="absolute inset-0 -z-10 bg-glow-amber"></div>
       <slot />
     </main>
     <ClientLogos />

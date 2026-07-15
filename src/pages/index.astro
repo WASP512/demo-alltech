@@ -12,12 +12,6 @@ const rest = services.filter((s) => !s.featured);
   title="Managed IT, Cybersecurity & Cloudflare Zero Trust"
   description="AllTech is a Northern Utah managed IT and cybersecurity provider. Cloudflare Partner, UniFi specialist, 24/7 emergency response. Serving Logan, Tremonton, Brigham City, Preston, and northern Utah."
 >
-  <!-- Page-wide ambient background — dot grid + amber glow span every section,
-       not just the hero. Sections below are transparent so this shows through. -->
-  <div class="relative overflow-hidden isolate">
-    <div class="absolute inset-0 -z-10 bg-dot-grid"></div>
-    <div class="absolute inset-0 -z-10 bg-glow-amber"></div>
-
   <!-- ============ SECTION 1 · HERO ============ -->
   <section class="relative">
     <!-- Decorative topology SVG on the right -->
@@ -53,8 +47,8 @@ const rest = services.filter((s) => !s.featured);
         <div class="eyebrow mb-5">Managed IT · Cybersecurity · Northern Utah</div>
 
         <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight" style="color: var(--color-text-primary)">
-          IT that actually <span style="color: var(--color-amber-400)">works</span>,<br />
-          security that actually <span style="color: var(--color-amber-400)">holds</span>.
+          IT and <span style="color: var(--color-amber-400)">cybersecurity</span>,<br />
+          run by a real <span style="color: var(--color-amber-400)">team</span>.
         </h1>
 
         <p class="mt-7 text-xl max-w-2xl leading-relaxed" style="color: var(--color-text-default)">
@@ -85,12 +79,12 @@ const rest = services.filter((s) => !s.featured);
       <SegmentHeader index="01" label="What we do" />
       <div class="max-w-2xl mb-14">
         <h2 class="text-4xl lg:text-5xl font-bold leading-tight">
-          Most MSPs sell you tickets.<br />
-          <span style="color: var(--color-amber-400)">We sell you uptime.</span>
+          What we do.<br />
+          <span style="color: var(--color-amber-400)">Delivered in-house.</span>
         </h2>
         <p class="mt-5 text-lg leading-relaxed" style="color: var(--color-text-default)">
-          Everything below is delivered in-house by engineers who specialize in it —
-          not subcontracted to a faceless NOC. Pick a service to see how we deliver it.
+          Every one of these is handled by engineers who specialize in it —
+          not a subcontractor, not an overseas call center. Pick a service to see how we deliver it.
         </p>
       </div>
 
@@ -157,32 +151,48 @@ const rest = services.filter((s) => !s.featured);
           <span style="color: var(--color-amber-400)">Professional.</span>
         </h2>
         <p class="mt-5 text-lg leading-relaxed" style="color: var(--color-text-default)">
-          Most small businesses outgrow the one-person "IT guy" the moment something
-          critical breaks. AllTech is a full team of engineers — security-led,
-          framework-driven, and on call 24/7 — so you're never one person (or one
-          vacation) away from disaster.
+          A lot of small businesses run on one IT guy. When he's out sick, on
+          vacation, or gone, so is your support. AllTech is a full team —
+          so there's always someone who knows your systems.
         </p>
       </div>
 
-      <!-- P / P / P pillars -->
+      <!-- P / P / P pillars — icons reuse the site's own shape vocabulary
+           (concentric squares + node from the hero motif; the checkmark
+           stroke already used in the list below) rather than a generic
+           icon set. -->
       <div class="grid md:grid-cols-3 gap-4 mb-12">
-        {[
-          ['Proactive', 'We monitor, patch, and harden before problems start — not after the call comes in.'],
-          ['Preventative', 'Layered security built on real frameworks (CIS, NIST), continually updated to stop threats you haven’t seen yet.'],
-          ['Professional', 'Documented, accountable, and responsive — a team that shows up, communicates, and follows through.'],
-        ].map(([title, body]) => (
-          <div class="card">
-            <h3 class="font-display text-xl font-bold mb-2" style="color: var(--color-text-primary)">{title}</h3>
-            <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">{body}</p>
-          </div>
-        ))}
+        <div class="card">
+          <svg class="mb-4" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <rect x="6" y="6" width="24" height="24" rx="2" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-dasharray="2 3" />
+            <rect x="12" y="12" width="12" height="12" rx="1.5" stroke="var(--color-amber-500)" stroke-width="1.5" />
+            <circle cx="18" cy="18" r="2" fill="var(--color-amber-500)" />
+          </svg>
+          <h3 class="font-display text-xl font-bold mb-2" style="color: var(--color-text-primary)">Proactive</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">We monitor, patch, and harden before problems start — not after the call comes in.</p>
+        </div>
+        <div class="card">
+          <svg class="mb-4" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <rect x="5" y="13" width="18" height="18" rx="2" stroke="var(--color-amber-500)" stroke-width="1.5" />
+            <rect x="13" y="5" width="18" height="18" rx="2" stroke="var(--color-amber-500)" stroke-width="1.5" />
+          </svg>
+          <h3 class="font-display text-xl font-bold mb-2" style="color: var(--color-text-primary)">Preventative</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">Layered security built on real frameworks (CIS, NIST), continually updated to stop threats you haven’t seen yet.</p>
+        </div>
+        <div class="card">
+          <svg class="mb-4" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <rect x="5" y="5" width="26" height="26" rx="2" stroke="var(--color-amber-500)" stroke-width="1.5" />
+            <path d="M11 18l5 5l9 -11" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h3 class="font-display text-xl font-bold mb-2" style="color: var(--color-text-primary)">Professional</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">Documented, accountable, and responsive — a team that shows up, communicates, and follows through.</p>
+        </div>
       </div>
 
       <!-- What sets us apart from a one-person shop -->
       <div class="grid sm:grid-cols-2 gap-x-10 gap-y-3 max-w-3xl">
         {[
           'A full team of engineers — not a single point of failure',
-          'Security-led, not just break/fix',
           'Enterprise tooling: Cloudflare, UniFi, Datto, Microsoft 365',
           '24/7 emergency response',
           'Framework-based and refined as new threats emerge',
@@ -210,7 +220,7 @@ const rest = services.filter((s) => !s.featured);
         <p class="mt-5 text-lg leading-relaxed" style="color: var(--color-text-default)">
           Take our free security gap assessment — a few quick questions across 12 domains,
           from backups and patching to firewalls, identity, and endpoints. You'll get a
-          posture score on the spot, and our team will follow up with tailored next steps.
+          score right away, and we'll follow up to walk through what it means for your business.
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a href="/assessment" class="btn btn-primary">
@@ -221,5 +231,4 @@ const rest = services.filter((s) => !s.featured);
       </div>
     </div>
   </section>
-  </div>
 </BaseLayout>
