@@ -42,38 +42,42 @@ const aNormalWeek = [
   'A staff member locked out of email before a meeting they can\'t miss',
 ];
 
-// Decorative "audio burst" ring behind the hero CTA — a dense ring of gold
-// tick lines radiating outward, with an organic wavy outer edge (a few
-// summed harmonics) so it reads like a sound-wave / radar sweep rather than
-// a mechanical starburst. Generated here so the geometry is exact; rendered
-// as thin amber lines on the page's cream background (no filled panel), so it
-// draws the eye without weighing the section down. Length is damped toward
-// the top and bottom so the ring hugs the wide button and never reaches the
-// paragraph above or the trust row below.
-const ctaBurst = (() => {
-  const cx = 360, cy = 116;      // center of the SVG box (720 x 232)
-  const rxIn = 178, ryIn = 45;   // inner ellipse — clears the pill button
-  const N = 104;
-  return Array.from({ length: N }, (_, i) => {
-    const t = (i / N) * Math.PI * 2;
-    const wave =
-      Math.sin(t * 3 + 0.5) * 0.55 +
-      Math.sin(t * 5 + 1.9) * 0.30 +
-      Math.sin(t * 2 - 0.7) * 0.35;
-    const vert = Math.abs(Math.cos(t));            // 1 at the sides, 0 top/bottom
-    const damp = 0.38 + 0.62 * Math.pow(vert, 0.7);
-    const len = (15 + 15 * (0.5 + 0.5 * wave)) * damp;
-    const dx = Math.cos(t), dy = Math.sin(t);
-    const x1 = cx + rxIn * dx, y1 = cy + ryIn * dy;
-    return {
-      x1: +x1.toFixed(1), y1: +y1.toFixed(1),
-      x2: +(x1 + len * dx).toFixed(1), y2: +(y1 + len * dy).toFixed(1),
-      o: +(0.3 + 0.55 * Math.min(1, len / 30)).toFixed(2),
-      w: len > 24 ? 1.6 : 1.3,
-      c: len > 24 ? 'var(--color-amber-400)' : 'var(--color-amber-500)',
-    };
-  });
-})();
+// Decorative "orbit" flourish behind the hero CTA. A pair of open gold
+// elliptical arcs sweep around the button, layered with one wider, fainter
+// arc and a handful of graduated node dots — echoing the site's topology
+// motif (frames + nodes) rather than a busy sunburst. The arcs are open at
+// the top and bottom, so nothing crosses the paragraph above or the trust
+// row below, and the whole thing stays airy: a few intentional strokes with
+// lots of negative space, not a dense ring.
+const CX = 380, CY = 120;        // center of the 760 x 240 SVG box
+const arcPts = (rx: number, ry: number, a0: number, a1: number, step = 3) => {
+  const pts: string[] = [];
+  for (let a = a0; a <= a1; a += step) {
+    const r = (a * Math.PI) / 180;
+    pts.push(`${(CX + rx * Math.cos(r)).toFixed(1)},${(CY + ry * Math.sin(r)).toFixed(1)}`);
+  }
+  return pts.join(' ');
+};
+const dotAt = (a: number, rx: number, ry: number, r: number, o: number, c: string) => {
+  const rad = (a * Math.PI) / 180;
+  return { cx: +(CX + rx * Math.cos(rad)).toFixed(1), cy: +(CY + ry * Math.sin(rad)).toFixed(1), r, o, c };
+};
+// Angles use the SVG convention (0° = right, 90° = down). Gaps are left
+// around 270° (top) and 90° (bottom).
+const ctaArcs = [
+  { points: arcPts(196, 50, 104, 256), w: 1.75, o: 0.55, c: 'var(--color-amber-500)' }, // left sweep
+  { points: arcPts(196, 50, 284, 436), w: 1.75, o: 0.55, c: 'var(--color-amber-500)' }, // right sweep
+  { points: arcPts(224, 60, 298, 422), w: 1.5,  o: 0.28, c: 'var(--color-amber-400)' }, // wider echo, upper right
+];
+const ctaDots = [
+  dotAt(104, 196, 50, 2.6, 0.75, 'var(--color-amber-500)'),  // arc end caps
+  dotAt(256, 196, 50, 2.6, 0.75, 'var(--color-amber-500)'),
+  dotAt(284, 196, 50, 2.6, 0.75, 'var(--color-amber-500)'),
+  dotAt(436, 196, 50, 2.6, 0.75, 'var(--color-amber-500)'),
+  dotAt(298, 224, 60, 3.6, 0.9,  'var(--color-amber-400)'),  // comet trail, upper right
+  dotAt(311, 240, 68, 2.4, 0.6,  'var(--color-amber-400)'),
+  dotAt(325, 256, 76, 1.7, 0.4,  'var(--color-amber-400)'),
+];
 ---
 
 <BaseLayout
@@ -130,12 +134,15 @@ const ctaBurst = (() => {
         </p>
 
         <div class="mt-9 relative inline-block">
-          <!-- Gold audio-burst ring (desktop only) radiating from behind the
-               primary CTA — see ctaBurst in the frontmatter. -->
+          <!-- Gold orbit flourish (desktop only) sweeping around the primary
+               CTA — see ctaArcs / ctaDots in the frontmatter. -->
           <div class="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 pointer-events-none" aria-hidden="true">
-            <svg width="720" height="232" viewBox="0 0 720 232" fill="none">
-              {ctaBurst.map((l) => (
-                <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={l.c} stroke-width={l.w} stroke-linecap="round" opacity={l.o} />
+            <svg width="760" height="240" viewBox="0 0 760 240" fill="none">
+              {ctaArcs.map((a) => (
+                <polyline points={a.points} fill="none" stroke={a.c} stroke-width={a.w} stroke-linecap="round" stroke-linejoin="round" opacity={a.o} />
+              ))}
+              {ctaDots.map((d) => (
+                <circle cx={d.cx} cy={d.cy} r={d.r} fill={d.c} opacity={d.o} />
               ))}
             </svg>
           </div>
