@@ -463,10 +463,12 @@ const aNormalWeek = [
   .dot-b { animation: ctaDotPulse 5.6s ease-out infinite 1.1s; }
   .dot-c { animation: ctaDotPulse 6.4s ease-out infinite 2s; }
 
-  /* Speed the sweep up a touch on hover — reads as "engaging". */
-  .cta-orbit-wrap:hover .orbit-a { animation-duration: 3.8s; }
-  .cta-orbit-wrap:hover .orbit-b { animation-duration: 4.5s; }
-  .cta-orbit-wrap:hover .orbit-c { animation-duration: 5.1s; }
+  /* Hover accent: thicken the orbit strokes slightly, which transitions
+     smoothly. We deliberately do NOT change animation-duration on hover —
+     re-basing a running animation's duration makes the sweep jump to a
+     different phase mid-loop. */
+  .orbit { transition: stroke-width 0.25s var(--ease-out-soft); }
+  .cta-orbit-wrap:hover .orbit { stroke-width: 2.3; }
 
   @keyframes ctaOrbitSweep {
     0%   { stroke-dashoffset: 620; opacity: 0; }
