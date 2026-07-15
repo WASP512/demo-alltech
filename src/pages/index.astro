@@ -34,8 +34,8 @@ const rest = services.filter((s) => !s.featured);
       <circle cx="310" cy="200" r="3" fill="var(--color-teal-500)" opacity="0.7" />
       <line x1="345" y1="270" x2="460" y2="210" stroke="var(--color-slate-400)" stroke-width="2" />
       <circle cx="403" cy="240" r="3" fill="var(--color-amber-400)" opacity="0.7" />
-      <line x1="275" y1="330" x2="165" y2="430" stroke="var(--color-slate-400)" stroke-width="2" />
-      <circle cx="220" cy="380" r="3" fill="var(--color-slate-400)" opacity="0.7" />
+      <line x1="275" y1="330" x2="185" y2="424" stroke="var(--color-slate-400)" stroke-width="2" />
+      <circle cx="228" cy="378" r="3" fill="var(--color-slate-400)" opacity="0.7" />
 
       <!-- Hub: AllTech, filled amber -->
       <rect x="255" y="255" width="110" height="110" rx="18" fill="var(--color-amber-400)" filter="url(#hero-shadow)" />
@@ -53,13 +53,17 @@ const rest = services.filter((s) => !s.featured);
       <circle cx="336" cy="72" r="6" fill="var(--color-teal-500)" />
 
       <!-- Satellite: secured system (right) -->
-      <path d="M460 168h84v56l-42 40-42-40z" fill="var(--color-bg-tint)" stroke="var(--color-amber-500)" stroke-width="2" stroke-linejoin="round" filter="url(#hero-shadow)" />
-      <path d="M482 200l14 14l24-28" stroke="var(--color-amber-600)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M502 168L474 182V220C474 240 488 253 502 264C516 253 530 240 530 220V182Z" fill="var(--color-bg-tint)" stroke="var(--color-amber-500)" stroke-width="2" stroke-linejoin="round" filter="url(#hero-shadow)" />
+      <path d="M482 202l14 14l24-28" stroke="var(--color-amber-600)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
 
-      <!-- Satellite: cloud (bottom-left) -->
+      <!-- Satellite: cloud (bottom-left). A clean cloud silhouette with a
+           small sync badge overlapping its bottom-right corner — like an
+           app icon's notification badge — rather than a large loose arrow
+           arc, which reads as disconnected floating linework at this scale. -->
       <path d="M148 460a24 24 0 01-4-47.6a29 29 0 0155.7-10a21.5 21.5 0 011.3 43.6z" fill="var(--color-bg-surface)" stroke="var(--color-slate-400)" stroke-width="2" stroke-linejoin="round" filter="url(#hero-shadow)" />
-      <path d="M177 428a15 15 0 1 1-4 19" stroke="var(--color-amber-500)" stroke-width="3" stroke-linecap="round" fill="none" />
-      <path d="M181 421l-6 8l9 2" stroke="var(--color-amber-500)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="197" cy="447" r="17" fill="var(--color-amber-400)" stroke="var(--color-bg-page)" stroke-width="4" filter="url(#hero-shadow)" />
+      <path d="M189 439a9 9 0 1 1-2.3 12.5" stroke="var(--color-ink-900)" stroke-width="2.5" stroke-linecap="round" fill="none" />
+      <path d="M192.5 435l-4.5 5l5.5 2" stroke="var(--color-ink-900)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 
     <div class="relative container-wide pt-24 pb-32 lg:pt-32 lg:pb-40">
@@ -76,41 +80,11 @@ const rest = services.filter((s) => !s.featured);
           businesses online and secure — from UniFi networks to full Cloudflare Zero Trust rollouts.
         </p>
 
-        <div class="mt-9 relative inline-block">
-          <!-- Bold atmospheric "spotlight" behind the primary CTA — a soft
-               gradient-mesh blend of the site's own ink/amber/teal tokens,
-               overlaid with crisp blueprint linework (overlapping circles,
-               a dashed frame, ruler ticks, coordinate labels) so it reads as
-               technical rather than decorative, consistent with the rest of
-               the illustration system. Contained to the button, not a
-               full-bleed background — draws the eye to the one action that
-               matters most on this page. -->
-          <div
-            class="hidden sm:block absolute -z-10 pointer-events-none"
-            style="left:50%; top:50%; transform:translate(-50%,-50%); width:460px; height:108px; border-radius:22px; overflow:hidden; box-shadow: 0 10px 34px rgba(20,16,10,0.28), 0 2px 10px rgba(236,140,0,0.18);"
-          >
-            <div class="absolute inset-0" style="
-              background:
-                radial-gradient(circle at 22% 22%, rgba(255,176,54,0.95) 0%, transparent 48%),
-                radial-gradient(circle at 82% 78%, rgba(79,184,168,0.85) 0%, transparent 52%),
-                radial-gradient(circle at 60% 100%, rgba(236,140,0,0.55) 0%, transparent 46%),
-                var(--color-ink-950);
-            "></div>
-            <svg width="460" height="108" viewBox="0 0 460 108" fill="none" aria-hidden="true" class="absolute inset-0">
-              <rect x="8" y="8" width="444" height="92" rx="16" stroke="rgba(247,249,252,0.5)" stroke-width="1" stroke-dasharray="3 5" />
-              <circle cx="70" cy="54" r="46" stroke="var(--color-teal-400)" stroke-width="1.75" opacity="0.8" />
-              <circle cx="130" cy="54" r="40" stroke="var(--color-amber-300)" stroke-width="1.75" opacity="0.9" />
-              <circle cx="382" cy="54" r="52" stroke="rgba(247,249,252,0.6)" stroke-width="1.25" />
-              <text x="18" y="96" font-family="var(--font-mono)" font-size="8" letter-spacing="0.5" fill="rgba(247,249,252,0.55)">X 130.4 Y 54.0</text>
-              <text x="366" y="20" font-family="var(--font-mono)" font-size="8" letter-spacing="0.5" fill="rgba(247,249,252,0.55)">SCOPE</text>
-            </svg>
-          </div>
-          <div class="relative flex flex-wrap items-center gap-3">
-            <a href="/assessment" class="btn btn-primary">
-              Take the free security gap assessment
-              <span aria-hidden="true">→</span>
-            </a>
-          </div>
+        <div class="mt-9 flex flex-wrap items-center gap-3">
+          <a href="/assessment" class="btn btn-primary">
+            Take the free security gap assessment
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
 
         <div class="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm" style="color: var(--color-text-muted)">
@@ -261,8 +235,8 @@ const rest = services.filter((s) => !s.featured);
           <rect x="660" y="15" width="260" height="170" rx="14" fill="var(--color-bg-surface)" stroke="var(--color-border-default)" stroke-width="1.5" filter="url(#ppp-shadow)" />
           <rect x="680" y="35" width="36" height="5" rx="2.5" fill="var(--color-amber-400)" />
           <g transform="translate(762,58)">
-            <path d="M0 4h44v24l-22 24l-22-24z" fill="var(--color-bg-tint)" stroke="var(--color-amber-500)" stroke-width="2" stroke-linejoin="round" />
-            <path d="M11 28l7 7l14-16" stroke="var(--color-amber-600)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M22 2L4 10V27C4 40 11 49 22 55C33 49 40 40 40 27V10Z" fill="var(--color-bg-tint)" stroke="var(--color-amber-500)" stroke-width="2" stroke-linejoin="round" />
+            <path d="M12 27l7 7l14-16" stroke="var(--color-amber-600)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
           </g>
           <text x="790" y="165" text-anchor="middle" font-family="var(--font-display)" font-weight="700" font-size="20" fill="var(--color-text-primary)">Professional</text>
         </svg>
