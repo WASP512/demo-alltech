@@ -30,8 +30,8 @@ const rest = services.filter((s) => !s.featured);
       </defs>
 
       <!-- Connecting lines + signal dots -->
-      <line x1="310" y1="255" x2="310" y2="140" stroke="var(--color-slate-400)" stroke-width="2" />
-      <circle cx="310" cy="197" r="3" fill="var(--color-teal-500)" opacity="0.7" />
+      <line x1="310" y1="255" x2="310" y2="146" stroke="var(--color-slate-400)" stroke-width="2" />
+      <circle cx="310" cy="200" r="3" fill="var(--color-teal-500)" opacity="0.7" />
       <line x1="345" y1="270" x2="460" y2="210" stroke="var(--color-slate-400)" stroke-width="2" />
       <circle cx="403" cy="240" r="3" fill="var(--color-amber-400)" opacity="0.7" />
       <line x1="275" y1="330" x2="165" y2="430" stroke="var(--color-slate-400)" stroke-width="2" />
@@ -237,7 +237,11 @@ const rest = services.filter((s) => !s.featured);
           <text x="790" y="165" text-anchor="middle" font-family="var(--font-display)" font-weight="700" font-size="20" fill="var(--color-text-primary)">Professional</text>
         </svg>
       </div>
-      <div class="grid sm:grid-cols-3 gap-8 mb-14 pb-14" style="border-bottom: 1px solid var(--color-border-subtle)">
+      <!-- Grid columns mirror the SVG panels' exact proportions (260:70:260:70:260
+           units) via matching percentages + space-between, so captions stay
+           aligned under their panel at every viewport instead of drifting
+           against the illustration's independently-scaled coordinates. -->
+      <div class="grid mb-14 pb-14" style="grid-template-columns: 28.26% 28.26% 28.26%; justify-content: space-between; border-bottom: 1px solid var(--color-border-subtle)">
         <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">We monitor, patch, and harden before problems start — not after the call comes in.</p>
         <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">Layered security built on real frameworks (CIS, NIST), continually updated to stop threats you haven’t seen yet.</p>
         <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">Documented, accountable, and responsive — a team that shows up, communicates, and follows through.</p>

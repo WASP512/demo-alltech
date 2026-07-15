@@ -72,7 +72,8 @@ const { name, size = 32, class: className } = Astro.props;
   // "systematic" here. Stroke weight/color still match the rest of the kit.
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true" class={className}>
     <path d="M9 22a5 5 0 01-1-9.9a6 6 0 0111.6-2.1a4.5 4.5 0 01.4 9z" stroke="var(--color-slate-500)" stroke-width="1.5" stroke-linejoin="round" />
-    <path d="M13 17l-2 2l2 2M19 17l2 2l-2 2" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M14 18a6 6 0 1 1-1.5 8" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" fill="none" />
+    <path d="M16.5 15.5l-2.5 2.5l3 1" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 )}
 
@@ -87,8 +88,8 @@ const { name, size = 32, class: className } = Astro.props;
 {name === 'disk-recovery' && (
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true" class={className}>
     <rect x="6" y="6" width="20" height="20" rx="2" stroke="var(--color-slate-500)" stroke-width="1.5" />
-    <path d="M20 12a5 5 0 1 1-6.5 3.5" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" />
-    <path d="M22 9v4h-4" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M21 12.5a6.5 6.5 0 1 1-8.5 4.5" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" fill="none" />
+    <path d="M22.5 9.5l-1.5 3l3 1" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 )}
 
@@ -119,8 +120,8 @@ const { name, size = 32, class: className } = Astro.props;
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true" class={className}>
     <rect x="4" y="5" width="24" height="17" rx="2" stroke="var(--color-slate-500)" stroke-width="1.5" />
     <path d="M11 17a5 5 0 0 1 9-3" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" />
-    <line x1="9" y1="27" x2="9" y2="24" stroke="var(--color-slate-500)" stroke-width="1.5" stroke-linecap="round" />
-    <line x1="16" y1="27" x2="16" y2="22" stroke="var(--color-slate-500)" stroke-width="1.5" stroke-linecap="round" />
-    <line x1="23" y1="27" x2="23" y2="25" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" />
+    <line x1="9" y1="27" x2="9" y2="22" stroke="var(--color-slate-500)" stroke-width="1.5" stroke-linecap="round" />
+    <line x1="16" y1="27" x2="16" y2="19" stroke="var(--color-slate-500)" stroke-width="1.5" stroke-linecap="round" />
+    <line x1="23" y1="27" x2="23" y2="24" stroke="var(--color-amber-500)" stroke-width="1.5" stroke-linecap="round" />
   </svg>
 )}
