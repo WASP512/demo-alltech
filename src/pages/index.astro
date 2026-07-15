@@ -20,7 +20,7 @@ const rest = services.filter((s) => !s.featured);
          soft shadow, not thin outlines — this is meant to carry real visual
          weight against the headline, not sit as a quiet accent beside it. -->
     <svg
-      class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 -z-0 pointer-events-none"
+      class="hidden xl:block absolute right-0 top-1/2 -translate-y-1/2 -z-0 pointer-events-none"
       width="620" height="620" viewBox="0 0 620 620" fill="none" aria-hidden="true"
     >
       <defs>
@@ -250,10 +250,13 @@ const rest = services.filter((s) => !s.featured);
            units) via matching percentages + space-between, so captions stay
            aligned under their panel at every viewport instead of drifting
            against the illustration's independently-scaled coordinates. -->
-      <div class="grid mb-14 pb-14" style="grid-template-columns: 28.26% 28.26% 28.26%; justify-content: space-between; border-bottom: 1px solid var(--color-border-subtle)">
-        <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">We monitor, patch, and harden before problems start — not after the call comes in.</p>
-        <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">Layered security built on real frameworks (CIS, NIST), continually updated to stop threats you haven’t seen yet.</p>
-        <p class="text-sm leading-relaxed" style="color: var(--color-text-default)">Documented, accountable, and responsive — a team that shows up, communicates, and follows through.</p>
+      <div
+        class="grid gap-5 sm:gap-0 mb-14 pb-14 sm:justify-between sm:[grid-template-columns:28.26%_28.26%_28.26%]"
+        style="border-bottom: 1px solid var(--color-border-subtle)"
+      >
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-default)"><strong class="sm:hidden" style="color: var(--color-text-primary)">Proactive — </strong>We monitor, patch, and harden before problems start — not after the call comes in.</p>
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-default)"><strong class="sm:hidden" style="color: var(--color-text-primary)">Preventative — </strong>Layered security built on real frameworks (CIS, NIST), continually updated to stop threats you haven’t seen yet.</p>
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-default)"><strong class="sm:hidden" style="color: var(--color-text-primary)">Professional — </strong>Documented, accountable, and responsive — a team that shows up, communicates, and follows through.</p>
       </div>
 
       <!-- What sets us apart from a one-person shop — plain list now that the
