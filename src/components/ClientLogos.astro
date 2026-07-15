@@ -11,36 +11,34 @@
  * Add each logo file to /public/logos/ and append to this array (keep the real
  * file extension — the set is a mix of png/jpeg/webp).
  */
-// `invert` — for white-on-dark logo files that would otherwise render as a
-// heavy dark slab in the grayscale strip; inverting turns them dark-on-light
-// so they sit at the same visual weight as the rest of the row.
 const clients = [
   { src: '/logos/als.jpeg', alt: "AL'S" },
   { src: '/logos/beazer-lock-key.webp', alt: 'Beazer Lock & Key' },
   { src: '/logos/caspers-ice-cream.png', alt: "Casper's Ice Cream" },
   { src: '/logos/ducworks.jpeg', alt: 'Ducworks, Inc.' },
   { src: '/logos/double-l-ranch-meats.png', alt: 'Double L Ranch Meats' },
-  { src: '/logos/northern-title.webp', alt: 'Northern Title', invert: true },
+  { src: '/logos/northern-title.webp', alt: 'Northern Title' },
   { src: '/logos/plastics-resources.webp', alt: 'Plastics Resources Incorporated' },
   { src: '/logos/richmond-utah.jpeg', alt: 'Richmond, Utah' },
   { src: '/logos/spartan.webp', alt: 'Spartan' },
 ];
 ---
 
-<section class="py-12 border-t" style="background-color: var(--color-bg-page); border-color: var(--color-border-subtle)">
+<!-- Transparent background (no fill) so the page-wide ambient dot grid
+     continues through this strip instead of being cut off by a solid band. --><section class="py-12 border-t" style="border-color: var(--color-border-subtle)">
   <p class="text-center eyebrow mb-10">Trusted by dozens of businesses</p>
   <div class="marquee" aria-label="Businesses we serve">
     <ul class="marquee-group">
       {clients.map((c) => (
         <li>
-          <img src={c.src} alt={c.alt} class:list={['client-logo', c.invert && 'client-logo--invert']} loading="lazy" onerror="this.style.display='none'" />
+          <img src={c.src} alt={c.alt} class="client-logo" loading="lazy" onerror="this.style.display='none'" />
         </li>
       ))}
     </ul>
     <ul class="marquee-group" aria-hidden="true">
       {clients.map((c) => (
         <li>
-          <img src={c.src} alt="" class:list={['client-logo', c.invert && 'client-logo--invert']} loading="lazy" onerror="this.style.display='none'" />
+          <img src={c.src} alt="" class="client-logo" loading="lazy" onerror="this.style.display='none'" />
         </li>
       ))}
     </ul>
@@ -77,24 +75,10 @@ const clients = [
     width: auto;
     max-width: 190px;
     object-fit: contain;
-    filter: grayscale(1);
-    opacity: 0.72;
-    transition: filter 0.2s var(--ease-out-soft), opacity 0.2s var(--ease-out-soft);
+    transition: opacity 0.2s var(--ease-out-soft);
   }
   @media (min-width: 1024px) {
     .client-logo { height: 4.5rem; }  /* 72px desktop — bigger so small logos read */
-  }
-  .client-logo:hover {
-    filter: grayscale(0);
-    opacity: 1;
-  }
-  .client-logo--invert {
-    filter: grayscale(1) invert(1);
-  }
-  .client-logo--invert:hover {
-    /* Stay inverted on hover — un-inverting would flash the dark slab back. */
-    filter: grayscale(1) invert(1);
-    opacity: 1;
   }
   @keyframes client-marquee {
     to { transform: translateX(calc(-100% - var(--gap))); }
